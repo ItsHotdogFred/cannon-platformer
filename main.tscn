@@ -1,0 +1,113 @@
+[gd_scene format=3 uid="uid://df1tjmqe6msdq"]
+
+[ext_resource type="PackedScene" uid="uid://cbgsp7kuo84q1" path="res://player.tscn" id="1_0xm2m"]
+[ext_resource type="Script" uid="uid://gryv2jnbe7a0" path="res://main.gd" id="2_main"]
+[ext_resource type="Script" uid="uid://bngi4x21pnqef" path="res://label.gd" id="3_4c57u"]
+[ext_resource type="Script" uid="uid://bbk4casxeuub0" path="res://screen_camera.gd" id="3_camera"]
+[ext_resource type="FontFile" uid="uid://cet8y2a7ru56n" path="res://Silkscreen/Silkscreen-Bold.ttf" id="3_efxa6"]
+[ext_resource type="Texture2D" uid="uid://wqejci3osvoa" path="res://Jumpstart Legacy/Parallax-Backgrounds/Forest/Layer_08.png" id="4_7mycd"]
+[ext_resource type="Texture2D" uid="uid://b48lsa4ucxed3" path="res://Jumpstart Legacy/Parallax-Backgrounds/Forest/Layer_04.png" id="5_272bh"]
+[ext_resource type="AudioStream" uid="uid://icoapxm7cb08" path="res://audio/iron_ascent.ogg" id="5_dg77c"]
+[ext_resource type="Texture2D" uid="uid://day8mtawlvuop" path="res://Jumpstart Legacy/Parallax-Backgrounds/Forest/Layer_06.png" id="6_5vw27"]
+[ext_resource type="PackedScene" uid="uid://c8ce8iwriq0m3" path="res://Level_05.tscn" id="6_ycdy4"]
+[ext_resource type="PackedScene" uid="uid://yhivvoqo6exq" path="res://Level_02.tscn" id="8_5vw27"]
+[ext_resource type="PackedScene" uid="uid://dfnrfpy668v86" path="res://Level_03.tscn" id="8_kek77"]
+[ext_resource type="PackedScene" uid="uid://ct2ogpm6fi3m6" path="res://Level_04.tscn" id="9_kek77"]
+
+[node name="Main" type="Node2D" unique_id=1227024573]
+script = ExtResource("2_main")
+
+[node name="ScreenCamera" type="Camera2D" parent="." unique_id=2020762220]
+position = Vector2(160, 90)
+script = ExtResource("3_camera")
+
+[node name="Label" type="Label" parent="ScreenCamera" unique_id=1516192247]
+z_index = 1
+offset_left = -154.0
+offset_top = -90.0
+offset_right = -114.0
+offset_bottom = -67.0
+theme_override_fonts/font = ExtResource("3_efxa6")
+theme_override_font_sizes/font_size = 16
+text = "0"
+script = ExtResource("3_4c57u")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="ScreenCamera" unique_id=318832377]
+position = Vector2(-160, -90)
+stream = ExtResource("5_dg77c")
+autoplay = true
+
+[node name="Player" parent="." unique_id=602816141 instance=ExtResource("1_0xm2m")]
+z_index = 5
+position = Vector2(70, 144)
+
+[node name="Layer08" type="Sprite2D" parent="." unique_id=610337988]
+z_index = -3
+position = Vector2(132, 46)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("4_7mycd")
+
+[node name="Layer04" type="Sprite2D" parent="." unique_id=1989215620]
+z_index = -1
+texture_filter = 1
+position = Vector2(144, 65)
+scale = Vector2(1.4087253, 1)
+texture = ExtResource("5_272bh")
+
+[node name="Layer12" type="Sprite2D" parent="." unique_id=37595107]
+z_index = -1
+texture_filter = 1
+position = Vector2(1228, 65)
+scale = Vector2(1.4087253, 1)
+texture = ExtResource("5_272bh")
+
+[node name="Layer06" type="Sprite2D" parent="." unique_id=1023775360]
+z_index = -2
+texture_filter = 1
+position = Vector2(140, 59)
+scale = Vector2(1.4087253, 1)
+texture = ExtResource("6_5vw27")
+
+[node name="Layer11" type="Sprite2D" parent="." unique_id=1011382894]
+z_index = -2
+texture_filter = 1
+position = Vector2(1185, 66)
+scale = Vector2(1.4087253, 1)
+texture = ExtResource("6_5vw27")
+
+[node name="Tutorial_01" parent="." unique_id=199532143 instance=ExtResource("8_5vw27")]
+
+[node name="Tutoiral_02" parent="." unique_id=2023377505 instance=ExtResource("8_kek77")]
+position = Vector2(320, 0)
+
+[node name="Layer09" type="Sprite2D" parent="." unique_id=38045241]
+z_index = -3
+position = Vector2(669.094, 46)
+scale = Vector2(2.113088, 1.5)
+texture = ExtResource("4_7mycd")
+
+[node name="Layer10" type="Sprite2D" parent="." unique_id=804879631]
+z_index = -3
+position = Vector2(1322.9999, 51.00003)
+scale = Vector2(2.113088, 1.5)
+texture = ExtResource("4_7mycd")
+
+[node name="Layer05" type="Sprite2D" parent="." unique_id=1650029925]
+z_index = -1
+texture_filter = 1
+position = Vector2(685.9988, 65)
+scale = Vector2(1.9845068, 1)
+texture = ExtResource("5_272bh")
+
+[node name="Layer07" type="Sprite2D" parent="." unique_id=74217151]
+z_index = -2
+texture_filter = 1
+position = Vector2(681.3641, 57.000004)
+scale = Vector2(1.9845068, 1)
+texture = ExtResource("6_5vw27")
+
+[node name="TileMapLayer" parent="." unique_id=938936149 instance=ExtResource("9_kek77")]
+position = Vector2(640, 0)
+
+[node name="TileMapLayer2" parent="." unique_id=1466047648 instance=ExtResource("6_ycdy4")]
+position = Vector2(960, 0)
