@@ -77,10 +77,11 @@ func _leave_rope():
 ## Immediate release with no delay / no carry velocity (death, forced cancel).
 ## Deferred: may be called from Area2D.body_entered while physics is flushing
 ## queries; reparenting a CharacterBody2D there is not allowed.
-func force_release() -> void:
-	call_deferred("_detach_player", Vector2.ZERO)
+## reactivate_player: false on death so the player stays frozen for the sequence.
+func force_release(reactivate_player: bool = true) -> void:
+	call_deferred("_detach_player", Vector2.ZERO, reactivate_player)
 
-func _detach_player(release_momentum: Vector2) -> void:
+func _detach_player(release_momentum: Vector2, reactivate_player: bool = true) -> void:
 	if _released or not is_instance_valid(self):
 		return
 	_released = true
@@ -92,7 +93,10 @@ func _detach_player(release_momentum: Vector2) -> void:
 		return
 
 	_player.reparent(get_tree().current_scene)
-	_player.set_active(true)
+	if reactivate_player:
+		_player.set_active(true)
+	else:
+		_player.set_active(false)
 	_player.momentum = release_momentum
 	if _player.has_method("clear_grappling_hook"):
 		_player.clear_grappling_hook(self)

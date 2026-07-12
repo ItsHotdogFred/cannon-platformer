@@ -3,17 +3,26 @@ extends CharacterBody2D
 @export var speed: float = 150.0
 @export var friction: float = 50# 500.0
 
+@export_group("Death")
+@export var death_hitstop: float = 0.12
+@export var death_hold: float = 0.35
+@export var spawn_in_duration: float = 0.22
+
 @onready var ray_cast_2d: RayCast2D = $RayCast2D
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var shoot_time: Timer = $ShootTime
+@onready var sprite: AnimatedSprite2D = $Sprite
 
 const GRAPPLING_HOOK = preload("uid://dum12y78crq6f")
+const DEATH_BURST = preload("res://death_burst.tscn")
 
 var starting_pos : Vector2
 
 var can_shoot = true
 ## Active hook instance while swinging; null when free.
 var active_grappling_hook: Node2D = null
+## True while the arcade death sequence is playing (blocks re-entry).
+var is_dying: bool = false
 
 
 # Persistent movement state. The player has no walk input - all motion
@@ -32,6 +41,9 @@ func _ready() -> void:
 	Gamemanager.player = self
 
 func _physics_process(delta: float) -> void:
+	if is_dying:
+		return
+
 	_set_ray_cast_direction()
 	# Fire: launch the player opposite the cursor (recoil). Each shot adds a
 	# fresh impulse to momentum instead of accumulating a never-decayed unit
@@ -72,9 +84,9 @@ func _physics_process(delta: float) -> void:
 	momentum = velocity
 	
 	if global_position > get_global_mouse_position():
-		$Sprite.flip_h = true
+		sprite.flip_h = true
 	else:
-		$Sprite.flip_h = false
+		sprite.flip_h = false
 	
 func _set_ray_cast_direction():
 	var mouse_pos := get_global_mouse_position()
@@ -82,6 +94,8 @@ func _set_ray_cast_direction():
 	ray_cast_2d.target_position = ray_cast_2d.to_local(mouse_pos)
 
 func _use_grappling_hook():
+	if is_dying:
+		return
 	if not ray_cast_2d.is_colliding(): return
 	# Don't stack hooks if somehow already attached.
 	if active_grappling_hook != null and is_instance_valid(active_grappling_hook):
@@ -95,30 +109,111 @@ func _use_grappling_hook():
 	grapplingHookNode.start_hook(ray_cast_2d.get_collision_point())
 
 ## Tear down an active grapple without starting a new one.
-func cancel_grappling_hook() -> void:
+## reactivate_player: false during death so force_release doesn't re-enable physics.
+func cancel_grappling_hook(reactivate_player: bool = true) -> void:
 	if active_grappling_hook != null and is_instance_valid(active_grappling_hook):
-		active_grappling_hook.force_release()
+		active_grappling_hook.force_release(reactivate_player)
 	active_grappling_hook = null
 
 func clear_grappling_hook(hook: Node2D = null) -> void:
 	if hook == null or active_grappling_hook == hook:
 		active_grappling_hook = null
 
-## Reset after death: detach rope first so the player isn't stuck under PlayerAnchor.
-## Safe to call from Area2D.body_entered — force_release defers reparent.
-func respawn() -> void:
-	cancel_grappling_hook()
-	# global_position works while still parented; deferred reparent keeps it.
+## Arcade death: hitstop flash → particle burst → hold → soft respawn at checkpoint.
+## Safe to call from Area2D.body_entered.
+func die() -> void:
+	if is_dying:
+		return
+	is_dying = true
+	# Keep timers/tweens alive if the camera pauses the tree mid-sequence.
+	process_mode = Node.PROCESS_MODE_ALWAYS
+
+	cancel_grappling_hook(false)
+	momentum = Vector2.ZERO
+	velocity = Vector2.ZERO
+	set_active(false)
+
+	var death_pos := global_position
+	var cam := get_viewport().get_camera_2d()
+
+	# Hitstop feel: bright flash + shake while still visible on the spike.
+	sprite.modulate = Color(2.5, 2.5, 2.5, 1.0)
+	if cam != null and cam.has_method("shake"):
+		cam.shake(death_hitstop + 0.05, 2.5)
+
+	_spawn_burst(death_pos)
+
+	await _death_wait(death_hitstop)
+
+	sprite.visible = false
+	sprite.modulate = Color.WHITE
+	sprite.scale = Vector2.ONE
+
+	await _death_wait(death_hold)
+
+	# Soft teleport — camera pans if the checkpoint is on another screen.
 	global_position = starting_pos
 	momentum = Vector2.ZERO
 	velocity = Vector2.ZERO
+
+	if cam != null and cam.has_method("focus_on_player"):
+		await cam.focus_on_player()
+
+	_spawn_burst(global_position, true)
+
+	# Scale / fade back in at the checkpoint.
+	sprite.visible = true
+	sprite.modulate.a = 0.0
+	sprite.scale = Vector2(0.4, 0.4)
+
+	var tween := create_tween()
+	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	tween.set_parallel(true)
+	tween.tween_property(sprite, "modulate:a", 1.0, spawn_in_duration)
+	tween.tween_property(sprite, "scale", Vector2.ONE, spawn_in_duration) \
+			.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	await tween.finished
+
+	sprite.modulate = Color.WHITE
+	sprite.scale = Vector2.ONE
 	set_active(true)
+	process_mode = Node.PROCESS_MODE_INHERIT
+	is_dying = false
+
+
+## Instant reset (no VFX). Prefer die() for gameplay deaths.
+func respawn() -> void:
+	cancel_grappling_hook(false)
+	global_position = starting_pos
+	momentum = Vector2.ZERO
+	velocity = Vector2.ZERO
+	sprite.visible = true
+	sprite.modulate = Color.WHITE
+	sprite.scale = Vector2.ONE
+	set_active(true)
+	is_dying = false
+	process_mode = Node.PROCESS_MODE_INHERIT
+
 
 func set_active(boolean: bool):
 	set_physics_process(boolean)
 	# Must be deferred: spike death runs from Area2D.body_entered (physics
 	# callback), and changing shape.disabled inline is ignored/unsafe there.
 	collision_shape_2d.set_deferred("disabled", not boolean)
+
+
+func _spawn_burst(at: Vector2, spawn_puff: bool = false) -> void:
+	var burst: Node2D = DEATH_BURST.instantiate()
+	if spawn_puff:
+		burst.spawn_puff = true
+	# Parent first so _ready runs with spawn_puff already set.
+	get_tree().current_scene.add_child(burst)
+	burst.global_position = at
+
+
+func _death_wait(seconds: float) -> void:
+	# process_always + ignore_pause so camera screen-pauses don't stall death.
+	await get_tree().create_timer(seconds, true, false, true).timeout
 
 
 func _on_shoot_time_timeout() -> void:
