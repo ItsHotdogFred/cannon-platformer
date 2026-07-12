@@ -9,7 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://b48lsa4ucxed3" path="res://Jumpstart Legacy/Parallax-Backgrounds/Forest/Layer_04.png" id="5_272bh"]
 [ext_resource type="AudioStream" uid="uid://icoapxm7cb08" path="res://audio/iron_ascent.ogg" id="5_dg77c"]
 [ext_resource type="Texture2D" uid="uid://day8mtawlvuop" path="res://Jumpstart Legacy/Parallax-Backgrounds/Forest/Layer_06.png" id="6_5vw27"]
+[ext_resource type="Script" uid="uid://bto1f0lrjepde" path="res://sound.gd" id="6_w48qg"]
 [ext_resource type="PackedScene" uid="uid://c8ce8iwriq0m3" path="res://Level_05.tscn" id="6_ycdy4"]
+[ext_resource type="Texture2D" uid="uid://bibuw7f70ifba" path="res://icons/sound_on.svg" id="7_vivmo"]
 [ext_resource type="PackedScene" uid="uid://yhivvoqo6exq" path="res://Level_02.tscn" id="8_5vw27"]
 [ext_resource type="PackedScene" uid="uid://dfnrfpy668v86" path="res://Level_03.tscn" id="8_kek77"]
 [ext_resource type="PackedScene" uid="uid://ct2ogpm6fi3m6" path="res://Level_04.tscn" id="9_kek77"]
@@ -36,6 +38,16 @@ script = ExtResource("3_4c57u")
 position = Vector2(-160, -90)
 stream = ExtResource("5_dg77c")
 autoplay = true
+
+[node name="Sound" type="Button" parent="ScreenCamera" unique_id=1426153752]
+z_index = 1
+texture_filter = 1
+offset_left = -138.0
+offset_top = -90.0
+offset_right = -106.0
+offset_bottom = -58.0
+icon = ExtResource("7_vivmo")
+script = ExtResource("6_w48qg")
 
 [node name="Player" parent="." unique_id=602816141 instance=ExtResource("1_0xm2m")]
 z_index = 5
@@ -111,3 +123,5 @@ position = Vector2(640, 0)
 
 [node name="TileMapLayer2" parent="." unique_id=1466047648 instance=ExtResource("6_ycdy4")]
 position = Vector2(960, 0)
+
+[connection signal="pressed" from="ScreenCamera/Sound" to="ScreenCamera/Sound" method="_on_pressed"]

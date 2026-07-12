@@ -36,7 +36,10 @@ func _physics_process(delta: float) -> void:
 	# Fire: launch the player opposite the cursor (recoil). Each shot adds a
 	# fresh impulse to momentum instead of accumulating a never-decayed unit
 	# vector, which is what let old vertical momentum bleed into later shots.
-	if Input.is_action_just_pressed("shoot") and can_shoot:
+	# Skip fire if the click landed on UI (e.g. sound toggle) — Input still
+	# reports the action even when a Control already handled the event.
+	if Input.is_action_just_pressed("shoot") and can_shoot \
+			and get_viewport().gui_get_hovered_control() == null:
 		var mouse_pos = get_global_mouse_position()
 		var direction: Vector2 = (mouse_pos - global_position).normalized()
 		momentum += -direction * speed
