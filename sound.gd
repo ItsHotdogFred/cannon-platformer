@@ -4,7 +4,6 @@ const SOUND_ON = preload("uid://bibuw7f70ifba")
 const SOUND_OFF = preload("uid://dq1yst02klqce")
 
 @onready var audio_stream_player_2d: AudioStreamPlayer2D = $"../AudioStreamPlayer2D"
-@onready var sprite_2d: Sprite2D = $Sprite2D
 
 @export var sound : bool = true
 

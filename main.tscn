@@ -15,6 +15,8 @@
 [ext_resource type="PackedScene" uid="uid://yhivvoqo6exq" path="res://Level_02.tscn" id="8_5vw27"]
 [ext_resource type="PackedScene" uid="uid://dfnrfpy668v86" path="res://Level_03.tscn" id="8_kek77"]
 [ext_resource type="PackedScene" uid="uid://ct2ogpm6fi3m6" path="res://Level_04.tscn" id="9_kek77"]
+[ext_resource type="PackedScene" uid="uid://cjcm5bget2q20" path="res://Level_06.tscn" id="16_2cqfq"]
+[ext_resource type="PackedScene" uid="uid://bq2rjwc4u0t6e" path="res://Level_07.tscn" id="17_yaehf"]
 
 [node name="Main" type="Node2D" unique_id=1227024573]
 script = ExtResource("2_main")
@@ -100,14 +102,21 @@ texture = ExtResource("4_7mycd")
 
 [node name="Layer10" type="Sprite2D" parent="." unique_id=804879631]
 z_index = -3
-position = Vector2(1322.9999, 51.00003)
-scale = Vector2(2.113088, 1.5)
+position = Vector2(1588.4529, 51.00003)
+scale = Vector2(3.772169, 1.5)
 texture = ExtResource("4_7mycd")
 
 [node name="Layer05" type="Sprite2D" parent="." unique_id=1650029925]
 z_index = -1
 texture_filter = 1
 position = Vector2(685.9988, 65)
+scale = Vector2(1.9845068, 1)
+texture = ExtResource("5_272bh")
+
+[node name="Layer13" type="Sprite2D" parent="." unique_id=1436852703]
+z_index = -1
+texture_filter = 1
+position = Vector2(1771, 65)
 scale = Vector2(1.9845068, 1)
 texture = ExtResource("5_272bh")
 
@@ -118,10 +127,23 @@ position = Vector2(681.3641, 57.000004)
 scale = Vector2(1.9845068, 1)
 texture = ExtResource("6_5vw27")
 
+[node name="Layer14" type="Sprite2D" parent="." unique_id=501980394]
+z_index = -2
+texture_filter = 1
+position = Vector2(1728, 66)
+scale = Vector2(1.9845068, 1)
+texture = ExtResource("6_5vw27")
+
 [node name="TileMapLayer" parent="." unique_id=938936149 instance=ExtResource("9_kek77")]
 position = Vector2(640, 0)
 
 [node name="TileMapLayer2" parent="." unique_id=1466047648 instance=ExtResource("6_ycdy4")]
 position = Vector2(960, 0)
+
+[node name="TileMapLayer3" parent="." unique_id=749135044 instance=ExtResource("16_2cqfq")]
+position = Vector2(1280, 0)
+
+[node name="TileMapLayer4" parent="." unique_id=686122201 instance=ExtResource("17_yaehf")]
+position = Vector2(1600, 0)
 
 [connection signal="pressed" from="ScreenCamera/Sound" to="ScreenCamera/Sound" method="_on_pressed"]
