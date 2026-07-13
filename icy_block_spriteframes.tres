@@ -1,0 +1,32 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://dcmwa4isi1kwm"]
+
+[ext_resource type="Texture2D" uid="uid://bp4cltkg72l0k" path="res://Jumpstart Legacy/Entities/Platforms/falling_platform_icy.png" id="1_qu17h"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ryhil"]
+atlas = ExtResource("1_qu17h")
+region = Rect2(0, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cfe1p"]
+atlas = ExtResource("1_qu17h")
+region = Rect2(0, 16, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0esut"]
+atlas = ExtResource("1_qu17h")
+region = Rect2(0, 0, 8, 8)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ryhil")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cfe1p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0esut")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 1.0
+}]
