@@ -1,8 +1,0 @@
-[gd_scene format=3 uid="uid://ciy37oparu0qc"]
-
-[ext_resource type="Script" uid="uid://bfb0qk5ydgq25" path="res://moving_platform_controller.gd" id="1_ssjs2"]
-[ext_resource type="PackedScene" uid="uid://dv1k36nowupnc" path="res://moving_platform.tscn" id="2_cvv6b"]
-
-[node name="Moving Platform Controller" type="Node2D" unique_id=1445278168]
-script = ExtResource("1_ssjs2")
-moving_platform = ExtResource("2_cvv6b")

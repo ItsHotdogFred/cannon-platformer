@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://dcaeoaw66cmoj"]
+
+[ext_resource type="Script" uid="uid://badvaqnsis3xy" path="res://world/hazards/icy_block.gd" id="1_0esut"]
+[ext_resource type="Texture2D" uid="uid://bp4cltkg72l0k" path="res://assets/jumpstart/Jumpstart Legacy/Entities/Platforms/falling_platform_icy.png" id="1_5vodk"]
+[ext_resource type="SpriteFrames" uid="uid://dcmwa4isi1kwm" path="res://world/hazards/icy_block_spriteframes.tres" id="2_0esut"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_twto6"]
+size = Vector2(8, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b2glc"]
+size = Vector2(8, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0esut"]
+atlas = ExtResource("1_5vodk")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ryhil"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0esut")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 1.0
+}]
+
+[node name="IcyBlock" type="AnimatableBody2D" unique_id=1962784823]
+script = ExtResource("1_0esut")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=93362129]
+texture_filter = 1
+sprite_frames = ExtResource("2_0esut")
+frame = 2
+frame_progress = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=404133236]
+shape = SubResource("RectangleShape2D_twto6")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=823660463]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=124832941]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_b2glc")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Area2D" unique_id=1098816767]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_ryhil")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

@@ -197,30 +197,45 @@ trajectory (read from `git log` + uncommitted changes):
 
 ## File Map (quick reference)
 
-| File                              | Role                                    |
+Top-level layout is **by domain**, not by file type. Scripts and scenes
+for a feature live together.
+
+| Path                              | Role                                    |
 |-----------------------------------|-----------------------------------------|
 | `project.godot`                   | Project config, input map, autoloads    |
 | `main.tscn` / `main.gd`           | World root, contains all level sub-scenes |
-| `player.gd` / `player.tscn`       | Player: input dispatch + delegates to subsystems |
-| `player/movement.gd`              | Cannon recoil, friction, gravity, collision, momentum |
-| `player/grapple_controller.gd`    | Grapple raycast + hook lifecycle |
-| `player/death_sequence.gd`        | Arcade death cascade (hitstop → burst → respawn → spawn-in) |
-| `screen_camera.gd`                | Screen-locked camera + shake            |
-| `grappling_hook.gd` / `.tscn`     | Grapple projectile / swing              |
-| `death_burst.gd` / `death_burst.tscn` | Particle burst on death / respawn   |
-| `checkpoint.gd` / `.tscn`         | Checkpoint trigger                      |
-| `spike.gd` / `.tscn`              | Death hazard (Area2D)                   |
-| `star.gd` / `.tscn`               | Collectible                             |
-| `icy_block.gd` / `.tscn`          | Falling platform (WIP)                  |
-| `moving_platform.tscn` + `moving_platform_controller.gd` | Moving platform (WIP) |
-| `gamemanager.gd`                  | Game-state autoload                     |
-| `sound.gd`                        | Sound helper / mute toggle              |
-| `label.gd`                        | UI label helper                         |
-| `Level_01.tscn` … `Level_09.tscn` | Individual level rooms                  |
-| `audio/`                          | Sound assets                            |
+| `assets/jumpstart/Jumpstart Legacy/` | Third-party asset pack (CC0 Jumpstart) |
+| `audio/sfx/`                      | Sound effects                           |
+| `audio/music/`                    | Music tracks                            |
+| `fonts/silkscreen/`               | Silkscreen pixel font                   |
 | `icons/`                          | UI icons                                |
-| `Silkscreen/`, `Jumpstart Legacy/`| Font assets                             |
+| `core/`                           | Autoloads (singletons)                  |
+| `core/gamemanager.gd`             | Game-state singleton                    |
+| `ui/`                             | UI scripts attached to main scene HUD   |
+| `ui/sound.gd`                     | Sound helper / mute toggle              |
+| `ui/label.gd`                     | UI label helper                         |
+| `world/player/`                   | Player subsystems (cannon, grapple, death) |
+| `world/player/player.gd/.tscn`    | Player: input dispatch + delegates     |
+| `world/player/movement.gd`        | Cannon recoil, friction, gravity, collision, momentum |
+| `world/player/grapple_controller.gd` | Grapple raycast + hook lifecycle     |
+| `world/player/death_sequence.gd`  | Arcade death cascade (hitstop → burst → respawn → spawn-in) |
+| `world/camera/screen_camera.gd`   | Screen-locked camera + shake            |
+| `world/hazards/`                  | Anything that hurts the player          |
+| `world/hazards/spike.gd/.tscn`    | Death hazard (Area2D)                   |
+| `world/hazards/icy_block.gd/.tscn` | Falling platform (WIP)                 |
+| `world/hazards/moving_platform.tscn` + `moving_platform_controller.gd` | Moving platform (WIP) |
+| `world/props/`                    | Interactive world objects               |
+| `world/props/checkpoint.gd/.tscn` | Checkpoint trigger                      |
+| `world/props/star.gd/.tscn`       | Collectible                             |
+| `world/props/death_burst.gd/.tscn` | Particle burst on death / respawn    |
+| `world/props/grappling_hook.gd/.tscn` | Grapple projectile / swing         |
+| `world/levels/Level_01.tscn` … `Level_09.tscn` | Individual level rooms    |
 | `addons/godot_ai/`                | Godot AI MCP plugin (managed)           |
+
+**Adding a new hazard / prop / level**: drop the `.gd` + `.tscn` pair
+into the matching `world/hazards/`, `world/props/`, or `world/levels/`
+folder. No path rewriting needed for the move — just write relative
+`res://` paths from where the new file lives.
 
 ---
 
@@ -232,16 +247,13 @@ trajectory (read from `git log` + uncommitted changes):
   `scene_get_hierarchy` / `node_get_properties` before mutating. Avoid
   editing `.tscn` files by hand unless you have to.
 - **Tests:** there is no test suite yet. Verify changes by running the
-  project (`project_run` with `mode="current"` for the level you touched)
-  and checking `logs_read(source="game")` + `editor_screenshot`.
-- **Backup files:** `screen_camera.gd.backup` is a leftover; don't reference
-  it, and don't create new `.backup` files — use git instead.
-- **Uncommitted work is real work.** `git status` shows modified
-  `Level_07.tscn`, `player.gd`, `grappling_hook.gd`, `icy_block.*`,
-  `main.tscn`, `sound.gd`, `death_burst.gd`, `project.godot`, plus
-  untracked `Level_08.tscn`, `Level_09.tscn`, `moving_platform*`,
-  `addons/`. Don't sweep these up or "tidy" the working tree without
-  asking.
+  project (`project_run` with `mode="main"` or `"current"` for the level
+  you touched) and checking `logs_read(source="game")` +
+  `editor_screenshot`.
+- **Backup files:** none. Don't create new `.backup` files — use git
+  instead.
+- **Uncommitted work is real work.** Check `git status` before tidying
+  the working tree.
 
 ---
 

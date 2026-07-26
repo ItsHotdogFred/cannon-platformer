@@ -3,7 +3,7 @@ extends Node
 ## respawn at checkpoint → spawn-in tween. Safe to call from
 ## Area2D.body_entered.
 
-const DEATH_BURST = preload("res://death_burst.tscn")
+const DEATH_BURST = preload("res://world/props/death_burst.tscn")
 
 @export var death_hitstop: float = 0.12
 @export var death_hold: float = 0.35

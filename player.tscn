@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cbgsp7kuo84q1"]
 
 [ext_resource type="Script" uid="uid://cf5887erlmh14" path="res://player.gd" id="1_onrkg"]
-[ext_resource type="Texture2D" uid="uid://h42vltkr8bs6" path="res://Jumpstart Legacy/Entities/Player/player.png" id="2_i3pqv"]
+[ext_resource type="Texture2D" uid="uid://h42vltkr8bs6" path="res://assets/jumpstart/Jumpstart Legacy/Entities/Player/player.png" id="2_i3pqv"]
 [ext_resource type="AudioStream" uid="uid://sua3ywg8f8pl" path="res://audio/sfx/bit_cannon.wav" id="3_i3pqv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lquwl"]
