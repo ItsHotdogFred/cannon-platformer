@@ -59,6 +59,32 @@ Levels are short single-screen-or-multi-screen rooms strung together in
   level is sized as one or more 320×180 rooms. Use this grid when placing
   geometry — the camera snaps to room centers.
 
+### Mechanic: player subsystems
+`player.gd` is a thin orchestrator (~107 lines). The real work lives in
+three sibling `Node`s that are `add_child`'d in `_ready` and `bind`-ed
+to the player:
+- `res://player/movement.gd` — cannon recoil (`speed`),
+  `friction_air` / `friction_ground`, `gravity_scale * gravity`, the
+  `set_active` deferral rule, and `momentum`. Owns `_can_shoot` + the
+  `ShootTime` timer signal.
+- `res://player/grapple_controller.gd` — raycast aim, range check,
+  hook instantiation, `cancel` / `clear` lifecycle. Fires
+  `on_attach` / `on_release` so movement can disable / re-enable
+  physics.
+- `res://player/death_sequence.gd` — the entire `die()` cascade
+  (hitstop → burst → hold → respawn → spawn-in). `start()` and
+  `reset()` are its public surface.
+
+Tunables for each subsystem are exported on the subsystem itself, not
+on `player.gd` (except `noclip_speed`, which is a player-level debug
+toggle).
+
+Public surface that other systems (spikes, hook) call on the player:
+`die()`, `respawn()`, `set_active(active)` (proxies to movement),
+`momentum` (getter/setter that proxies to movement), and
+`clear_grappling_hook(hook)`. Don't add new public methods on
+`player.gd` without checking — extend the subsystem instead.
+
 ### Mechanic: arcade death sequence
 The player no longer instant-teleports on death. On hitting a spike (or any
 death trigger) the game plays:
@@ -72,7 +98,8 @@ Tunables live in `player.gd` under the **Death** export group:
 `death_hitstop`, `death_hold`, `spawn_in_duration`.
 
 ### Mechanic: grappling hook
-- Range: `max_grapple_distance` (default **72 px**, on `player.gd`).
+- Range: `max_grapple_distance` (default **72 px**, on
+  `player/grapple_controller.gd`).
 - Triggered by the `interaction` action (Space / right-click). Aims along the
   cursor via a `RayCast2D` child of the player; capped so out-of-range hits
   don't attach.
@@ -150,7 +177,8 @@ trajectory (read from `git log` + uncommitted changes):
   needs movement, it should compose with `momentum` (add/subtract), not
   overwrite it.
 - **Friction dampens horizontal momentum only.** Vertical is left alone so
-  cannon arcs feel right. `friction` is 50 in the air, 500 on the ground.
+  cannon arcs feel right. `friction_air` is 50, `friction_ground` is 500
+  (both exports on `player.gd`).
 - **Pixel grid is sacred.** Vertex + transform snapping is on. Place
   geometry on integer coordinates.
 - **Death must go through `player.die()`.** New spikes/hazards: Area2D
@@ -173,7 +201,10 @@ trajectory (read from `git log` + uncommitted changes):
 |-----------------------------------|-----------------------------------------|
 | `project.godot`                   | Project config, input map, autoloads    |
 | `main.tscn` / `main.gd`           | World root, contains all level sub-scenes |
-| `player.gd` / `player.tscn`       | Player: cannon recoil, grapple, death   |
+| `player.gd` / `player.tscn`       | Player: input dispatch + delegates to subsystems |
+| `player/movement.gd`              | Cannon recoil, friction, gravity, collision, momentum |
+| `player/grapple_controller.gd`    | Grapple raycast + hook lifecycle |
+| `player/death_sequence.gd`        | Arcade death cascade (hitstop → burst → respawn → spawn-in) |
 | `screen_camera.gd`                | Screen-locked camera + shake            |
 | `grappling_hook.gd` / `.tscn`     | Grapple projectile / swing              |
 | `death_burst.gd` / `death_burst.tscn` | Particle burst on death / respawn   |

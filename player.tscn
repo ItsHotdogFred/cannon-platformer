@@ -93,5 +93,3 @@ target_position = Vector2(200, 0)
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1616469664]
 stream = ExtResource("3_i3pqv")
 volume_db = 24.0
-
-[connection signal="timeout" from="ShootTime" to="." method="_on_shoot_time_timeout"]
