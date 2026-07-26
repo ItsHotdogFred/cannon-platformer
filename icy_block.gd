@@ -1,10 +1,7 @@
-extends StaticBody2D
+extends AnimatableBody2D
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
-
-@export var empty_node : AnimatedSprite2D
-
-const ICY_BLOCK_SPRITEFRAMES = preload("uid://dcmwa4isi1kwm")
+@onready var animated_sprite_2d_empty: AnimatedSprite2D = $Area2D/AnimatedSprite2D
 
 var going_down : bool = false
 
@@ -19,24 +16,23 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		animated_sprite_2d.frame = 1
 		await get_tree().create_timer(1).timeout
 		going_down = true
-		var new_sprite : AnimatedSprite2D = AnimatedSprite2D.new()
-		new_sprite.sprite_frames = ICY_BLOCK_SPRITEFRAMES
-		new_sprite.animation = "default"
-		new_sprite.frame = 2
-		add_child(new_sprite)
-		new_sprite.global_position = starting_pos
-		new_sprite.top_level = true
-		new_sprite.z_index = 999
-		empty_node = new_sprite
-		await get_tree().create_timer(1).timeout
+		await get_tree().create_timer(3).timeout
 		going_down = false
-		new_sprite.queue_free()
 		animated_sprite_2d.frame = 0
 		global_position = starting_pos
+		var tween = get_tree().create_tween()
+		animated_sprite_2d.scale = Vector2(0,0)
+		tween.tween_property(animated_sprite_2d, "scale", Vector2(1,1), 0.5)
 		
 		
 		
 		
 func _physics_process(delta: float) -> void:
 	if going_down:
-		global_position.y += 30 * delta
+		global_position.y += 50 * delta
+		animated_sprite_2d_empty.show()
+		animated_sprite_2d_empty.global_position = starting_pos
+		return
+	animated_sprite_2d_empty.hide()
+	
+		

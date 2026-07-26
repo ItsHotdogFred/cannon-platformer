@@ -17,7 +17,8 @@
 [ext_resource type="PackedScene" uid="uid://ct2ogpm6fi3m6" path="res://Level_04.tscn" id="9_kek77"]
 [ext_resource type="PackedScene" uid="uid://cjcm5bget2q20" path="res://Level_06.tscn" id="16_2cqfq"]
 [ext_resource type="PackedScene" uid="uid://bq2rjwc4u0t6e" path="res://Level_07.tscn" id="17_yaehf"]
-[ext_resource type="PackedScene" uid="uid://dcaeoaw66cmoj" path="res://icy_block.tscn" id="18_074og"]
+[ext_resource type="PackedScene" uid="uid://ciy37oparu0qc" path="res://moving_platform_controller.tscn" id="19_82xsv"]
+[ext_resource type="PackedScene" uid="uid://b5i4sei82fbqv" path="res://Level_09.tscn" id="19_cegan"]
 
 [node name="Main" type="Node2D" unique_id=1227024573]
 script = ExtResource("2_main")
@@ -49,8 +50,10 @@ offset_left = -138.0
 offset_top = -90.0
 offset_right = -106.0
 offset_bottom = -58.0
+focus_mode = 0
 icon = ExtResource("7_vivmo")
 script = ExtResource("6_w48qg")
+sound = false
 
 [node name="Player" parent="." unique_id=602816141 instance=ExtResource("1_0xm2m")]
 z_index = 5
@@ -147,7 +150,36 @@ position = Vector2(1280, 0)
 [node name="TileMapLayer4" parent="." unique_id=686122201 instance=ExtResource("17_yaehf")]
 position = Vector2(1600, 0)
 
-[node name="IcyBlock" parent="." unique_id=1928012977 instance=ExtResource("18_074og")]
-position = Vector2(152, 131)
+[node name="TileMapLayer5" parent="." unique_id=1303224397 instance=ExtResource("19_cegan")]
+position = Vector2(1920, 0)
+
+[node name="Moving Platform Controller" parent="." unique_id=1445278168 instance=ExtResource("19_82xsv")]
+
+[node name="0" type="Node2D" parent="Moving Platform Controller" unique_id=1113016039]
+position = Vector2(91, 131)
+
+[node name="1" type="Node2D" parent="Moving Platform Controller" unique_id=81540884]
+position = Vector2(386, 151)
+
+[node name="2" type="Node2D" parent="Moving Platform Controller" unique_id=1233148657]
+position = Vector2(743, 124)
+
+[node name="3" type="Node2D" parent="Moving Platform Controller" unique_id=795093623]
+position = Vector2(789, 98)
+
+[node name="4" type="Node2D" parent="Moving Platform Controller" unique_id=1322662225]
+position = Vector2(845, 99)
+
+[node name="5" type="Node2D" parent="Moving Platform Controller" unique_id=132263909]
+position = Vector2(924, 141)
+
+[node name="6" type="Node2D" parent="Moving Platform Controller" unique_id=262763532]
+position = Vector2(1018, 123)
+
+[node name="7" type="Node2D" parent="Moving Platform Controller" unique_id=955799701]
+position = Vector2(1057, 82)
+
+[node name="8" type="Node2D" parent="Moving Platform Controller" unique_id=1129994211]
+position = Vector2(1181, 71)
 
 [connection signal="pressed" from="ScreenCamera/Sound" to="ScreenCamera/Sound" method="_on_pressed"]

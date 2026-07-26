@@ -13,10 +13,15 @@ extends Node2D
 
 var current_rope_length: float
 var _player: Node2D
+var _attached_body: Node2D
+var _attached_local_position := Vector2.ZERO
 var _released := false
 
-func start_hook(hookPosition):
-	anchor.global_position = hookPosition
+func start_hook(hook_position: Vector2, attached_body: Node2D = null) -> void:
+	anchor.global_position = hook_position
+	if attached_body != null:
+		_attached_body = attached_body
+		_attached_local_position = attached_body.to_local(hook_position)
 
 	_player = get_tree().get_first_node_in_group("player")
 	player_anchor.global_position = _player.global_position
@@ -42,6 +47,7 @@ func _physics_process(delta: float) -> void:
 	if _player == null:
 		return
 
+	_update_anchor_position()
 	var to_anchor := anchor.global_position - player_anchor.global_position
 	var distance := to_anchor.length()
 	var direction := to_anchor.normalized()
@@ -67,6 +73,13 @@ func _physics_process(delta: float) -> void:
 
 	if Input.is_action_just_pressed("interaction"):
 		_leave_rope()
+
+## Keeps an attachment at the same point on a moving/rotating collider.
+func _update_anchor_position() -> void:
+	if _attached_body != null and is_instance_valid(_attached_body):
+		anchor.global_position = _attached_body.to_global(_attached_local_position)
+	else:
+		_attached_body = null
 
 func _leave_rope():
 	await get_tree().create_timer(0.1).timeout

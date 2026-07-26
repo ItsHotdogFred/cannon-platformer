@@ -2,6 +2,9 @@ extends CharacterBody2D
 
 @export var speed: float = 150.0
 @export var friction: float = 50# 500.0
+@export var noclip_speed: float = 200.0
+@export_group("Grappling Hook")
+@export var max_grapple_distance: float = 72.0
 
 @export_group("Death")
 @export var death_hitstop: float = 0.12
@@ -23,6 +26,8 @@ var can_shoot = true
 var active_grappling_hook: Node2D = null
 ## True while the arcade death sequence is playing (blocks re-entry).
 var is_dying: bool = false
+## Debug free-fly: no collision, gravity, or cannon physics. Toggle with F.
+var noclip: bool = false
 
 
 # Persistent movement state. The player has no walk input - all motion
@@ -42,6 +47,13 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if is_dying:
+		return
+
+	if Input.is_action_just_pressed("noclip"):
+		_toggle_noclip()
+
+	if noclip:
+		_noclip_move(delta)
 		return
 
 	_set_ray_cast_direction()
@@ -87,16 +99,55 @@ func _physics_process(delta: float) -> void:
 		sprite.flip_h = true
 	else:
 		sprite.flip_h = false
+
+
+func _toggle_noclip() -> void:
+	noclip = not noclip
+	cancel_grappling_hook()
+	momentum = Vector2.ZERO
+	velocity = Vector2.ZERO
+	# Disable collision so we pass through tiles, spikes, etc.
+	collision_shape_2d.set_deferred("disabled", noclip)
+	if noclip:
+		sprite.modulate = Color(1.0, 1.0, 1.0, 0.55)
+	else:
+		sprite.modulate = Color.WHITE
+
+
+func _noclip_move(delta: float) -> void:
+	var dir := Vector2(
+		Input.get_axis("left", "right"),
+		Input.get_axis("up", "down")
+	)
+	if dir.length_squared() > 1.0:
+		dir = dir.normalized()
+	global_position += dir * noclip_speed * delta
+	momentum = Vector2.ZERO
+	velocity = Vector2.ZERO
+
+	if global_position.x > get_global_mouse_position().x:
+		sprite.flip_h = true
+	else:
+		sprite.flip_h = false
 	
 func _set_ray_cast_direction():
 	var mouse_pos := get_global_mouse_position()
-	# Point the ray at the cursor and make it long enough to reach the click.
-	ray_cast_2d.target_position = ray_cast_2d.to_local(mouse_pos)
+	# Limit the cast so targets beyond the hook's range cannot be grappled.
+	var aim_offset := ray_cast_2d.to_local(mouse_pos)
+	ray_cast_2d.target_position = aim_offset.limit_length(max_grapple_distance)
 
 func _use_grappling_hook():
 	if is_dying:
 		return
 	if not ray_cast_2d.is_colliding(): return
+
+	# Check the hit position too, so a stale raycast result can never create an
+	# attachment outside the configured range.
+	var hook_position := ray_cast_2d.get_collision_point()
+	var hook_target := ray_cast_2d.get_collider() as Node2D
+	if global_position.distance_to(hook_position) > max_grapple_distance:
+		return
+
 	# Don't stack hooks if somehow already attached.
 	if active_grappling_hook != null and is_instance_valid(active_grappling_hook):
 		return
@@ -106,7 +157,7 @@ func _use_grappling_hook():
 	var grapplingHookNode = GRAPPLING_HOOK.instantiate()
 	get_tree().current_scene.add_child(grapplingHookNode)
 	active_grappling_hook = grapplingHookNode
-	grapplingHookNode.start_hook(ray_cast_2d.get_collision_point())
+	grapplingHookNode.start_hook(hook_position, hook_target)
 
 ## Tear down an active grapple without starting a new one.
 ## reactivate_player: false during death so force_release doesn't re-enable physics.
@@ -136,10 +187,8 @@ func die() -> void:
 	var death_pos := global_position
 	var cam := get_viewport().get_camera_2d()
 
-	# Hitstop feel: bright flash + shake while still visible on the spike.
+	# Hitstop feel: bright flash while still visible on the spike.
 	sprite.modulate = Color(2.5, 2.5, 2.5, 1.0)
-	if cam != null and cam.has_method("shake"):
-		cam.shake(death_hitstop + 0.05, 2.5)
 
 	_spawn_burst(death_pos)
 
@@ -174,7 +223,7 @@ func die() -> void:
 			.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	await tween.finished
 
-	sprite.modulate = Color.WHITE
+	sprite.modulate = Color(1.0, 1.0, 1.0, 0.55) if noclip else Color.WHITE
 	sprite.scale = Vector2.ONE
 	set_active(true)
 	process_mode = Node.PROCESS_MODE_INHERIT
@@ -199,16 +248,17 @@ func set_active(boolean: bool):
 	set_physics_process(boolean)
 	# Must be deferred: spike death runs from Area2D.body_entered (physics
 	# callback), and changing shape.disabled inline is ignored/unsafe there.
-	collision_shape_2d.set_deferred("disabled", not boolean)
+	# Keep collision off while noclipping even when re-activating after death.
+	collision_shape_2d.set_deferred("disabled", not boolean or noclip)
 
 
 func _spawn_burst(at: Vector2, spawn_puff: bool = false) -> void:
 	var burst: Node2D = DEATH_BURST.instantiate()
 	if spawn_puff:
 		burst.spawn_puff = true
-	# Parent first so _ready runs with spawn_puff already set.
+	# Parent first, then play_at so particles never emit at (0,0).
 	get_tree().current_scene.add_child(burst)
-	burst.global_position = at
+	burst.play_at(at)
 
 
 func _death_wait(seconds: float) -> void:

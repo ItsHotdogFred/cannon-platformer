@@ -1,16 +1,21 @@
 extends Node2D
 ## One-shot arcade particle burst. Spawns at a world position, emits, then frees.
 
-## Set before add_child() so _ready can tune the emitter first.
+## Set before play() so the emitter can be tuned first.
 var spawn_puff: bool = false
 
 @onready var particles: CPUParticles2D = $CPUParticles2D
 
 
 func _ready() -> void:
+	particles.finished.connect(queue_free)
+
+
+## Place at world position, then emit. Must run after add_child so global_position sticks.
+func play_at(world_pos: Vector2) -> void:
+	global_position = world_pos
 	if spawn_puff:
 		_configure_as_spawn_puff()
-	particles.finished.connect(queue_free)
 	particles.restart()
 	particles.emitting = true
 
