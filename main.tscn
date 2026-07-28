@@ -5,10 +5,7 @@
 [ext_resource type="Script" uid="uid://bngi4x21pnqef" path="res://ui/label.gd" id="3_4c57u"]
 [ext_resource type="Script" uid="uid://bbk4casxeuub0" path="res://world/camera/screen_camera.gd" id="3_camera"]
 [ext_resource type="FontFile" uid="uid://cet8y2a7ru56n" path="res://fonts/silkscreen/Silkscreen-Bold.ttf" id="3_efxa6"]
-[ext_resource type="Texture2D" uid="uid://wqejci3osvoa" path="res://assets/jumpstart/Jumpstart Legacy/Parallax-Backgrounds/Forest/Layer_08.png" id="4_7mycd"]
-[ext_resource type="Texture2D" uid="uid://b48lsa4ucxed3" path="res://assets/jumpstart/Jumpstart Legacy/Parallax-Backgrounds/Forest/Layer_04.png" id="5_272bh"]
 [ext_resource type="AudioStream" uid="uid://icoapxm7cb08" path="res://audio/music/iron_ascent.ogg" id="5_dg77c"]
-[ext_resource type="Texture2D" uid="uid://day8mtawlvuop" path="res://assets/jumpstart/Jumpstart Legacy/Parallax-Backgrounds/Forest/Layer_06.png" id="6_5vw27"]
 [ext_resource type="Script" uid="uid://bto1f0lrjepde" path="res://ui/sound.gd" id="6_w48qg"]
 [ext_resource type="PackedScene" uid="uid://c8ce8iwriq0m3" path="res://world/levels/Level_05.tscn" id="6_ycdy4"]
 [ext_resource type="Texture2D" uid="uid://bibuw7f70ifba" path="res://icons/sound_on.svg" id="7_vivmo"]
@@ -16,8 +13,8 @@
 [ext_resource type="PackedScene" uid="uid://dfnrfpy668v86" path="res://world/levels/Level_03.tscn" id="8_kek77"]
 [ext_resource type="PackedScene" uid="uid://ct2ogpm6fi3m6" path="res://world/levels/Level_04.tscn" id="9_kek77"]
 [ext_resource type="PackedScene" uid="uid://cjcm5bget2q20" path="res://world/levels/Level_06.tscn" id="16_2cqfq"]
+[ext_resource type="PackedScene" uid="uid://tqjr7bjruir1" path="res://background.tscn" id="17_074og"]
 [ext_resource type="PackedScene" uid="uid://bq2rjwc4u0t6e" path="res://world/levels/Level_07.tscn" id="17_yaehf"]
-[ext_resource type="PackedScene" uid="uid://ciy37oparu0qc" path="res://world/hazards/moving_platform_controller.tscn" id="19_82xsv"]
 [ext_resource type="PackedScene" uid="uid://b5i4sei82fbqv" path="res://world/levels/Level_09.tscn" id="19_cegan"]
 
 [node name="Main" type="Node2D" unique_id=1227024573]
@@ -52,91 +49,19 @@ offset_right = -106.0
 offset_bottom = -58.0
 focus_mode = 0
 icon = ExtResource("7_vivmo")
+flat = true
 script = ExtResource("6_w48qg")
 sound = false
 
 [node name="Player" parent="." unique_id=602816141 instance=ExtResource("1_0xm2m")]
 z_index = 5
 position = Vector2(70, 144)
-
-[node name="Layer08" type="Sprite2D" parent="." unique_id=610337988]
-z_index = -3
-position = Vector2(132, 46)
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("4_7mycd")
-
-[node name="Layer04" type="Sprite2D" parent="." unique_id=1989215620]
-z_index = -1
-texture_filter = 1
-position = Vector2(144, 65)
-scale = Vector2(1.4087253, 1)
-texture = ExtResource("5_272bh")
-
-[node name="Layer12" type="Sprite2D" parent="." unique_id=37595107]
-z_index = -1
-texture_filter = 1
-position = Vector2(1228, 65)
-scale = Vector2(1.4087253, 1)
-texture = ExtResource("5_272bh")
-
-[node name="Layer06" type="Sprite2D" parent="." unique_id=1023775360]
-z_index = -2
-texture_filter = 1
-position = Vector2(140, 59)
-scale = Vector2(1.4087253, 1)
-texture = ExtResource("6_5vw27")
-
-[node name="Layer11" type="Sprite2D" parent="." unique_id=1011382894]
-z_index = -2
-texture_filter = 1
-position = Vector2(1185, 66)
-scale = Vector2(1.4087253, 1)
-texture = ExtResource("6_5vw27")
+noclip_speed = null
 
 [node name="Tutorial_01" parent="." unique_id=199532143 instance=ExtResource("8_5vw27")]
 
 [node name="Tutoiral_02" parent="." unique_id=2023377505 instance=ExtResource("8_kek77")]
 position = Vector2(320, 0)
-
-[node name="Layer09" type="Sprite2D" parent="." unique_id=38045241]
-z_index = -3
-position = Vector2(669.094, 46)
-scale = Vector2(2.113088, 1.5)
-texture = ExtResource("4_7mycd")
-
-[node name="Layer10" type="Sprite2D" parent="." unique_id=804879631]
-z_index = -3
-position = Vector2(1588.4529, 51.00003)
-scale = Vector2(3.772169, 1.5)
-texture = ExtResource("4_7mycd")
-
-[node name="Layer05" type="Sprite2D" parent="." unique_id=1650029925]
-z_index = -1
-texture_filter = 1
-position = Vector2(685.9988, 65)
-scale = Vector2(1.9845068, 1)
-texture = ExtResource("5_272bh")
-
-[node name="Layer13" type="Sprite2D" parent="." unique_id=1436852703]
-z_index = -1
-texture_filter = 1
-position = Vector2(1771, 65)
-scale = Vector2(1.9845068, 1)
-texture = ExtResource("5_272bh")
-
-[node name="Layer07" type="Sprite2D" parent="." unique_id=74217151]
-z_index = -2
-texture_filter = 1
-position = Vector2(681.3641, 57.000004)
-scale = Vector2(1.9845068, 1)
-texture = ExtResource("6_5vw27")
-
-[node name="Layer14" type="Sprite2D" parent="." unique_id=501980394]
-z_index = -2
-texture_filter = 1
-position = Vector2(1728, 66)
-scale = Vector2(1.9845068, 1)
-texture = ExtResource("6_5vw27")
 
 [node name="TileMapLayer" parent="." unique_id=938936149 instance=ExtResource("9_kek77")]
 position = Vector2(640, 0)
@@ -153,33 +78,7 @@ position = Vector2(1600, 0)
 [node name="TileMapLayer5" parent="." unique_id=1303224397 instance=ExtResource("19_cegan")]
 position = Vector2(1920, 0)
 
-[node name="Moving Platform Controller" parent="." unique_id=1445278168 instance=ExtResource("19_82xsv")]
-
-[node name="0" type="Node2D" parent="Moving Platform Controller" unique_id=1113016039]
-position = Vector2(91, 131)
-
-[node name="1" type="Node2D" parent="Moving Platform Controller" unique_id=81540884]
-position = Vector2(386, 151)
-
-[node name="2" type="Node2D" parent="Moving Platform Controller" unique_id=1233148657]
-position = Vector2(743, 124)
-
-[node name="3" type="Node2D" parent="Moving Platform Controller" unique_id=795093623]
-position = Vector2(789, 98)
-
-[node name="4" type="Node2D" parent="Moving Platform Controller" unique_id=1322662225]
-position = Vector2(845, 99)
-
-[node name="5" type="Node2D" parent="Moving Platform Controller" unique_id=132263909]
-position = Vector2(924, 141)
-
-[node name="6" type="Node2D" parent="Moving Platform Controller" unique_id=262763532]
-position = Vector2(1018, 123)
-
-[node name="7" type="Node2D" parent="Moving Platform Controller" unique_id=955799701]
-position = Vector2(1057, 82)
-
-[node name="8" type="Node2D" parent="Moving Platform Controller" unique_id=1129994211]
-position = Vector2(1181, 71)
+[node name="Background" parent="." unique_id=1680881938 instance=ExtResource("17_074og")]
+z_index = -2
 
 [connection signal="pressed" from="ScreenCamera/Sound" to="ScreenCamera/Sound" method="_on_pressed"]

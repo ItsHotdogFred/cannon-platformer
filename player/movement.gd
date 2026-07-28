@@ -72,18 +72,14 @@ func try_fire() -> void:
 ## Gravity only acts while airborne. Horizontal momentum bleeds off at
 ## different rates in the air vs on the ground. Vertical momentum is NOT
 ## damped so cannon launches follow a natural gravity arc.
-func step(delta: float) -> void:
+func step(delta: float, celeste_momentum : Vector2) -> void:
 	if not body.is_on_floor():
 		momentum.y += _gravity * gravity_scale * delta
 		momentum.x = move_toward(momentum.x, 0.0, friction_air * delta)
 	else:
 		momentum.x = move_toward(momentum.x, 0.0, friction_ground * delta)
 
-	body.velocity = momentum
-	body.move_and_slide()
-	## Sync momentum from the post-collision velocity so landing zeroes
-	## vertical momentum and hitting a wall zeroes horizontal momentum.
-	momentum = body.velocity
+	body.velocity = momentum + celeste_momentum
 
 
 ## Enable/disable physics + collision. `disabled` is deferred because spike

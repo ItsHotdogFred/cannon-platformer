@@ -3,12 +3,17 @@ extends CharacterBody2D
 const MovementScript = preload("res://player/movement.gd")
 const GrappleScript = preload("res://player/grapple_controller.gd")
 const DeathScript = preload("res://player/death_sequence.gd")
+const CelesteMovementScript = preload("res://player/celeste_movement.gd")
+const CursorScript = preload("res://player/cursor_indicator.gd")
 
 @export var noclip_speed: float = 200.0
+@onready var sprite: AnimatedSprite2D = $Sprite
 
 @onready var movement = MovementScript.new()
 @onready var grapple = GrappleScript.new()
 @onready var death = DeathScript.new()
+@onready var celeste = CelesteMovementScript.new()
+@onready var cursor = CursorScript.new()
 
 var starting_pos: Vector2
 
@@ -32,9 +37,16 @@ func _ready() -> void:
 	death.bind(self, $Sprite, starting_pos,
 			func (active: bool): movement.set_active(active),
 			func (): return movement.is_noclip())
+	celeste.bind(self, movement)
+	cursor.name = "CursorIndicator"
+	add_child(cursor)
+	cursor.bind($ShootTime)
 
 
 func _physics_process(delta: float) -> void:
+	
+	var celeste_momentum = celeste.movement(delta)
+	
 	if death.is_dying:
 		return
 	if Input.is_action_just_pressed("noclip"):
@@ -50,7 +62,14 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("interaction"):
 		if grapple.try_attach():
 			return
-	movement.step(delta)
+	movement.step(delta, celeste_momentum)
+	
+	var pre_velocity := velocity
+	move_and_slide()
+	if pre_velocity.x != 0.0:
+		movement.momentum.x *= velocity.x / pre_velocity.x
+	if pre_velocity.y != 0.0:
+		movement.momentum.y *= velocity.y / pre_velocity.y
 
 
 # --- Public surface other systems call -------------------------------

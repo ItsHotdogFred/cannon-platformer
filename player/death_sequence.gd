@@ -17,11 +17,10 @@ var get_noclip: Callable = Callable()
 var is_dying: bool = false
 
 
-func bind(body: CharacterBody2D, sprite: AnimatedSprite2D, starting_pos: Vector2,
+func bind(body: CharacterBody2D, sprite: AnimatedSprite2D, _starting_pos: Vector2,
 		set_active: Callable, get_noclip: Callable) -> void:
 	self.body = body
 	self.sprite = sprite
-	self.starting_pos = starting_pos
 	self.set_active = set_active
 	self.get_noclip = get_noclip
 
@@ -47,7 +46,7 @@ func start() -> void:
 ## Instant reset (no VFX). Prefer start() for gameplay deaths.
 ## Caller is responsible for zeroing momentum/velocity before calling.
 func reset() -> void:
-	body.global_position = starting_pos
+	body.global_position = body.starting_pos
 	sprite.visible = true
 	sprite.modulate = Color.WHITE
 	sprite.scale = Vector2.ONE
@@ -69,8 +68,8 @@ func _hide_during_hold() -> void:
 
 
 func _respawn() -> void:
-	# Soft teleport — camera pans if the checkpoint is on another screen.
-	body.global_position = starting_pos
+	# Read the player's live starting_pos (updated by checkpoints), not our cached copy.
+	body.global_position = body.starting_pos
 	var cam := body.get_viewport().get_camera_2d()
 	if cam != null and cam.has_method("focus_on_player"):
 		await cam.focus_on_player()

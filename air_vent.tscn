@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://cec0llytnw5kf"]
+
+[ext_resource type="Script" uid="uid://c27ijolw8yxcx" path="res://air_vent.gd" id="1_4ohvb"]
+[ext_resource type="Texture2D" uid="uid://d3tyr7vk3dw18" path="res://assets/jumpstart/Jumpstart Legacy/Particles/circle.png" id="1_jqynr"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_twto6"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(4, 1, 1)
+gravity = Vector3(0, -98, 0)
+scale_min = 0.5
+scale_max = 0.5
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_twto6"]
+size = Vector2(8, 54)
+
+[node name="Air Vent" type="Area2D" unique_id=1751366971]
+script = ExtResource("1_4ohvb")
+
+[node name="Box8x8" type="ColorRect" parent="." unique_id=1957283104]
+offset_right = 8.0
+offset_bottom = 8.0
+color = Color(0, 1, 0, 0.5)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=718924876]
+texture_filter = 1
+position = Vector2(4, 0)
+texture = ExtResource("1_jqynr")
+process_material = SubResource("ParticleProcessMaterial_twto6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=54490012]
+position = Vector2(4, -27)
+shape = SubResource("RectangleShape2D_twto6")
