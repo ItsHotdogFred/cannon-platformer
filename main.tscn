@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://ct2ogpm6fi3m6" path="res://world/levels/Level_04.tscn" id="9_kek77"]
 [ext_resource type="PackedScene" uid="uid://cjcm5bget2q20" path="res://world/levels/Level_06.tscn" id="16_2cqfq"]
 [ext_resource type="PackedScene" uid="uid://tqjr7bjruir1" path="res://background.tscn" id="17_074og"]
+[ext_resource type="PackedScene" uid="uid://xn0lnuevgjwd" path="res://world/levels/Level_10.tscn" id="17_cegan"]
 [ext_resource type="PackedScene" uid="uid://bq2rjwc4u0t6e" path="res://world/levels/Level_07.tscn" id="17_yaehf"]
 [ext_resource type="PackedScene" uid="uid://b5i4sei82fbqv" path="res://world/levels/Level_09.tscn" id="19_cegan"]
 
@@ -80,5 +81,8 @@ position = Vector2(1920, 0)
 
 [node name="Background" parent="." unique_id=1680881938 instance=ExtResource("17_074og")]
 z_index = -2
+
+[node name="TileMapLayer6" parent="." unique_id=891859371 instance=ExtResource("17_cegan")]
+position = Vector2(1920, 180)
 
 [connection signal="pressed" from="ScreenCamera/Sound" to="ScreenCamera/Sound" method="_on_pressed"]
