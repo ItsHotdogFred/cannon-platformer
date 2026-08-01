@@ -104,8 +104,8 @@ Tunables live in `player.gd` under the **Death** export group:
   cursor via a `RayCast2D` child of the player; capped so out-of-range hits
   don't attach.
 - The grapple physics hook stays in the gameplay physics tree, while its rope
-  `Line2D` is reparented into the `SubViewport` and positioned relative to
-  `ScreenCamera` for rendering.
+  `Line2D` is reparented under `ScreenCamera` and positioned in camera-local
+  coordinates for rendering, including while screen transitions pause physics.
 - The `SubViewportContainer` follows `ScreenCamera` so the overlay remains
   aligned as the player crosses room boundaries.
 - Cancels safely on death (`cancel_grappling_hook(reactivate_player: false)`)
@@ -138,8 +138,9 @@ Tunables live in `player.gd` under the **Death** export group:
 
 ### Other systems in place
 - **Cursor indicator** (`player/cursor_indicator.tscn` / `.gd`) — screen-space reload
-  wheel manually placed under the gameplay `CanvasLayer`; its exported player
-  reference supplies the shoot timer and keeps it pinned during transitions.
+  wheel parented under `ScreenCamera` and positioned in camera-local screen
+  coordinates, so it stays pinned during room transitions. Its exported player
+  reference supplies the shoot timer.
 - **Checkpoints** (`checkpoint.gd` / `.tscn`) — sets `player.starting_pos`.
 - **Stars / collectibles** (`star.gd` / `.tscn`).
 - **Spikes** (`spike.gd` / `.tscn`) — Area2D that calls `player.die()`.

@@ -1,5 +1,7 @@
 extends Node2D
 
+@export var camera : Camera2D
+
 func _ready():
 	# Default window size via DisplayServer (more reliable on Wayland than
 	# project overrides alone). Leave resize enabled so maximize works.

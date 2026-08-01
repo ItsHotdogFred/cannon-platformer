@@ -20,6 +20,12 @@ var _released := false
 var _rope_viewport: SubViewport
 var _screen_camera: Camera2D
 
+
+func _ready() -> void:
+	# Keep rope rendering alive while the camera pans with the tree paused.
+	process_mode = Node.PROCESS_MODE_ALWAYS
+
+
 func start_hook(hook_position: Vector2, attached_body: Node2D = null) -> void:
 	anchor.global_position = hook_position
 	if attached_body != null:
@@ -30,8 +36,8 @@ func start_hook(hook_position: Vector2, attached_body: Node2D = null) -> void:
 	_player_parent = _player.get_parent()
 	_rope_viewport = get_tree().get_first_node_in_group("grapple_rope_viewport") as SubViewport
 	_screen_camera = get_tree().get_first_node_in_group("grapple_screen_camera") as Camera2D
-	if _rope_viewport != null:
-		line_2d.reparent(_rope_viewport, false)
+	if is_instance_valid(_screen_camera):
+		line_2d.reparent(_screen_camera, false)
 		line_2d.position = Vector2.ZERO
 		line_2d.visible = true
 	player_anchor.global_position = _player.global_position
@@ -55,6 +61,8 @@ func start_hook(hook_position: Vector2, attached_body: Node2D = null) -> void:
 
 func _physics_process(delta: float) -> void:
 	if _player == null:
+		return
+	if get_tree().paused:
 		return
 
 	_update_anchor_position()
@@ -143,9 +151,7 @@ func _process(_delta: float) -> void:
 	# mutates a copy and won't update the rendered line.
 	var player_position := player_anchor.global_position
 	var anchor_position := anchor.global_position
-	if _rope_viewport != null and _screen_camera != null:
-		var viewport_center := Vector2(_rope_viewport.size) * 0.5
-		var camera_position := _screen_camera.global_position
-		player_position = player_position - camera_position + viewport_center
-		anchor_position = anchor_position - camera_position + viewport_center
+	if is_instance_valid(_screen_camera):
+		player_position = _screen_camera.to_local(player_anchor.global_position)
+		anchor_position = _screen_camera.to_local(anchor.global_position)
 	line_2d.points = PackedVector2Array([player_position, anchor_position])
