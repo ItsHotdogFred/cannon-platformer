@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://tqjr7bjruir1"]
 
-[ext_resource type="Script" path="res://background.gd" id="0_background"]
+[ext_resource type="Script" uid="uid://j13daoggttk4" path="res://background.gd" id="0_background"]
 [ext_resource type="Texture2D" uid="uid://b48lsa4ucxed3" path="res://assets/jumpstart/Jumpstart Legacy/Parallax-Backgrounds/Forest/Layer_04.png" id="1_splo0"]
 [ext_resource type="Texture2D" uid="uid://c62mewh5wi5vs" path="res://assets/jumpstart/Jumpstart Legacy/Parallax-Backgrounds/Forest/Layer_03.png" id="2_eq6nc"]
 [ext_resource type="Texture2D" uid="uid://day8mtawlvuop" path="res://assets/jumpstart/Jumpstart Legacy/Parallax-Backgrounds/Forest/Layer_06.png" id="3_bpugw"]

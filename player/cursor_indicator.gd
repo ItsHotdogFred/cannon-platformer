@@ -6,16 +6,23 @@ extends Node2D
 @export var color_ready: Color = Color.WHITE
 @export var color_charge: Color = Color(1.0, 1.0, 1.0, 0.6)
 @export var color_bg: Color = Color(0.25, 0.25, 0.25, 0.4)
+@export var player: Node2D
 
 var shoot_timer: Timer
 
 
-func bind(timer: Timer) -> void:
-	shoot_timer = timer
+func _ready() -> void:
+	# The camera pauses gameplay during room transitions, but the cursor should
+	# remain visible and pinned to the viewport mouse position.
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	if player == null:
+		player = get_tree().get_first_node_in_group("player") as Node2D
+	if player != null:
+		shoot_timer = player.get_node_or_null("ShootTime") as Timer
 
 
 func _process(_delta: float) -> void:
-	global_position = get_global_mouse_position().round()
+	position = get_viewport().get_mouse_position().round()
 	queue_redraw()
 
 

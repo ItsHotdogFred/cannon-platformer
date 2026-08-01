@@ -103,6 +103,11 @@ Tunables live in `player.gd` under the **Death** export group:
 - Triggered by the `interaction` action (Space / right-click). Aims along the
   cursor via a `RayCast2D` child of the player; capped so out-of-range hits
   don't attach.
+- The grapple physics hook stays in the gameplay physics tree, while its rope
+  `Line2D` is reparented into the `SubViewport` and positioned relative to
+  `ScreenCamera` for rendering.
+- The `SubViewportContainer` follows `ScreenCamera` so the overlay remains
+  aligned as the player crosses room boundaries.
 - Cancels safely on death (`cancel_grappling_hook(reactivate_player: false)`)
   and on entering noclip.
 - `set_active(false)` (disables physics + collision) runs **deferred** because
@@ -132,6 +137,9 @@ Tunables live in `player.gd` under the **Death** export group:
 - Cancels any active grappling hook on toggle.
 
 ### Other systems in place
+- **Cursor indicator** (`player/cursor_indicator.tscn` / `.gd`) — screen-space reload
+  wheel manually placed under the gameplay `CanvasLayer`; its exported player
+  reference supplies the shoot timer and keeps it pinned during transitions.
 - **Checkpoints** (`checkpoint.gd` / `.tscn`) — sets `player.starting_pos`.
 - **Stars / collectibles** (`star.gd` / `.tscn`).
 - **Spikes** (`spike.gd` / `.tscn`) — Area2D that calls `player.die()`.
@@ -223,6 +231,7 @@ for a feature live together.
 | `world/player/movement.gd`        | Cannon recoil, friction, gravity, collision, momentum |
 | `world/player/grapple_controller.gd` | Grapple raycast + hook lifecycle     |
 | `world/player/death_sequence.gd`  | Arcade death cascade (hitstop → burst → respawn → spawn-in) |
+| `player/cursor_indicator.tscn` / `.gd` | Screen-space mouse cursor and reload wheel; instanced in `main.tscn` |
 | `world/camera/screen_camera.gd`   | Screen-locked camera + shake            |
 | `world/hazards/`                  | Anything that hurts the player          |
 | `world/hazards/spike.gd/.tscn`    | Death hazard (Area2D)                   |

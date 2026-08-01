@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://player/cursor_indicator.gd" id="1_cursor"]
+
+[node name="CursorIndicator" type="Node2D"]
+z_as_relative = false
+z_index = 100
+script = ExtResource("1_cursor")

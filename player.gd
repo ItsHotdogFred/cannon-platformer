@@ -4,7 +4,6 @@ const MovementScript = preload("res://player/movement.gd")
 const GrappleScript = preload("res://player/grapple_controller.gd")
 const DeathScript = preload("res://player/death_sequence.gd")
 const CelesteMovementScript = preload("res://player/celeste_movement.gd")
-const CursorScript = preload("res://player/cursor_indicator.gd")
 
 @export var noclip_speed: float = 200.0
 @onready var sprite: AnimatedSprite2D = $Sprite
@@ -13,7 +12,6 @@ const CursorScript = preload("res://player/cursor_indicator.gd")
 @onready var grapple = GrappleScript.new()
 @onready var death = DeathScript.new()
 @onready var celeste = CelesteMovementScript.new()
-@onready var cursor = CursorScript.new()
 
 var starting_pos: Vector2
 
@@ -36,11 +34,8 @@ func _ready() -> void:
 	grapple.on_release = func (): movement.set_active(true)
 	death.bind(self, $Sprite, starting_pos,
 			func (active: bool): movement.set_active(active),
-			func (): return movement.is_noclip())
+		func (): return movement.is_noclip())
 	celeste.bind(self, movement)
-	cursor.name = "CursorIndicator"
-	add_child(cursor)
-	cursor.bind($ShootTime)
 
 
 func _physics_process(delta: float) -> void:

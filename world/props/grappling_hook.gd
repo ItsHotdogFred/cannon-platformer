@@ -17,6 +17,8 @@ var _player_parent: Node
 var _attached_body: Node2D
 var _attached_local_position := Vector2.ZERO
 var _released := false
+var _rope_viewport: SubViewport
+var _screen_camera: Camera2D
 
 func start_hook(hook_position: Vector2, attached_body: Node2D = null) -> void:
 	anchor.global_position = hook_position
@@ -26,6 +28,12 @@ func start_hook(hook_position: Vector2, attached_body: Node2D = null) -> void:
 
 	_player = get_tree().get_first_node_in_group("player")
 	_player_parent = _player.get_parent()
+	_rope_viewport = get_tree().get_first_node_in_group("grapple_rope_viewport") as SubViewport
+	_screen_camera = get_tree().get_first_node_in_group("grapple_screen_camera") as Camera2D
+	if _rope_viewport != null:
+		line_2d.reparent(_rope_viewport, false)
+		line_2d.position = Vector2.ZERO
+		line_2d.visible = true
 	player_anchor.global_position = _player.global_position
 	player_anchor.linear_velocity = Vector2.ZERO
 	player_anchor.angular_velocity = 0.0
@@ -120,13 +128,24 @@ func _detach_player(release_momentum: Vector2, reactivate_player: bool = true) -
 	if _player.has_method("clear_grappling_hook"):
 		_player.clear_grappling_hook(self)
 
+	# The rope was reparented into the SubViewport, so it is no longer freed
+	# automatically with this hook instance.
+	if is_instance_valid(line_2d):
+		line_2d.queue_free()
 	queue_free()
 
 
 func _process(_delta: float) -> void:
+	if not is_instance_valid(line_2d):
+		return
+
 	# Assign a whole new PackedVector2Array; indexing `line_2d.points` alone
 	# mutates a copy and won't update the rendered line.
-	line_2d.points = PackedVector2Array([
-		line_2d.to_local(player_anchor.global_position),
-		line_2d.to_local(anchor.global_position)
-	])
+	var player_position := player_anchor.global_position
+	var anchor_position := anchor.global_position
+	if _rope_viewport != null and _screen_camera != null:
+		var viewport_center := Vector2(_rope_viewport.size) * 0.5
+		var camera_position := _screen_camera.global_position
+		player_position = player_position - camera_position + viewport_center
+		anchor_position = anchor_position - camera_position + viewport_center
+	line_2d.points = PackedVector2Array([player_position, anchor_position])
