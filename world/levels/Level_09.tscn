@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dcaeoaw66cmoj" path="res://world/hazards/icy_block.tscn" id="7_f6gmw"]
 [ext_resource type="PackedScene" uid="uid://c5dq5f1nbpq8b" path="res://world/hazards/spike.tscn" id="7_fxys2"]
 [ext_resource type="Texture2D" uid="uid://dyqrgeb01bgtl" path="res://assets/jumpstart/Jumpstart Legacy/Particles/snow_flake.png" id="9_gm5rp"]
+[ext_resource type="Script" uid="uid://dl4liswboohvy" path="res://world/levels/gpu_particles_2d.gd" id="10_cw647"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n6sch"]
 texture = ExtResource("1_yrvgd")
@@ -1292,13 +1293,15 @@ rotation = 3.1415927
 position = Vector2(103, 176)
 rotation = 3.1415927
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=877907578]
+[node name="SnowParticles2D" type="GPUParticles2D" parent="." unique_id=877907578]
 z_index = -1
+texture_filter = 1
 position = Vector2(135, -6)
 amount = 150
 texture = ExtResource("9_gm5rp")
 lifetime = 4.5
 process_material = SubResource("ParticleProcessMaterial_l1gdm")
+script = ExtResource("10_cw647")
 
 [connection signal="body_entered" from="Checkpoint" to="Checkpoint" method="_on_body_entered"]
 [connection signal="body_entered" from="void" to="void" method="_on_body_entered"]

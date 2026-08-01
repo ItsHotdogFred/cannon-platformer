@@ -6,6 +6,7 @@
 [ext_resource type="FontFile" uid="uid://cet8y2a7ru56n" path="res://fonts/silkscreen/Silkscreen-Bold.ttf" id="4_vn7fu"]
 [ext_resource type="PackedScene" uid="uid://bdir8fdmbtr0r" path="res://world/props/star.tscn" id="5_modof"]
 [ext_resource type="Texture2D" uid="uid://drbdhakieel44" path="res://assets/jumpstart/Jumpstart Legacy/Particles/squircle.png" id="6_xvuf8"]
+[ext_resource type="Script" uid="uid://dl4liswboohvy" path="res://world/levels/gpu_particles_2d.gd" id="7_f3dyj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n6sch"]
 texture = ExtResource("1_5ceop")
@@ -732,8 +733,10 @@ position = Vector2(168, 72)
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=872974896]
 z_index = -1
+texture_filter = 1
 position = Vector2(135, -6)
 amount = 100
 texture = ExtResource("6_xvuf8")
 lifetime = 3.0
 process_material = SubResource("ParticleProcessMaterial_f3dyj")
+script = ExtResource("7_f3dyj")

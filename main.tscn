@@ -21,11 +21,54 @@
 [node name="Main" type="Node2D" unique_id=1227024573]
 script = ExtResource("2_main")
 
-[node name="ScreenCamera" type="Camera2D" parent="." unique_id=2020762220]
+[node name="Background" parent="." unique_id=1680881938 instance=ExtResource("17_074og")]
+z_index = -2
+position = Vector2(0, -15)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1612213823]
+texture_filter = 1
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=527611784]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(320, 180)
+render_target_update_mode = 4
+
+[node name="Player" parent="SubViewportContainer/SubViewport" unique_id=602816141 instance=ExtResource("1_0xm2m")]
+z_index = 5
+position = Vector2(70, 144)
+noclip_speed = null
+
+[node name="Tutorial_01" parent="SubViewportContainer/SubViewport" unique_id=199532143 instance=ExtResource("8_5vw27")]
+
+[node name="Tutoiral_02" parent="SubViewportContainer/SubViewport" unique_id=2023377505 instance=ExtResource("8_kek77")]
+position = Vector2(320, 0)
+
+[node name="TileMapLayer" parent="SubViewportContainer/SubViewport" unique_id=938936149 instance=ExtResource("9_kek77")]
+position = Vector2(640, 0)
+
+[node name="TileMapLayer2" parent="SubViewportContainer/SubViewport" unique_id=1466047648 instance=ExtResource("6_ycdy4")]
+position = Vector2(960, 0)
+
+[node name="TileMapLayer3" parent="SubViewportContainer/SubViewport" unique_id=749135044 instance=ExtResource("16_2cqfq")]
+position = Vector2(1280, 0)
+
+[node name="TileMapLayer4" parent="SubViewportContainer/SubViewport" unique_id=686122201 instance=ExtResource("17_yaehf")]
+position = Vector2(1600, 0)
+
+[node name="TileMapLayer5" parent="SubViewportContainer/SubViewport" unique_id=1303224397 instance=ExtResource("19_cegan")]
+position = Vector2(1920, 0)
+
+[node name="TileMapLayer6" parent="SubViewportContainer/SubViewport" unique_id=891859371 instance=ExtResource("17_cegan")]
+position = Vector2(1920, 180)
+
+[node name="ScreenCamera" type="Camera2D" parent="SubViewportContainer/SubViewport" unique_id=2020762220]
 position = Vector2(160, 90)
 script = ExtResource("3_camera")
 
-[node name="Label" type="Label" parent="ScreenCamera" unique_id=1516192247]
+[node name="Label" type="Label" parent="SubViewportContainer/SubViewport/ScreenCamera" unique_id=1516192247]
 z_index = 1
 offset_left = -154.0
 offset_top = -90.0
@@ -36,12 +79,12 @@ theme_override_font_sizes/font_size = 16
 text = "0"
 script = ExtResource("3_4c57u")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="ScreenCamera" unique_id=318832377]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="SubViewportContainer/SubViewport/ScreenCamera" unique_id=318832377]
 position = Vector2(-160, -90)
 stream = ExtResource("5_dg77c")
 autoplay = true
 
-[node name="Sound" type="Button" parent="ScreenCamera" unique_id=1426153752]
+[node name="Sound" type="Button" parent="SubViewportContainer/SubViewport/ScreenCamera" unique_id=1426153752]
 z_index = 1
 texture_filter = 1
 offset_left = -138.0
@@ -54,35 +97,4 @@ flat = true
 script = ExtResource("6_w48qg")
 sound = false
 
-[node name="Player" parent="." unique_id=602816141 instance=ExtResource("1_0xm2m")]
-z_index = 5
-position = Vector2(70, 144)
-noclip_speed = null
-
-[node name="Tutorial_01" parent="." unique_id=199532143 instance=ExtResource("8_5vw27")]
-
-[node name="Tutoiral_02" parent="." unique_id=2023377505 instance=ExtResource("8_kek77")]
-position = Vector2(320, 0)
-
-[node name="TileMapLayer" parent="." unique_id=938936149 instance=ExtResource("9_kek77")]
-position = Vector2(640, 0)
-
-[node name="TileMapLayer2" parent="." unique_id=1466047648 instance=ExtResource("6_ycdy4")]
-position = Vector2(960, 0)
-
-[node name="TileMapLayer3" parent="." unique_id=749135044 instance=ExtResource("16_2cqfq")]
-position = Vector2(1280, 0)
-
-[node name="TileMapLayer4" parent="." unique_id=686122201 instance=ExtResource("17_yaehf")]
-position = Vector2(1600, 0)
-
-[node name="TileMapLayer5" parent="." unique_id=1303224397 instance=ExtResource("19_cegan")]
-position = Vector2(1920, 0)
-
-[node name="Background" parent="." unique_id=1680881938 instance=ExtResource("17_074og")]
-z_index = -2
-
-[node name="TileMapLayer6" parent="." unique_id=891859371 instance=ExtResource("17_cegan")]
-position = Vector2(1920, 180)
-
-[connection signal="pressed" from="ScreenCamera/Sound" to="ScreenCamera/Sound" method="_on_pressed"]
+[connection signal="pressed" from="SubViewportContainer/SubViewport/ScreenCamera/Sound" to="SubViewportContainer/SubViewport/ScreenCamera/Sound" method="_on_pressed"]

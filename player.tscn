@@ -137,7 +137,6 @@ height = 14.0
 script = ExtResource("1_onrkg")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1601340922]
-visible = false
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_twto6")
 autoplay = "default"
@@ -157,6 +156,7 @@ stream = ExtResource("3_i3pqv")
 volume_db = 24.0
 
 [node name="CelesteRect" type="ColorRect" parent="." unique_id=1656481243]
+visible = false
 offset_left = -4.0
 offset_top = 2.0
 offset_right = 4.0

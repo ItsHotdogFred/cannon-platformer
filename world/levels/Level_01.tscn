@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c22ww6ypa5rwh" path="res://assets/jumpstart/Jumpstart Legacy/Decoration/Decals.png" id="2_n6sch"]
 [ext_resource type="PackedScene" uid="uid://c5dq5f1nbpq8b" path="res://world/hazards/spike.tscn" id="3_ruxot"]
 [ext_resource type="Texture2D" uid="uid://drbdhakieel44" path="res://assets/jumpstart/Jumpstart Legacy/Particles/squircle.png" id="4_j8mhs"]
+[ext_resource type="Script" uid="uid://dl4liswboohvy" path="res://world/levels/gpu_particles_2d.gd" id="5_uhtq7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n6sch"]
 texture = ExtResource("1_wh77f")
@@ -513,3 +514,4 @@ amount = 100
 texture = ExtResource("4_j8mhs")
 lifetime = 3.0
 process_material = SubResource("ParticleProcessMaterial_twto6")
+script = ExtResource("5_uhtq7")

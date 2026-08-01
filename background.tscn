@@ -1,15 +1,18 @@
 [gd_scene format=3 uid="uid://tqjr7bjruir1"]
 
+[ext_resource type="Script" path="res://background.gd" id="0_background"]
 [ext_resource type="Texture2D" uid="uid://b48lsa4ucxed3" path="res://assets/jumpstart/Jumpstart Legacy/Parallax-Backgrounds/Forest/Layer_04.png" id="1_splo0"]
 [ext_resource type="Texture2D" uid="uid://c62mewh5wi5vs" path="res://assets/jumpstart/Jumpstart Legacy/Parallax-Backgrounds/Forest/Layer_03.png" id="2_eq6nc"]
 [ext_resource type="Texture2D" uid="uid://day8mtawlvuop" path="res://assets/jumpstart/Jumpstart Legacy/Parallax-Backgrounds/Forest/Layer_06.png" id="3_bpugw"]
 [ext_resource type="Texture2D" uid="uid://wqejci3osvoa" path="res://assets/jumpstart/Jumpstart Legacy/Parallax-Backgrounds/Forest/Layer_08.png" id="4_gjjrj"]
 
 [node name="Background" type="Node2D" unique_id=1680881938]
+script = ExtResource("0_background")
 
 [node name="Parallax2D" type="Parallax2D" parent="." unique_id=1389982522]
 scroll_scale = Vector2(0.2, 0.2)
-repeat_size = Vector2(320, 0)
+repeat_size = Vector2(320, 180)
+repeat_times = 20
 
 [node name="Sprite2D" type="Sprite2D" parent="Parallax2D" unique_id=1115997957]
 texture_filter = 1
@@ -18,7 +21,8 @@ texture = ExtResource("1_splo0")
 
 [node name="Parallax2D2" type="Parallax2D" parent="." unique_id=945826290]
 scroll_scale = Vector2(0.4, 0.4)
-repeat_size = Vector2(320, 0)
+repeat_size = Vector2(320, 180)
+repeat_times = 20
 
 [node name="Sprite2D2" type="Sprite2D" parent="Parallax2D2" unique_id=2095281472]
 texture_filter = 1
@@ -27,7 +31,8 @@ texture = ExtResource("2_eq6nc")
 
 [node name="Parallax2D3" type="Parallax2D" parent="." unique_id=721946809]
 scroll_scale = Vector2(0.6, 0.6)
-repeat_size = Vector2(320, 0)
+repeat_size = Vector2(320, 180)
+repeat_times = 20
 
 [node name="Sprite2D3" type="Sprite2D" parent="Parallax2D3" unique_id=20636311]
 z_index = -1
@@ -37,7 +42,8 @@ texture = ExtResource("3_bpugw")
 
 [node name="Parallax2D4" type="Parallax2D" parent="." unique_id=878857521]
 scroll_scale = Vector2(0.8, 0.8)
-repeat_size = Vector2(320, 0)
+repeat_size = Vector2(320, 180)
+repeat_times = 20
 
 [node name="Sprite2D4" type="Sprite2D" parent="Parallax2D4" unique_id=1792413269]
 z_index = -1

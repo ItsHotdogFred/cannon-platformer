@@ -26,8 +26,8 @@ so they agree.
   2D project; the setting is leftover/forward-looking and can be ignored for
   gameplay work).
 - **Main scene:** `main.tscn` (uid `uid://df1tjmqe6msdq`).
-- **Display:** 320×180 internal viewport, displayed at 960×540 with
-  `viewport` stretch mode. Pixel snapping is on for both transforms and
+- **Display:** 320×180 internal viewport with `canvas_items` stretch mode
+  (no window-size override). Pixel snapping is on for both transforms and
   vertices — treat the pixel grid as authoritative.
 - **Autoloads:**
   - `Gamemanager` — game state singleton.
@@ -119,6 +119,9 @@ Tunables live in `player.gd` under the **Death** export group:
   mid-pan. The camera itself runs at `PROCESS_MODE_ALWAYS` so the tween
   finishes.
 - Has a `shake(duration, intensity)` helper used by future impacts.
+- The root-level `background.tscn` stays outside the gameplay `SubViewport`;
+  `background.gd` mirrors the SubViewport camera position so its `Parallax2D`
+  layers still scroll during gameplay and camera transitions.
 - A `.backup` of an older version sits next to the script — it's stale, leave
   it alone unless explicitly asked to clean up.
 
@@ -204,6 +207,7 @@ for a feature live together.
 |-----------------------------------|-----------------------------------------|
 | `project.godot`                   | Project config, input map, autoloads    |
 | `main.tscn` / `main.gd`           | World root, contains all level sub-scenes |
+| `background.tscn` / `background.gd` | Root-level parallax background synced to the SubViewport camera |
 | `assets/jumpstart/Jumpstart Legacy/` | Third-party asset pack (CC0 Jumpstart) |
 | `audio/sfx/`                      | Sound effects                           |
 | `audio/music/`                    | Music tracks                            |

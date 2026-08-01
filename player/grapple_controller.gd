@@ -47,7 +47,10 @@ func try_attach() -> bool:
 	var hook_target := ray_cast.get_collider() as Node2D
 	on_attach.call()
 	var hook := GRAPPLING_HOOK.instantiate()
-	body.get_tree().current_scene.add_child(hook)
+	# The player lives in a SubViewport, so the hook must share that viewport's
+	# physics world. Adding it to current_scene would make the player leave the
+	# active viewport when it is reparented to the hook anchor.
+	body.get_parent().add_child(hook)
 	active = hook
 	hook.start_hook(hook_position, hook_target)
 	return true

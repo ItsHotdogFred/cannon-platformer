@@ -13,6 +13,7 @@ extends Node2D
 
 var current_rope_length: float
 var _player: Node2D
+var _player_parent: Node
 var _attached_body: Node2D
 var _attached_local_position := Vector2.ZERO
 var _released := false
@@ -24,6 +25,7 @@ func start_hook(hook_position: Vector2, attached_body: Node2D = null) -> void:
 		_attached_local_position = attached_body.to_local(hook_position)
 
 	_player = get_tree().get_first_node_in_group("player")
+	_player_parent = _player.get_parent()
 	player_anchor.global_position = _player.global_position
 	player_anchor.linear_velocity = Vector2.ZERO
 	player_anchor.angular_velocity = 0.0
@@ -105,7 +107,11 @@ func _detach_player(release_momentum: Vector2, reactivate_player: bool = true) -
 		queue_free()
 		return
 
-	_player.reparent(get_tree().current_scene)
+	# Return the player to the parent it had before attaching. This is commonly
+	# a SubViewport; reparenting to current_scene would remove it from the
+	# viewport's rendering and physics world.
+	if is_instance_valid(_player_parent):
+		_player.reparent(_player_parent)
 	if reactivate_player:
 		_player.set_active(true)
 	else:
