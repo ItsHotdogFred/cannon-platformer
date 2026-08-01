@@ -22,7 +22,10 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	position = get_viewport().get_mouse_position().round()
+	# CursorIndicator is a child of ScreenCamera, whose origin is the center
+	# of the gameplay viewport. Keep the wheel in camera-local screen space.
+	position = (get_viewport().get_mouse_position()
+		- get_viewport_rect().size * 0.5).round()
 	queue_redraw()
 
 
