@@ -1,13 +1,12 @@
 extends Node
-## Arcade death cascade: hitstop flash → particle burst → hold → soft
-## respawn at checkpoint → spawn-in tween. Safe to call from
+## Arcade death cascade: hitstop → particle burst → hold → soft
+## respawn at checkpoint. Safe to call from
 ## Area2D.body_entered.
 
 const DEATH_BURST = preload("res://world/props/death_burst.tscn")
 
 @export var death_hitstop: float = 0.12
 @export var death_hold: float = 0.35
-@export var spawn_in_duration: float = 0.22
 
 var body: CharacterBody2D
 var sprite: AnimatedSprite2D
@@ -15,6 +14,7 @@ var starting_pos: Vector2 = Vector2.ZERO
 var set_active: Callable = Callable()
 var get_noclip: Callable = Callable()
 var is_dying: bool = false
+var active_burst: Node
 
 
 func bind(body: CharacterBody2D, sprite: AnimatedSprite2D, _starting_pos: Vector2,
@@ -56,9 +56,7 @@ func reset() -> void:
 
 
 func _flash_and_burst() -> void:
-	# Hitstop feel: bright flash while still visible on the spike.
-	sprite.modulate = Color(2.5, 2.5, 2.5, 1.0)
-	_spawn_burst(body.global_position)
+	_spawn_burst(body.global_position, body.starting_pos)
 
 
 func _hide_during_hold() -> void:
@@ -70,39 +68,30 @@ func _hide_during_hold() -> void:
 func _respawn() -> void:
 	# Read the player's live starting_pos (updated by checkpoints), not our cached copy.
 	body.global_position = body.starting_pos
+	if is_instance_valid(active_burst) and active_burst.has_method("set_rebuild_target"):
+		active_burst.set_rebuild_target(body.global_position)
 	var cam := body.get_viewport().get_camera_2d()
 	if cam != null and cam.has_method("focus_on_player"):
 		await cam.focus_on_player()
-	_spawn_burst(body.global_position, true)
+	if is_instance_valid(active_burst):
+		await active_burst.rebuild_finished
 
 
 func _spawn_in() -> void:
-	# Scale / fade back in at the checkpoint.
+	# Reappear without changing the player's visual properties.
 	sprite.visible = true
-	sprite.modulate.a = 0.0
-	sprite.scale = Vector2(0.4, 0.4)
-
-	var tween := body.create_tween()
-	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
-	tween.set_parallel(true)
-	tween.tween_property(sprite, "modulate:a", 1.0, spawn_in_duration)
-	tween.tween_property(sprite, "scale", Vector2.ONE, spawn_in_duration) \
-			.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-	await tween.finished
-
 	sprite.modulate = Color(1.0, 1.0, 1.0, 0.55) if get_noclip.call() else Color.WHITE
 	sprite.scale = Vector2.ONE
 	set_active.call(true)
 
 
-func _spawn_burst(at: Vector2, spawn_puff: bool = false) -> void:
+func _spawn_burst(at: Vector2, rebuild_at: Vector2) -> void:
 	var burst: Node2D = DEATH_BURST.instantiate()
-	if spawn_puff:
-		burst.spawn_puff = true
 	# The player lives in a SubViewport; keep the burst in that same world.
 	# Parent first, then play_at so particles never emit at (0,0).
 	body.get_parent().add_child(burst)
-	burst.play_at(at)
+	active_burst = burst
+	burst.play_at(at, rebuild_at)
 
 
 func _wait(seconds: float) -> void:

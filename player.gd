@@ -15,6 +15,7 @@ const CelesteMovementScript = preload("res://player/celeste_movement.gd")
 
 var starting_pos: Vector2
 
+signal just_died
 
 func _ready() -> void:
 	add_to_group("player")
@@ -76,6 +77,7 @@ func die() -> void:
 	movement.momentum = Vector2.ZERO
 	velocity = Vector2.ZERO
 	movement.set_active(false)
+	just_died.emit()
 	await death.start()
 
 
