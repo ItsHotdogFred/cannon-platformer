@@ -16,6 +16,7 @@ var player: Node2D
 var _shake_time: float = 0.0
 var _shake_intensity: float = 0.0
 
+signal transiton_completed
 
 func _ready() -> void:
 	# Keep running while the tree is paused during a screen transition.
@@ -134,6 +135,7 @@ func _transition_to_screen(screen: Vector2i) -> void:
 
 	global_position = target
 	get_tree().paused = false
+	transiton_completed.emit()
 	is_transitioning = false
 
 	# If the player is already past the new edge (rare), chain another pan.

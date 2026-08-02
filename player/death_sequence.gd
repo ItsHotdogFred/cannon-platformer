@@ -99,8 +99,9 @@ func _spawn_burst(at: Vector2, spawn_puff: bool = false) -> void:
 	var burst: Node2D = DEATH_BURST.instantiate()
 	if spawn_puff:
 		burst.spawn_puff = true
+	# The player lives in a SubViewport; keep the burst in that same world.
 	# Parent first, then play_at so particles never emit at (0,0).
-	body.get_tree().current_scene.add_child(burst)
+	body.get_parent().add_child(burst)
 	burst.play_at(at)
 
 

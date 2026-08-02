@@ -4,13 +4,13 @@
 [ext_resource type="Texture2D" uid="uid://c22ww6ypa5rwh" path="res://assets/jumpstart/Jumpstart Legacy/Decoration/Decals.png" id="2_laknp"]
 [ext_resource type="Texture2D" uid="uid://dubh4w1t41jhc" path="res://assets/jumpstart/Jumpstart Legacy/Tilesets/Dirt.png" id="3_u8mry"]
 [ext_resource type="Texture2D" uid="uid://b46acgtsdo3u5" path="res://assets/jumpstart/Jumpstart Legacy/Tilesets/Snowy_ice.png" id="4_lkr0r"]
-[ext_resource type="Script" uid="uid://brxbbn6ts2rap" path="res://world/levels/level_02.gd" id="5_l1gdm"]
+[ext_resource type="Script" uid="uid://c55fqx3iki2ga" path="res://level.gd" id="5_l1gdm"]
 [ext_resource type="Script" uid="uid://nu0lrsaunffh" path="res://world/props/checkpoint.gd" id="5_qcfjj"]
 [ext_resource type="Script" uid="uid://bbpvbv8826ou3" path="res://world/hazards/spike.gd" id="6_ic6eh"]
 [ext_resource type="PackedScene" uid="uid://dcaeoaw66cmoj" path="res://world/hazards/icy_block.tscn" id="7_f6gmw"]
 [ext_resource type="PackedScene" uid="uid://c5dq5f1nbpq8b" path="res://world/hazards/spike.tscn" id="7_fxys2"]
 [ext_resource type="Texture2D" uid="uid://dyqrgeb01bgtl" path="res://assets/jumpstart/Jumpstart Legacy/Particles/snow_flake.png" id="9_gm5rp"]
-[ext_resource type="Script" uid="uid://dl4liswboohvy" path="res://world/levels/gpu_particles_2d.gd" id="10_cw647"]
+[ext_resource type="Script" uid="uid://bf4c5rpbup6a1" path="res://backgroundParticle.gd" id="11_l1gdm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n6sch"]
 texture = ExtResource("1_yrvgd")
@@ -790,12 +790,13 @@ gravity = Vector3(0, 24.5, 0)
 scale_min = 0.099999994
 color_ramp = SubResource("GradientTexture1D_twto6")
 
-[node name="TileMapLayer" type="TileMapLayer" unique_id=1466047648 node_paths=PackedStringArray("snow_particles_2d")]
+[node name="Level_09" type="TileMapLayer" unique_id=341649976 node_paths=PackedStringArray("LevelParticles")]
 texture_filter = 1
 tile_map_data = PackedByteArray("AAAAAAAAAAABAAEAAAAAAAEAAAABAAEAAAAAAAIAAwABAAIAAAABAAAAAAABAAEAAAACAAAAAAABAAEAAAADAAAAAAABAAEAAAAEAAAAAAABAAEAAAAFAAAAAAABAAEAAAAGAAAAAAABAAEAAAAHAAAAAAABAAEAAAAIAAAAAAABAAEAAAAJAAAAAAABAAEAAAAKAAAAAAABAAEAAAALAAAAAAABAAEAAAAMAAAAAAABAAEAAAANAAAAAAABAAEAAAAOAAAAAAABAAEAAAAPAAAAAAABAAEAAAAQAAAAAAABAAEAAAARAAAAAAABAAEAAAASAAAAAAABAAEAAAATAAAAAAABAAEAAAAUAAAAAAABAAEAAAAVAAAAAAABAAEAAAAWAAAAAAABAAEAAAAXAAAAAAABAAEAAAAYAAAAAAABAAEAAAABAAEAAAABAAEAAAABAAIAAwABAAIAAAACAAEAAAABAAEAAAAAABQAAwAAAAEAAAAAABUAAwAAAAEAAAAAABYAAwAAAAIAAAABABQAAwABAAEAAAABABUAAwABAAEAAAABABYAAwABAAIAAAACABQAAwACAAEAAAACABUAAwACAAEAAAACABYAAwACAAIAAAAZAAAAAAABAAEAAAAaAAAAAAABAAEAAAAbAAAAAAABAAEAAAAcAAAAAAABAAEAAAAdAAAAAAABAAEAAAAeAAAAAAABAAEAAAAfAAAAAAABAAEAAAACAAIAAwAGAAEAAAAlAAAAAAABAAEAAAAkAAAAAAABAAEAAAAjAAAAAAABAAEAAAAiAAAAAAABAAEAAAAhAAAAAAABAAEAAAAgAAAAAAABAAEAAAAmAAAAAAABAAEAAAAnAAAAAwACAAEAAAACABMAAwACAAEAAAACABIAAwACAAEAAAACABEAAwACAAEAAAACABAAAwACAAEAAAACAAwAAwACAAEAAAABABMAAwABAAEAAAABABIAAwABAAEAAAABABEAAwABAAEAAAABABAAAwABAAEAAAABAA8AAwABAAEAAAABAA4AAwABAAEAAAABAA0AAwABAAEAAAABAAwAAwABAAEAAAAAABMAAwAAAAEAAAAAABIAAwAAAAEAAAAAABEAAwAAAAEAAAAAABAAAwAAAAEAAAAAAA8AAwAAAAEAAAAAAA4AAwAAAAEAAAAAAA0AAwAAAAEAAAAAAAwAAwAAAAEAAAAAAAsAAwAAAAAAAAABAAsAAwABAAAAAAACAAsAAwACAAAAAAACAA4AAwABAAEAAAACAA8AAwAFAAEAAAACAA0AAwAFAAIAAAAEAAMAAAABAAEAAAAEAAQAAwABAAIAAAAFAAMAAwABAAEAAAAFAAQAAwABAAIAAAAGAAMAAwABAAEAAAAGAAQAAwABAAIAAAAHAAMAAwABAAEAAAAHAAQAAwABAAIAAAAIAAMAAwABAAEAAAAIAAQAAwABAAIAAAAJAAMAAwABAAEAAAAJAAQAAwABAAIAAAAKAAMAAwABAAEAAAAKAAQAAwABAAIAAAALAAMAAwABAAEAAAALAAQAAwABAAIAAAAMAAMAAwABAAEAAAAMAAQAAwABAAIAAAANAAMAAwABAAEAAAANAAQAAwABAAIAAAAOAAMAAwABAAEAAAAOAAQAAwABAAIAAAAPAAMAAwABAAEAAAAPAAQAAwABAAIAAAAQAAMAAwABAAEAAAAQAAQAAwABAAIAAAARAAMAAwABAAEAAAARAAQAAwABAAIAAAASAAMAAwABAAEAAAASAAQAAwABAAIAAAATAAMAAwABAAEAAAATAAQAAwABAAIAAAAUAAMAAwABAAEAAAAUAAQAAwABAAIAAAAVAAMAAwABAAEAAAAVAAQAAwABAAIAAAAWAAMAAwABAAEAAAAWAAQAAwABAAIAAAAXAAMAAwABAAEAAAAXAAQAAwABAAIAAAAYAAMAAwABAAEAAAAYAAQAAwABAAIAAAAZAAMAAwABAAEAAAAZAAQAAwABAAIAAAAaAAMAAwABAAEAAAAaAAQAAwABAAIAAAAbAAMAAwABAAEAAAAbAAQAAwABAAIAAAAcAAMAAwABAAEAAAAcAAQAAwABAAIAAAAdAAMAAwABAAEAAAAdAAQAAwABAAIAAAAeAAMAAwABAAEAAAAeAAQAAwABAAIAAAAfAAMAAwABAAEAAAAfAAQAAwABAAIAAAAgAAMAAwABAAEAAAAgAAQAAwABAAIAAAAhAAMAAwABAAEAAAAhAAQAAwAGAAEAAAAiAAMAAwABAAEAAAAiAAQAAwABAAEAAAAjAAMAAwABAAEAAAAjAAQAAwABAAEAAAAkAAMAAwABAAEAAAAkAAQAAwABAAEAAAAlAAMAAwABAAEAAAAlAAQAAwABAAEAAAAmAAMAAwABAAEAAAAmAAQAAwABAAEAAAAnAAMAAwACAAEAAAAnAAQAAwACAAEAAAADAAQAAwAAAAIAAAADAAMAAwAGAAEAAAADAAIAAwABAAEAAAADAAEAAwABAAEAAAAEAAEAAwABAAEAAAAFAAEAAwABAAEAAAAFAAIAAwABAAEAAAAGAAIAAwABAAEAAAAEAAIAAwABAAEAAAAGAAEAAwABAAEAAAAHAAEAAwABAAEAAAAHAAIAAwABAAEAAAAIAAEAAwABAAEAAAAIAAIAAwABAAEAAAAJAAEAAwABAAEAAAAJAAIAAwABAAEAAAAKAAEAAwABAAEAAAAKAAIAAwABAAEAAAALAAEAAwABAAEAAAALAAIAAwABAAEAAAAMAAEAAwABAAEAAAAMAAIAAwABAAEAAAANAAEAAwABAAEAAAANAAIAAwABAAEAAAAOAAEAAwABAAEAAAAOAAIAAwABAAEAAAAPAAEAAwABAAEAAAAPAAIAAwABAAEAAAAQAAEAAwABAAEAAAAQAAIAAwABAAEAAAARAAEAAwABAAEAAAARAAIAAwABAAEAAAASAAEAAwABAAEAAAASAAIAAwABAAEAAAATAAEAAwABAAEAAAATAAIAAwABAAEAAAAUAAEAAwABAAEAAAAUAAIAAwABAAEAAAAVAAEAAwABAAEAAAAVAAIAAwABAAEAAAAWAAEAAwABAAEAAAAWAAIAAwABAAEAAAAXAAEAAwABAAEAAAAXAAIAAwABAAEAAAAYAAEAAwABAAEAAAAYAAIAAwABAAEAAAAZAAEAAwABAAEAAAAZAAIAAwABAAEAAAAaAAEAAwABAAEAAAAaAAIAAwABAAEAAAAbAAEAAwABAAEAAAAbAAIAAwABAAEAAAAcAAEAAwABAAEAAAAcAAIAAwABAAEAAAAdAAEAAwABAAEAAAAdAAIAAwABAAEAAAAeAAEAAwABAAEAAAAeAAIAAwABAAEAAAAfAAEAAwABAAEAAAAfAAIAAwABAAEAAAAgAAEAAwABAAEAAAAgAAIAAwABAAEAAAAhAAEAAwABAAEAAAAhAAIAAwABAAEAAAAiAAEAAwABAAEAAAAiAAIAAwABAAEAAAAjAAEAAwABAAEAAAAjAAIAAwABAAEAAAAkAAEAAwABAAEAAAAkAAIAAwABAAEAAAAlAAEAAwABAAEAAAAlAAIAAwABAAEAAAAmAAEAAwABAAEAAAAmAAIAAwABAAEAAAAnAAEAAwACAAEAAAAnAAIAAwACAAEAAAACAAMAAwAAAAIAAAADAA4AAwABAAEAAAADAA8AAwABAAIAAAAEAA4AAwABAAEAAAAEAA8AAwABAAIAAAAFAA4AAwABAAEAAAAFAA8AAwABAAIAAAAGAA4AAwABAAEAAAAGAA8AAwABAAIAAAAHAA4AAwABAAEAAAAHAA8AAwABAAIAAAAIAA4AAwABAAEAAAAIAA8AAwABAAIAAAAJAA4AAwABAAEAAAAJAA8AAwABAAIAAAAKAA4AAwABAAEAAAAKAA8AAwABAAIAAAALAA4AAwABAAEAAAALAA8AAwABAAIAAAAMAA4AAwABAAEAAAAMAA8AAwABAAIAAAANAA4AAwABAAEAAAANAA8AAwABAAIAAAAOAA4AAwABAAEAAAAOAA8AAwABAAIAAAAPAA4AAwABAAEAAAAPAA8AAwABAAIAAAAQAA4AAwABAAEAAAAQAA8AAwABAAIAAAARAA4AAwABAAEAAAARAA8AAwABAAIAAAASAA4AAwABAAEAAAASAA8AAwABAAIAAAATAA4AAwABAAEAAAATAA8AAwABAAIAAAAUAA4AAwABAAEAAAAUAA8AAwABAAIAAAAVAA4AAwABAAEAAAAVAA8AAwABAAIAAAAWAA4AAwABAAEAAAAWAA8AAwABAAIAAAAXAA4AAwACAAEAAAAXAA8AAwACAAIAAAADAA0AAwABAAAAAAAEAA0AAwABAAAAAAAFAA0AAwABAAAAAAAGAA0AAwABAAAAAAAHAA0AAwABAAAAAAAIAA0AAwABAAAAAAAJAA0AAwABAAAAAAAKAA0AAwABAAAAAAALAA0AAwABAAAAAAAMAA0AAwABAAAAAAANAA0AAwABAAAAAAAOAA0AAwABAAAAAAAPAA0AAwABAAAAAAAQAA0AAwABAAAAAAARAA0AAwABAAAAAAASAA0AAwABAAAAAAATAA0AAwABAAAAAAAUAA0AAwABAAAAAAAVAA0AAwABAAAAAAAWAA0AAwABAAAAAAAXAA0AAwACAAAAAAAhAAUAAwAAAAEAAAAhAAYAAwAAAAEAAAAhAAcAAwAAAAEAAAAhAAgAAwAAAAIAAAAiAAUAAwABAAEAAAAiAAYAAAABAAEAAAAiAAcAAAABAAEAAAAiAAgAAwAGAAEAAAAjAAUAAAABAAEAAAAjAAYAAAABAAEAAAAjAAcAAAABAAEAAAAjAAgAAAABAAEAAAAkAAUAAAABAAEAAAAkAAYAAAABAAEAAAAkAAcAAAABAAEAAAAkAAgAAAABAAEAAAAlAAUAAAABAAEAAAAlAAYAAAABAAEAAAAlAAcAAAABAAEAAAAlAAgAAAABAAEAAAAmAAUAAAABAAEAAAAmAAYAAAABAAEAAAAmAAcAAAABAAEAAAAmAAgAAAABAAEAAAAnAAUAAwACAAEAAAAnAAYAAwACAAEAAAAnAAcAAwACAAEAAAAnAAgAAwACAAEAAAAiAAoAAwAAAAEAAAAiAAkAAwAAAAEAAAAnAAoAAwACAAEAAAAnAAkAAwACAAEAAAAjAAoAAwABAAEAAAAkAAoAAwABAAEAAAAmAAoAAwABAAEAAAAlAAoAAwABAAEAAAAmAAkAAwABAAEAAAAlAAkAAwABAAEAAAAkAAkAAwABAAEAAAAjAAkAAwABAAEAAAAiABQAAwAAAAEAAAAiABUAAwAAAAEAAAAiABYAAwAAAAIAAAAjABQAAAABAAEAAAAjABUAAAABAAEAAAAjABYAAwABAAIAAAAkABQAAAABAAEAAAAkABUAAAABAAEAAAAkABYAAwABAAIAAAAlABQAAAABAAEAAAAlABUAAAABAAEAAAAlABYAAwABAAIAAAAmABQAAAABAAEAAAAmABUAAAABAAEAAAAmABYAAwABAAIAAAAnABQAAwACAAEAAAAnABUAAwACAAEAAAAnABYAAwACAAIAAAAiABMAAwAAAAEAAAAjABMAAAABAAEAAAAkABMAAAABAAEAAAAlABMAAAABAAEAAAAmABMAAAABAAEAAAAnABMAAwACAAEAAAAjABEAAAABAAEAAAAjABIAAAABAAEAAAAkABEAAAABAAEAAAAkABIAAAABAAEAAAAlABEAAAABAAEAAAAlABIAAAABAAEAAAAmABEAAAABAAEAAAAmABIAAAABAAEAAAAnABEAAwACAAEAAAAnABIAAwACAAEAAAAjAA4AAAABAAEAAAAjAA8AAAABAAEAAAAjABAAAAABAAEAAAAkAA4AAAABAAEAAAAkAA8AAAABAAEAAAAkABAAAAABAAEAAAAlAA4AAAABAAEAAAAlAA8AAAABAAEAAAAlABAAAAABAAEAAAAmAA4AAAABAAEAAAAmAA8AAAABAAEAAAAmABAAAAABAAEAAAAnAA4AAwACAAEAAAAnAA8AAwACAAEAAAAnABAAAwACAAEAAAAjAAsAAAABAAEAAAAjAAwAAAABAAEAAAAjAA0AAAABAAEAAAAkAAsAAAABAAEAAAAkAAwAAAABAAEAAAAkAA0AAAABAAEAAAAlAAsAAAABAAEAAAAlAAwAAAABAAEAAAAlAA0AAAABAAEAAAAmAAsAAAABAAEAAAAmAAwAAAABAAEAAAAmAA0AAAABAAEAAAAnAAsAAwACAAEAAAAnAAwAAwACAAEAAAAnAA0AAwACAAEAAAAiAAsAAwAAAAEAAAAiAAwAAwAAAAEAAAAiAA0AAwAAAAEAAAAiAA4AAwAAAAEAAAAiAA8AAwAAAAEAAAAiABAAAwAAAAEAAAAiABEAAwAAAAEAAAAiABIAAwAAAAEAAAAeAAsAAwACAAAAAAAeAAwAAwACAAEAAAAeAA0AAwACAAIAAAAdAAsAAwAAAAAAAAAdAAwAAwAAAAEAAAAdAA0AAwAAAAIAAAAfAAUAAQAFABAAAAAgAAUAAQAGABAAAAAgAAYAAQAGABEAAAAhAAkAAQAGABAAAAAhAAoAAQAGABEAAAAdAA4AAQAGABAAAAAdAA8AAQAGABEAAAAeAA4AAQADABAAAAAeAA8AAQADABEAAAAYAAwAAQAdAAUAAAAYAA0AAQAdAAYAAAAYAA4AAQAdAAcAAAAZAAwAAQAeAAUAAAAZAA0AAQAeAAYAAAA=")
 tile_set = SubResource("TileSet_twto6")
 script = ExtResource("5_l1gdm")
-snow_particles_2d = NodePath("SnowParticles2D")
+LevelParticles = [NodePath("SnowParticles2D")]
+metadata/_custom_type_script = "uid://c55fqx3iki2ga"
 
 [node name="Checkpoint" type="Area2D" parent="." unique_id=1152715742]
 position = Vector2(12, 82)
@@ -902,408 +903,410 @@ position = Vector2(247, 169)
 
 [node name="spike" parent="." unique_id=1260586256 instance=ExtResource("7_fxys2")]
 position = Vector2(26, 100)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike2" parent="." unique_id=1226550619 instance=ExtResource("7_fxys2")]
 position = Vector2(30, 100)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike3" parent="." unique_id=408975908 instance=ExtResource("7_fxys2")]
 position = Vector2(34, 100)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike4" parent="." unique_id=1549837984 instance=ExtResource("7_fxys2")]
 position = Vector2(38, 100)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike5" parent="." unique_id=1551383723 instance=ExtResource("7_fxys2")]
 position = Vector2(42, 100)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike6" parent="." unique_id=1752458208 instance=ExtResource("7_fxys2")]
 position = Vector2(46, 100)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike7" parent="." unique_id=416421229 instance=ExtResource("7_fxys2")]
 position = Vector2(50, 100)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike8" parent="." unique_id=1984619867 instance=ExtResource("7_fxys2")]
 position = Vector2(54, 100)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike9" parent="." unique_id=1697727004 instance=ExtResource("7_fxys2")]
 position = Vector2(58, 100)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike10" parent="." unique_id=378048183 instance=ExtResource("7_fxys2")]
 position = Vector2(62, 100)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike11" parent="." unique_id=25603626 instance=ExtResource("7_fxys2")]
 position = Vector2(66, 100)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike12" parent="." unique_id=339651421 instance=ExtResource("7_fxys2")]
 position = Vector2(70, 100)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike13" parent="." unique_id=598515938 instance=ExtResource("7_fxys2")]
 position = Vector2(74, 100)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike14" parent="." unique_id=1115682307 instance=ExtResource("7_fxys2")]
 position = Vector2(78, 100)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike15" parent="." unique_id=124217735 instance=ExtResource("7_fxys2")]
 position = Vector2(82, 100)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike16" parent="." unique_id=1063618272 instance=ExtResource("7_fxys2")]
 position = Vector2(86, 100)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike17" parent="." unique_id=566428702 instance=ExtResource("7_fxys2")]
 position = Vector2(90, 100)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike18" parent="." unique_id=424182659 instance=ExtResource("7_fxys2")]
 position = Vector2(94, 100)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike19" parent="." unique_id=41080344 instance=ExtResource("7_fxys2")]
 position = Vector2(98, 100)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike20" parent="." unique_id=1025156442 instance=ExtResource("7_fxys2")]
 position = Vector2(102, 100)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike21" parent="." unique_id=479792828 instance=ExtResource("7_fxys2")]
 position = Vector2(106, 100)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike22" parent="." unique_id=1283571791 instance=ExtResource("7_fxys2")]
 position = Vector2(110, 100)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike23" parent="." unique_id=2065079756 instance=ExtResource("7_fxys2")]
 position = Vector2(114, 100)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike24" parent="." unique_id=1506653819 instance=ExtResource("7_fxys2")]
 position = Vector2(118, 100)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike25" parent="." unique_id=1067366540 instance=ExtResource("7_fxys2")]
 position = Vector2(122, 100)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike26" parent="." unique_id=756013230 instance=ExtResource("7_fxys2")]
 position = Vector2(126, 100)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike27" parent="." unique_id=1366583075 instance=ExtResource("7_fxys2")]
 position = Vector2(130, 100)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike28" parent="." unique_id=2142552966 instance=ExtResource("7_fxys2")]
 position = Vector2(134, 100)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike29" parent="." unique_id=2012728440 instance=ExtResource("7_fxys2")]
 position = Vector2(138, 100)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike30" parent="." unique_id=557539108 instance=ExtResource("7_fxys2")]
 position = Vector2(142, 100)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike31" parent="." unique_id=298499804 instance=ExtResource("7_fxys2")]
 position = Vector2(146, 100)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike32" parent="." unique_id=478015524 instance=ExtResource("7_fxys2")]
 position = Vector2(150, 100)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike33" parent="." unique_id=1564335286 instance=ExtResource("7_fxys2")]
 position = Vector2(154, 100)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike34" parent="." unique_id=134029832 instance=ExtResource("7_fxys2")]
 position = Vector2(158, 100)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike35" parent="." unique_id=726112269 instance=ExtResource("7_fxys2")]
 position = Vector2(162, 100)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike36" parent="." unique_id=798373002 instance=ExtResource("7_fxys2")]
 position = Vector2(166, 100)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike37" parent="." unique_id=2006151900 instance=ExtResource("7_fxys2")]
 position = Vector2(170, 100)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike38" parent="." unique_id=1839493307 instance=ExtResource("7_fxys2")]
 position = Vector2(174, 100)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike39" parent="." unique_id=466548129 instance=ExtResource("7_fxys2")]
 position = Vector2(178, 100)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike40" parent="." unique_id=318029933 instance=ExtResource("7_fxys2")]
 position = Vector2(182, 100)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike41" parent="." unique_id=437794872 instance=ExtResource("7_fxys2")]
 position = Vector2(186, 100)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike42" parent="." unique_id=1955580690 instance=ExtResource("7_fxys2")]
 position = Vector2(190, 100)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike43" parent="." unique_id=156281665 instance=ExtResource("7_fxys2")]
 position = Vector2(107, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike44" parent="." unique_id=1080009403 instance=ExtResource("7_fxys2")]
 position = Vector2(111, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike45" parent="." unique_id=788765230 instance=ExtResource("7_fxys2")]
 position = Vector2(115, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike46" parent="." unique_id=1881947537 instance=ExtResource("7_fxys2")]
 position = Vector2(119, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike47" parent="." unique_id=2083474397 instance=ExtResource("7_fxys2")]
 position = Vector2(123, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike48" parent="." unique_id=22095152 instance=ExtResource("7_fxys2")]
 position = Vector2(127, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike49" parent="." unique_id=720835055 instance=ExtResource("7_fxys2")]
 position = Vector2(131, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike50" parent="." unique_id=1242471669 instance=ExtResource("7_fxys2")]
 position = Vector2(135, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike51" parent="." unique_id=760163400 instance=ExtResource("7_fxys2")]
 position = Vector2(139, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike52" parent="." unique_id=1368997935 instance=ExtResource("7_fxys2")]
 position = Vector2(143, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike53" parent="." unique_id=1582602302 instance=ExtResource("7_fxys2")]
 position = Vector2(147, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike54" parent="." unique_id=1526164654 instance=ExtResource("7_fxys2")]
 position = Vector2(151, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike55" parent="." unique_id=149657342 instance=ExtResource("7_fxys2")]
 position = Vector2(155, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike56" parent="." unique_id=333440698 instance=ExtResource("7_fxys2")]
 position = Vector2(159, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike57" parent="." unique_id=1981928932 instance=ExtResource("7_fxys2")]
 position = Vector2(163, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike58" parent="." unique_id=122981745 instance=ExtResource("7_fxys2")]
 position = Vector2(167, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike59" parent="." unique_id=2082972727 instance=ExtResource("7_fxys2")]
 position = Vector2(171, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike60" parent="." unique_id=2081009602 instance=ExtResource("7_fxys2")]
 position = Vector2(175, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike61" parent="." unique_id=313551095 instance=ExtResource("7_fxys2")]
 position = Vector2(179, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike62" parent="." unique_id=259927249 instance=ExtResource("7_fxys2")]
 position = Vector2(183, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike63" parent="." unique_id=1465837642 instance=ExtResource("7_fxys2")]
 position = Vector2(187, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike64" parent="." unique_id=1220898320 instance=ExtResource("7_fxys2")]
 position = Vector2(191, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike65" parent="." unique_id=1334595083 instance=ExtResource("7_fxys2")]
 position = Vector2(195, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike66" parent="." unique_id=348428361 instance=ExtResource("7_fxys2")]
 position = Vector2(199, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike67" parent="." unique_id=1115706406 instance=ExtResource("7_fxys2")]
 position = Vector2(203, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike68" parent="." unique_id=2142081610 instance=ExtResource("7_fxys2")]
 position = Vector2(207, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike69" parent="." unique_id=175945782 instance=ExtResource("7_fxys2")]
 position = Vector2(211, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike70" parent="." unique_id=2077034925 instance=ExtResource("7_fxys2")]
 position = Vector2(215, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike71" parent="." unique_id=320731371 instance=ExtResource("7_fxys2")]
 position = Vector2(219, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike72" parent="." unique_id=1616912396 instance=ExtResource("7_fxys2")]
 position = Vector2(223, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike73" parent="." unique_id=630889795 instance=ExtResource("7_fxys2")]
 position = Vector2(227, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike74" parent="." unique_id=1817241487 instance=ExtResource("7_fxys2")]
 position = Vector2(231, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike75" parent="." unique_id=256583101 instance=ExtResource("7_fxys2")]
 position = Vector2(235, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike76" parent="." unique_id=1630319322 instance=ExtResource("7_fxys2")]
 position = Vector2(239, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike77" parent="." unique_id=483606181 instance=ExtResource("7_fxys2")]
 position = Vector2(243, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike78" parent="." unique_id=370227522 instance=ExtResource("7_fxys2")]
 position = Vector2(247, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike79" parent="." unique_id=256484158 instance=ExtResource("7_fxys2")]
 position = Vector2(251, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike80" parent="." unique_id=1614817256 instance=ExtResource("7_fxys2")]
 position = Vector2(255, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike81" parent="." unique_id=366118980 instance=ExtResource("7_fxys2")]
 position = Vector2(259, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike82" parent="." unique_id=1758864752 instance=ExtResource("7_fxys2")]
 position = Vector2(263, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike83" parent="." unique_id=1289028603 instance=ExtResource("7_fxys2")]
 position = Vector2(267, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike84" parent="." unique_id=363106435 instance=ExtResource("7_fxys2")]
 position = Vector2(271, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike112" parent="." unique_id=1943621103 instance=ExtResource("7_fxys2")]
 position = Vector2(47, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike113" parent="." unique_id=1506324087 instance=ExtResource("7_fxys2")]
 position = Vector2(51, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike114" parent="." unique_id=764453810 instance=ExtResource("7_fxys2")]
 position = Vector2(55, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike115" parent="." unique_id=2085164555 instance=ExtResource("7_fxys2")]
 position = Vector2(59, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike116" parent="." unique_id=1666184141 instance=ExtResource("7_fxys2")]
 position = Vector2(63, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike117" parent="." unique_id=976487919 instance=ExtResource("7_fxys2")]
 position = Vector2(67, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike118" parent="." unique_id=1728343214 instance=ExtResource("7_fxys2")]
 position = Vector2(71, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike119" parent="." unique_id=1304573717 instance=ExtResource("7_fxys2")]
 position = Vector2(75, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike120" parent="." unique_id=1823943974 instance=ExtResource("7_fxys2")]
 position = Vector2(79, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike121" parent="." unique_id=1041942455 instance=ExtResource("7_fxys2")]
 position = Vector2(83, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike122" parent="." unique_id=1517932947 instance=ExtResource("7_fxys2")]
 position = Vector2(87, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike123" parent="." unique_id=2123423718 instance=ExtResource("7_fxys2")]
 position = Vector2(91, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike124" parent="." unique_id=1877612755 instance=ExtResource("7_fxys2")]
 position = Vector2(95, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike125" parent="." unique_id=1780987163 instance=ExtResource("7_fxys2")]
 position = Vector2(99, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
 [node name="spike126" parent="." unique_id=1221769281 instance=ExtResource("7_fxys2")]
 position = Vector2(103, 176)
-rotation = 3.1415927
+rotation = -3.1415925
 
-[node name="SnowParticles2D" type="GPUParticles2D" parent="." unique_id=877907578]
+[node name="SnowParticles2D" type="GPUParticles2D" parent="." unique_id=1367819825]
 texture_filter = 1
 position = Vector2(135, -6)
 amount = 150
 texture = ExtResource("9_gm5rp")
 lifetime = 4.5
 process_material = SubResource("ParticleProcessMaterial_l1gdm")
-script = ExtResource("10_cw647")
+script = ExtResource("11_l1gdm")
+HiRes = true
+metadata/_custom_type_script = "uid://bf4c5rpbup6a1"
 
 [connection signal="body_entered" from="Checkpoint" to="Checkpoint" method="_on_body_entered"]
 [connection signal="body_entered" from="void" to="void" method="_on_body_entered"]

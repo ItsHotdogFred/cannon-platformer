@@ -1,13 +1,14 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene format=3 uid="uid://diwn4vegs66pn"]
 
-[ext_resource type="Script" path="res://world/props/death_burst.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://bumej6i0q7qjg" path="res://world/props/death_burst.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://dnbwytjbpsjso" path="res://assets/jumpstart/Jumpstart Legacy/Particles/x_shape.png" id="2_x"]
 
-[node name="DeathBurst" type="Node2D"]
+[node name="DeathBurst" type="Node2D" unique_id=1572197021]
 z_index = 10
 script = ExtResource("1_script")
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=933285642]
+texture_filter = 1
 emitting = false
 amount = 18
 texture = ExtResource("2_x")
