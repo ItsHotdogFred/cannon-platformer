@@ -72,7 +72,7 @@ to the player:
   `on_attach` / `on_release` so movement can disable / re-enable
   physics.
 - `res://player/death_sequence.gd` — the entire `die()` cascade
-  (hitstop → burst → hold → respawn → spawn-in). `start()` and
+  (hitstop → burst → hold → respawn → reappearance). `start()` and
   `reset()` are its public surface.
 
 Tunables for each subsystem are exported on the subsystem itself, not
@@ -88,14 +88,14 @@ Public surface that other systems (spikes, hook) call on the player:
 ### Mechanic: arcade death sequence
 The player no longer instant-teleports on death. On hitting a spike (or any
 death trigger) the game plays:
-1. **Hitstop flash** (~0.12 s, sprite modulated to (2.5, 2.5, 2.5)).
+1. **Hitstop** (~0.12 s) while the death burst begins.
 2. **Particle burst** at the death position (`death_burst.tscn`).
 3. **Hold** (~0.35 s) with the sprite hidden.
 4. **Soft respawn** at the checkpoint / `starting_pos` (with camera
    re-focus if the checkpoint is on a different screen).
-5. **Spawn-in tween** — scale + fade in (~0.22 s, back-ease).
+5. **Immediate reappearance** at normal size, opacity, and brightness.
 Tunables live in `player.gd` under the **Death** export group:
-`death_hitstop`, `death_hold`, `spawn_in_duration`.
+`death_hitstop` and `death_hold`.
 
 ### Mechanic: grappling hook
 - Range: `max_grapple_distance` (default **72 px**, on
@@ -195,6 +195,11 @@ trajectory (read from `git log` + uncommitted changes):
   geometry on integer coordinates.
 - **Death must go through `player.die()`.** New spikes/hazards: Area2D
   with `body_entered` → `player.die()`. Don't teleport the player directly.
+- **Death burst rebuild:** `world/props/death_burst.tscn` emits the player
+  image mask at the death position, then its pixels travel individually to
+  the live checkpoint and rebuild the player there. The respawn sequence must
+  pass the checkpoint target to `DeathBurst.play_at()`; do not add a separate
+  respawn puff that duplicates this effect.
 - **Camera transitions pause the tree.** New physics that runs during a
   transition must use `PROCESS_MODE_ALWAYS` or be deferred to after the
   pan finishes.
@@ -231,7 +236,7 @@ for a feature live together.
 | `world/player/player.gd/.tscn`    | Player: input dispatch + delegates     |
 | `world/player/movement.gd`        | Cannon recoil, friction, gravity, collision, momentum |
 | `world/player/grapple_controller.gd` | Grapple raycast + hook lifecycle     |
-| `world/player/death_sequence.gd`  | Arcade death cascade (hitstop → burst → respawn → spawn-in) |
+| `world/player/death_sequence.gd`  | Arcade death cascade (hitstop → burst → respawn → reappearance) |
 | `player/cursor_indicator.tscn` / `.gd` | Screen-space mouse cursor and reload wheel; instanced in `main.tscn` |
 | `world/camera/screen_camera.gd`   | Screen-locked camera + shake            |
 | `world/hazards/`                  | Anything that hurts the player          |
