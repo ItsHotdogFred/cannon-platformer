@@ -3,8 +3,15 @@ class_name Level
 
 @export var camera : Camera2D
 @export var LevelParticles : Array[GPUParticles2D]
+@export var FragmentParticles : Array[String]
 
 func _ready():
+	var fragment := get_parent()
+	if fragment == null:
+		return
+	camera = fragment.get("camera") as Camera2D
+	if camera == null:
+		return
 	camera.transiton_completed.connect(_on_transiton_completed)
 	check()
 

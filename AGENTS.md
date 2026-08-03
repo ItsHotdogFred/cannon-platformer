@@ -51,10 +51,10 @@ Levels are short single-screen-or-multi-screen rooms strung together in
 ## Current State of the Project
 
 ### Levels
-- **9 levels** shipped: `Level_01.tscn` … `Level_09.tscn`. Levels are combined
+- **10 levels** shipped: `Level_01.tscn` … `Level_10.tscn`. Levels are combined
   inside `main.tscn` (the world is a big level container, not a level-select
-  screen). The most recent additions are `Level_08.tscn` and `Level_09.tscn`
-  (untracked, added after the last commit).
+  screen). The most recent additions are `Level_08.tscn`, `Level_09.tscn`, and
+  `Level_10.tscn`.
 - The world uses a **screen-by-screen camera** (see Camera below), so each
   level is sized as one or more 320×180 rooms. Use this grid when placing
   geometry — the camera snaps to room centers.
@@ -147,8 +147,12 @@ Tunables live in `player.gd` under the **Death** export group:
 - **Icy block** (`icy_block.gd` / `.tscn` + `icy_block_spriteframes.tres`) —
   a **falling** platform: when the player steps on it, it falls. Most recent
   feature (see latest commit `e42d335`).
-- **Moving platform** (`moving_platform.tscn` +
-  `moving_platform_controller.gd`) — untracked, added since the last commit.
+- **Moving platform** (`world/hazards/moving_platform.tscn` +
+  `moving_platform_controller.gd`) — a moving platform hazard.
+- **Fragment particles** (`fragment.gd`) — a fragment can map shared
+  `GPUParticles2D` nodes to string identifiers. The active `Level`'s
+  `FragmentParticles` identifiers control which shared effects emit as the
+  screen camera changes rooms.
 - **Sound** (`sound.gd`) — autoload-style helper + a UI mute toggle wired
   into the HUD. The "shoot" and other SFX route through the `AudioStreamPlayer2D`
   on the player. The script respects the "ignore clicks on Controls when
@@ -237,7 +241,7 @@ for a feature live together.
 | `world/player/movement.gd`        | Cannon recoil, friction, gravity, collision, momentum |
 | `world/player/grapple_controller.gd` | Grapple raycast + hook lifecycle     |
 | `world/player/death_sequence.gd`  | Arcade death cascade (hitstop → burst → respawn → reappearance) |
-| `player/cursor_indicator.tscn` / `.gd` | Screen-space mouse cursor and reload wheel; instanced in `main.tscn` |
+| `world/player/cursor_indicator.tscn` / `.gd` | Screen-space mouse cursor and reload wheel; instanced in `main.tscn` |
 | `world/camera/screen_camera.gd`   | Screen-locked camera + shake            |
 | `world/hazards/`                  | Anything that hurts the player          |
 | `world/hazards/spike.gd/.tscn`    | Death hazard (Area2D)                   |
@@ -248,7 +252,10 @@ for a feature live together.
 | `world/props/star.gd/.tscn`       | Collectible                             |
 | `world/props/death_burst.gd/.tscn` | Particle burst on death / respawn    |
 | `world/props/grappling_hook.gd/.tscn` | Grapple projectile / swing         |
-| `world/levels/Level_01.tscn` … `Level_09.tscn` | Individual level rooms    |
+| `world/levels/fragment.gd` / `fragment.tscn` | Shared particle effect controller |
+| `world/levels/fragment_container.tscn` | Combined level container and shared particle nodes |
+| `world/levels/background_particle.gd` | Shared level background particle behavior |
+| `world/levels/Level_01.tscn` … `Level_10.tscn` | Individual level rooms    |
 | `addons/godot_ai/`                | Godot AI MCP plugin (managed)           |
 
 **Adding a new hazard / prop / level**: drop the `.gd` + `.tscn` pair

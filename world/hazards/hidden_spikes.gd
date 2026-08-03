@@ -11,5 +11,8 @@ func _on_body_exited(body: Node2D) -> void:
 		#new_spike.global_rotation = global_rotation
 		spike = new_spike
 		var tween = get_tree().create_tween()
-		new_spike.get_node("Sprite2D").scale = Vector2(0,0)
-		tween.tween_property(new_spike.get_node("Sprite2D"), "scale", Vector2(1,1), 0.5)
+		var collision_shape: CollisionShape2D = new_spike.get_node("CollisionShape2D")
+		collision_shape.disabled = true
+		new_spike.get_node("Sprite2D").scale = Vector2(0, 0)
+		tween.tween_property(new_spike.get_node("Sprite2D"), "scale", Vector2(1, 1), 0.5)
+		tween.tween_callback(func() -> void: collision_shape.disabled = false)

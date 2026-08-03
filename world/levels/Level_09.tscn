@@ -4,13 +4,13 @@
 [ext_resource type="Texture2D" uid="uid://c22ww6ypa5rwh" path="res://assets/jumpstart/Jumpstart Legacy/Decoration/Decals.png" id="2_laknp"]
 [ext_resource type="Texture2D" uid="uid://dubh4w1t41jhc" path="res://assets/jumpstart/Jumpstart Legacy/Tilesets/Dirt.png" id="3_u8mry"]
 [ext_resource type="Texture2D" uid="uid://b46acgtsdo3u5" path="res://assets/jumpstart/Jumpstart Legacy/Tilesets/Snowy_ice.png" id="4_lkr0r"]
-[ext_resource type="Script" uid="uid://c55fqx3iki2ga" path="res://level.gd" id="5_l1gdm"]
+[ext_resource type="Script" uid="uid://c55fqx3iki2ga" path="res://world/levels/level.gd" id="5_l1gdm"]
 [ext_resource type="Script" uid="uid://nu0lrsaunffh" path="res://world/props/checkpoint.gd" id="5_qcfjj"]
 [ext_resource type="Script" uid="uid://bbpvbv8826ou3" path="res://world/hazards/spike.gd" id="6_ic6eh"]
 [ext_resource type="PackedScene" uid="uid://dcaeoaw66cmoj" path="res://world/hazards/icy_block.tscn" id="7_f6gmw"]
 [ext_resource type="PackedScene" uid="uid://c5dq5f1nbpq8b" path="res://world/hazards/spike.tscn" id="7_fxys2"]
 [ext_resource type="Texture2D" uid="uid://dyqrgeb01bgtl" path="res://assets/jumpstart/Jumpstart Legacy/Particles/snow_flake.png" id="9_gm5rp"]
-[ext_resource type="Script" uid="uid://bf4c5rpbup6a1" path="res://backgroundParticle.gd" id="11_l1gdm"]
+[ext_resource type="Script" uid="uid://bf4c5rpbup6a1" path="res://world/levels/background_particle.gd" id="11_l1gdm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n6sch"]
 texture = ExtResource("1_yrvgd")

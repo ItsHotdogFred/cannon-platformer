@@ -32,13 +32,16 @@ func start_hook(hook_position: Vector2, attached_body: Node2D = null) -> void:
 		_attached_body = attached_body
 		_attached_local_position = attached_body.to_local(hook_position)
 
-	_player = get_tree().get_first_node_in_group("player")
+	# PlayerAnchor is also in the player group while grappling because it is the
+	# body that interacts with hazards. Resolve the actual player explicitly.
+	_player = Gamemanager.player
 	_player_parent = _player.get_parent()
 	_rope_viewport = get_tree().get_first_node_in_group("grapple_rope_viewport") as SubViewport
 	_screen_camera = get_tree().get_first_node_in_group("grapple_screen_camera") as Camera2D
 	if is_instance_valid(_screen_camera):
 		line_2d.reparent(_screen_camera, false)
 		line_2d.position = Vector2.ZERO
+		line_2d.z_index = 100
 		line_2d.visible = true
 	player_anchor.global_position = _player.global_position
 	player_anchor.linear_velocity = Vector2.ZERO
@@ -118,7 +121,7 @@ func _detach_player(release_momentum: Vector2, reactivate_player: bool = true) -
 	_released = true
 
 	if _player == null:
-		_player = get_tree().get_first_node_in_group("player")
+		_player = Gamemanager.player
 	if _player == null:
 		queue_free()
 		return

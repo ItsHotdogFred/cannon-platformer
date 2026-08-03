@@ -1,9 +1,9 @@
 extends CharacterBody2D
 
-const MovementScript = preload("res://player/movement.gd")
-const GrappleScript = preload("res://player/grapple_controller.gd")
-const DeathScript = preload("res://player/death_sequence.gd")
-const CelesteMovementScript = preload("res://player/celeste_movement.gd")
+const MovementScript = preload("res://world/player/movement.gd")
+const GrappleScript = preload("res://world/player/grapple_controller.gd")
+const DeathScript = preload("res://world/player/death_sequence.gd")
+const CelesteMovementScript = preload("res://world/player/celeste_movement.gd")
 
 @export var noclip_speed: float = 200.0
 @onready var sprite: AnimatedSprite2D = $Sprite
@@ -74,6 +74,10 @@ func die() -> void:
 	if death.is_dying:
 		return
 	grapple.cancel(false)
+	# Grapple detachment is deferred because death can originate from a physics
+	# callback. Let it reparent the player before the death burst captures its
+	# world position and before the respawn sequence moves the player.
+	await get_tree().process_frame
 	movement.momentum = Vector2.ZERO
 	velocity = Vector2.ZERO
 	movement.set_active(false)

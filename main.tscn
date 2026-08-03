@@ -1,23 +1,16 @@
 [gd_scene format=3 uid="uid://df1tjmqe6msdq"]
 
-[ext_resource type="PackedScene" uid="uid://cbgsp7kuo84q1" path="res://player.tscn" id="1_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://cbgsp7kuo84q1" path="res://world/player/player.tscn" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://gryv2jnbe7a0" path="res://main.gd" id="2_main"]
 [ext_resource type="Script" uid="uid://bngi4x21pnqef" path="res://ui/label.gd" id="3_4c57u"]
 [ext_resource type="Script" uid="uid://bbk4casxeuub0" path="res://world/camera/screen_camera.gd" id="3_camera"]
 [ext_resource type="FontFile" uid="uid://cet8y2a7ru56n" path="res://fonts/silkscreen/Silkscreen-Bold.ttf" id="3_efxa6"]
 [ext_resource type="AudioStream" uid="uid://icoapxm7cb08" path="res://audio/music/iron_ascent.ogg" id="5_dg77c"]
 [ext_resource type="Script" uid="uid://bto1f0lrjepde" path="res://ui/sound.gd" id="6_w48qg"]
-[ext_resource type="PackedScene" uid="uid://c8ce8iwriq0m3" path="res://world/levels/Level_05.tscn" id="6_ycdy4"]
-[ext_resource type="PackedScene" path="res://player/cursor_indicator.tscn" id="7_cursor"]
+[ext_resource type="PackedScene" path="res://world/player/cursor_indicator.tscn" id="7_cursor"]
 [ext_resource type="Texture2D" uid="uid://bibuw7f70ifba" path="res://icons/sound_on.svg" id="7_vivmo"]
-[ext_resource type="PackedScene" uid="uid://yhivvoqo6exq" path="res://world/levels/Level_02.tscn" id="8_5vw27"]
-[ext_resource type="PackedScene" uid="uid://dfnrfpy668v86" path="res://world/levels/Level_03.tscn" id="8_kek77"]
-[ext_resource type="PackedScene" uid="uid://ct2ogpm6fi3m6" path="res://world/levels/Level_04.tscn" id="9_kek77"]
-[ext_resource type="PackedScene" uid="uid://cjcm5bget2q20" path="res://world/levels/Level_06.tscn" id="16_2cqfq"]
+[ext_resource type="PackedScene" uid="uid://0eqq6thotgan" path="res://world/levels/fragment_container.tscn" id="11_efxa6"]
 [ext_resource type="PackedScene" uid="uid://tqjr7bjruir1" path="res://background.tscn" id="17_074og"]
-[ext_resource type="PackedScene" uid="uid://xn0lnuevgjwd" path="res://world/levels/Level_10.tscn" id="17_cegan"]
-[ext_resource type="PackedScene" uid="uid://bq2rjwc4u0t6e" path="res://world/levels/Level_07.tscn" id="17_yaehf"]
-[ext_resource type="PackedScene" uid="uid://b5i4sei82fbqv" path="res://world/levels/Level_09.tscn" id="19_cegan"]
 
 [node name="Main" type="Node2D" unique_id=1227024573 node_paths=PackedStringArray("camera")]
 script = ExtResource("2_main")
@@ -39,31 +32,6 @@ render_target_update_mode = 4
 [node name="Player" parent="SubViewportContainer/SubViewport" unique_id=602816141 instance=ExtResource("1_0xm2m")]
 z_index = 5
 position = Vector2(70, 144)
-
-[node name="Tutorial_01" parent="SubViewportContainer/SubViewport" unique_id=199532143 node_paths=PackedStringArray("camera") instance=ExtResource("8_5vw27")]
-camera = NodePath("../ScreenCamera")
-
-[node name="Tutoiral_02" parent="SubViewportContainer/SubViewport" unique_id=2023377505 instance=ExtResource("8_kek77")]
-position = Vector2(320, 0)
-
-[node name="TileMapLayer" parent="SubViewportContainer/SubViewport" unique_id=938936149 instance=ExtResource("9_kek77")]
-position = Vector2(640, 0)
-
-[node name="TileMapLayer2" parent="SubViewportContainer/SubViewport" unique_id=1466047648 instance=ExtResource("6_ycdy4")]
-position = Vector2(960, 0)
-
-[node name="TileMapLayer3" parent="SubViewportContainer/SubViewport" unique_id=749135044 instance=ExtResource("16_2cqfq")]
-position = Vector2(1280, 0)
-
-[node name="TileMapLayer4" parent="SubViewportContainer/SubViewport" unique_id=686122201 instance=ExtResource("17_yaehf")]
-position = Vector2(1600, 0)
-
-[node name="TileMapLayer5" parent="SubViewportContainer/SubViewport" unique_id=1303224397 node_paths=PackedStringArray("camera") instance=ExtResource("19_cegan")]
-position = Vector2(1920, 0)
-camera = NodePath("../ScreenCamera")
-
-[node name="TileMapLayer6" parent="SubViewportContainer/SubViewport" unique_id=891859371 instance=ExtResource("17_cegan")]
-position = Vector2(1920, 180)
 
 [node name="ScreenCamera" type="Camera2D" parent="SubViewportContainer/SubViewport" unique_id=2020762220 groups=["grapple_screen_camera"]]
 position = Vector2(160, 90)
@@ -107,5 +75,8 @@ z_index = 999
 z_index = -2
 position = Vector2(0, -15)
 script = null
+
+[node name="Fragment" parent="SubViewportContainer/SubViewport" unique_id=585618502 node_paths=PackedStringArray("camera") instance=ExtResource("11_efxa6")]
+camera = NodePath("../ScreenCamera")
 
 [connection signal="pressed" from="SubViewportContainer/SubViewport/ScreenCamera/Sound" to="SubViewportContainer/SubViewport/ScreenCamera/Sound" method="_on_pressed"]

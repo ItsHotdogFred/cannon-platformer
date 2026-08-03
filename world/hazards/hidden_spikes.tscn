@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cytq7rbp35m4u"]
 
-[ext_resource type="Script" uid="uid://bogwce740fplh" path="res://hidden_spikes.gd" id="1_jkb8h"]
+[ext_resource type="Script" uid="uid://bogwce740fplh" path="res://world/hazards/hidden_spikes.gd" id="1_jkb8h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jkb8h"]
 size = Vector2(3, 6)

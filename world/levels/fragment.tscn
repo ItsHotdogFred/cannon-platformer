@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bpv6g6la486ly"]
+
+[ext_resource type="Script" uid="uid://dvt5tc3obrayg" path="res://world/levels/fragment.gd" id="1_1l4iw"]
+
+[node name="Fragment" type="Node2D" unique_id=967356842]
+script = ExtResource("1_1l4iw")

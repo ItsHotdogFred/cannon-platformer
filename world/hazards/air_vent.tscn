@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cec0llytnw5kf"]
 
-[ext_resource type="Script" uid="uid://c27ijolw8yxcx" path="res://air_vent.gd" id="1_4ohvb"]
+[ext_resource type="Script" uid="uid://c27ijolw8yxcx" path="res://world/hazards/air_vent.gd" id="1_4ohvb"]
 [ext_resource type="Texture2D" uid="uid://d3tyr7vk3dw18" path="res://assets/jumpstart/Jumpstart Legacy/Particles/circle.png" id="1_jqynr"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_twto6"]
