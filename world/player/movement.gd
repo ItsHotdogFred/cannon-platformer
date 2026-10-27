@@ -7,7 +7,7 @@ extends Node
 @export var friction_air: float = 50.0
 @export var friction_ground: float = 500.0
 ## Multiplier on the project gravity. The cannon arc wants a floaty feel.
-@export var gravity_scale: float = 0.25
+@export var gravity_scale: float = 0.50
 
 var body: CharacterBody2D
 var sprite: AnimatedSprite2D
@@ -31,6 +31,10 @@ func bind(body: CharacterBody2D, sprite: AnimatedSprite2D,
 	self.shoot_timer = shoot_timer
 	shoot_timer.timeout.connect(func (): _can_shoot = true)
 
+func jump():
+	momentum.y = -200
+	
+
 
 func is_noclip() -> bool:
 	return _noclip
@@ -51,11 +55,11 @@ func aim_sprite() -> void:
 	sprite.flip_h = body.global_position.x > body.get_global_mouse_position().x
 
 
-func try_fire() -> void:
+func try_fire() -> bool:
 	if not _can_shoot:
-		return
+		return false
 	if body.get_viewport().gui_get_hovered_control() != null:
-		return
+		return false
 	## Skip fire if the click landed on UI (e.g. the sound toggle) — Input
 	## still reports the action even when a Control already handled it.
 	var mouse_pos := body.get_global_mouse_position()
@@ -67,6 +71,7 @@ func try_fire() -> void:
 	_can_shoot = false
 	shoot_timer.start()
 	body.get_node("AudioStreamPlayer2D").play()
+	return true
 
 
 ## Gravity only acts while airborne. Horizontal momentum bleeds off at

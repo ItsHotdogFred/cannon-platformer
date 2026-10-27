@@ -29,3 +29,7 @@ shape = SubResource("CapsuleShape2D_636o4")
 [node name="Line2D" type="Line2D" parent="." unique_id=834870671]
 unique_name_in_owner = true
 points = PackedVector2Array(0, 0, 0, 47)
+width = 8.0
+texture_mode = 1
+texture_filter = 1
+texture_repeat = 2

@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://dhde11ehatx83"]
+
+[ext_resource type="Script" uid="uid://dvt5tc3obrayg" path="res://world/levels/fragment.gd" id="1_1fsxt"]
+[ext_resource type="PackedScene" uid="uid://dbfl6rtkcoi2b" path="res://world/levels/Level_prolog_1.tscn" id="2_bkstk"]
+
+[node name="Fragment" type="Node2D" unique_id=967356842]
+script = ExtResource("1_1fsxt")
+
+[node name="LevelProlouge1" parent="." unique_id=341649976 instance=ExtResource("2_bkstk")]

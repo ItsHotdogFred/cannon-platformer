@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://bnk4nwdsy5att"]
+
+[ext_resource type="Script" uid="uid://ci161of4cs2rn" path="res://flyboy.gd" id="1_hxh86"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uwa4j"]
+size = Vector2(8, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hxh86"]
+size = Vector2(8, 9)
+
+[node name="Flyboy" type="AnimatableBody2D" unique_id=1156917071]
+script = ExtResource("1_hxh86")
+
+[node name="Box8x8" type="ColorRect" parent="." unique_id=1014659405]
+offset_right = 8.0
+offset_bottom = 8.0
+color = Color(0, 1, 0, 0.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=955088762]
+position = Vector2(4, 4)
+shape = SubResource("RectangleShape2D_uwa4j")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=2073517896]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1429049553]
+position = Vector2(4, 3.5)
+shape = SubResource("RectangleShape2D_hxh86")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

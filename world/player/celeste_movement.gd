@@ -1,6 +1,7 @@
 extends Node
 
-@export var speed : float = 0
+## Left/right speed while airborne. Lower than ground_speed for less air control.
+@export var air_speed : float = 6000
 @export var ground_speed : float = 6000
 @export var gravity : float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
@@ -15,7 +16,7 @@ func movement(delta : float) -> Vector2:
 	
 	var momentum : Vector2
 	
-	var active_speed := ground_speed if characterbody2d.is_on_floor() else speed
+	var active_speed := ground_speed if characterbody2d.is_on_floor() else air_speed
 	
 	if Input.is_action_pressed("left"):
 		momentum.x += -active_speed * delta

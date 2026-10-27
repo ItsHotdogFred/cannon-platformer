@@ -10,42 +10,50 @@
 script = ExtResource("0_background")
 
 [node name="Parallax2D" type="Parallax2D" parent="." unique_id=1389982522]
+modulate = Color(0.55, 0.6, 0.7, 1)
 scroll_scale = Vector2(0.2, 0.2)
 repeat_size = Vector2(320, 180)
 repeat_times = 20
 
 [node name="Sprite2D" type="Sprite2D" parent="Parallax2D" unique_id=1115997957]
+light_mask = 2
 texture_filter = 1
 position = Vector2(160, 48)
 texture = ExtResource("1_splo0")
 
 [node name="Parallax2D2" type="Parallax2D" parent="." unique_id=945826290]
+modulate = Color(0.65, 0.7, 0.78, 1)
 scroll_scale = Vector2(0.4, 0.4)
 repeat_size = Vector2(320, 180)
 repeat_times = 20
 
 [node name="Sprite2D2" type="Sprite2D" parent="Parallax2D2" unique_id=2095281472]
+light_mask = 2
 texture_filter = 1
 position = Vector2(160, 48)
 texture = ExtResource("2_eq6nc")
 
 [node name="Parallax2D3" type="Parallax2D" parent="." unique_id=721946809]
+modulate = Color(0.29742557, 0.33226514, 0.4253173, 1)
 scroll_scale = Vector2(0.6, 0.6)
 repeat_size = Vector2(320, 180)
 repeat_times = 20
 
 [node name="Sprite2D3" type="Sprite2D" parent="Parallax2D3" unique_id=20636311]
+light_mask = 2
 z_index = -1
 texture_filter = 1
 position = Vector2(160, 48)
 texture = ExtResource("3_bpugw")
 
 [node name="Parallax2D4" type="Parallax2D" parent="." unique_id=878857521]
+modulate = Color(0.45, 0.5, 0.62, 1)
 scroll_scale = Vector2(0.8, 0.8)
 repeat_size = Vector2(320, 180)
 repeat_times = 20
 
 [node name="Sprite2D4" type="Sprite2D" parent="Parallax2D4" unique_id=1792413269]
+light_mask = 2
 z_index = -1
 texture_filter = 1
 position = Vector2(160, 48)

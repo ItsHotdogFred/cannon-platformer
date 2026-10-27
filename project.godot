@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Cannon Platformer"
-run/main_scene="uid://df1tjmqe6msdq"
+run/main_scene="uid://c5kgi281ndsxy"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -28,7 +28,11 @@ window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot_ai/plugin.cfg")
+enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg")
+
+[global_group]
+
+breakable=""
 
 [input]
 

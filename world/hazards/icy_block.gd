@@ -14,7 +14,7 @@ func _ready() -> void:
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		animated_sprite_2d.frame = 1
-		await get_tree().create_timer(1).timeout
+		await get_tree().create_timer(0.5).timeout
 		going_down = true
 		await get_tree().create_timer(3).timeout
 		going_down = false
@@ -29,7 +29,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		
 func _physics_process(delta: float) -> void:
 	if going_down:
-		global_position.y += 50 * delta
+		global_position.y += 100 * delta
 		animated_sprite_2d_empty.show()
 		animated_sprite_2d_empty.global_position = starting_pos
 		return

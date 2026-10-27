@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://bdd21iboaab8h"]
+
+[ext_resource type="Script" uid="uid://cre6var0atv8s" path="res://breakable.gd" id="1_knbfu"]
+[ext_resource type="Texture2D" uid="uid://c8ew8qb3o1icn" path="res://assets/jumpstart/Jumpstart Legacy/Tilesets/Scaffolding.png" id="1_lrtio"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_knbfu"]
+atlas = ExtResource("1_lrtio")
+region = Rect2(40, 0, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_twto6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_knbfu")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_twto6"]
+size = Vector2(8, 8)
+
+[node name="Breakable" type="StaticBody2D" unique_id=217170884 groups=["breakable"]]
+script = ExtResource("1_knbfu")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=572079130]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_twto6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1331512136]
+shape = SubResource("RectangleShape2D_twto6")

@@ -1,0 +1,103 @@
+[gd_scene format=3 uid="uid://p7w165ajiter"]
+
+[ext_resource type="Script" path="res://fragment.gd" id="1_okfg8"]
+[ext_resource type="PackedScene" uid="uid://yhivvoqo6exq" path="res://world/levels/Level_02.tscn" id="2_5ct28"]
+[ext_resource type="PackedScene" uid="uid://dfnrfpy668v86" path="res://world/levels/Level_03.tscn" id="3_tmk5l"]
+[ext_resource type="PackedScene" uid="uid://ct2ogpm6fi3m6" path="res://world/levels/Level_04.tscn" id="4_ufnu4"]
+[ext_resource type="PackedScene" uid="uid://c8ce8iwriq0m3" path="res://world/levels/Level_05.tscn" id="5_egiix"]
+[ext_resource type="PackedScene" uid="uid://cjcm5bget2q20" path="res://world/levels/Level_06.tscn" id="6_tnrki"]
+[ext_resource type="PackedScene" uid="uid://bq2rjwc4u0t6e" path="res://world/levels/Level_07.tscn" id="7_rlx0m"]
+[ext_resource type="PackedScene" uid="uid://b5i4sei82fbqv" path="res://world/levels/Level_09.tscn" id="8_kk8qj"]
+[ext_resource type="PackedScene" uid="uid://xn0lnuevgjwd" path="res://world/levels/Level_10.tscn" id="9_5yu0p"]
+[ext_resource type="Texture2D" uid="uid://drbdhakieel44" path="res://assets/jumpstart/Jumpstart Legacy/Particles/squircle.png" id="10_tmk5l"]
+[ext_resource type="Script" path="res://backgroundParticle.gd" id="11_ufnu4"]
+
+[sub_resource type="Gradient" id="Gradient_tmk5l"]
+offsets = PackedFloat32Array(0.6098081, 0.7654584, 1)
+colors = PackedColorArray(0.54509807, 0.7647059, 0.1882353, 1, 0.37366337, 0.60398585, 0.24448732, 1, 0.29411766, 0.5294118, 0.27058825, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_twto6"]
+gradient = SubResource("Gradient_tmk5l")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ufnu4"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(160, 1, 1)
+angle_min = 209.00002
+angle_max = 209.00002
+initial_velocity_max = 58.969997
+gravity = Vector3(0, 49, 0)
+scale_min = 0.099999994
+color_ramp = SubResource("GradientTexture1D_twto6")
+
+[sub_resource type="Gradient" id="Gradient_ufnu4"]
+offsets = PackedFloat32Array(0.53731346, 0.7654584, 1)
+colors = PackedColorArray(1, 0.49159813, 0.66906714, 1, 1, 0.6125112, 0.7098604, 1, 0.99052936, 0.3904423, 0.79078907, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_egiix"]
+gradient = SubResource("Gradient_ufnu4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_egiix"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(160, 1, 1)
+angle_min = 209.00002
+angle_max = 209.00002
+initial_velocity_max = 58.969997
+gravity = Vector3(0, 49, 0)
+scale_min = 0.099999994
+color_ramp = SubResource("GradientTexture1D_egiix")
+
+[node name="Fragment" type="Node2D" unique_id=585618502 node_paths=PackedStringArray("fragment_particles")]
+script = ExtResource("1_okfg8")
+fragment_particles = {
+NodePath("GPUParticles2D"): "Lush",
+NodePath("Test"): "Test"
+}
+metadata/_custom_type_script = "uid://dvt5tc3obrayg"
+
+[node name="Level_02" parent="." unique_id=1886536890 instance=ExtResource("2_5ct28")]
+FragmentParticles = Array[String](["Lush", "Test"])
+
+[node name="Level_03" parent="." unique_id=1466047648 instance=ExtResource("3_tmk5l")]
+position = Vector2(320, 0)
+
+[node name="Level_04" parent="." unique_id=1796801977 instance=ExtResource("4_ufnu4")]
+position = Vector2(640, 0)
+
+[node name="Level_05" parent="." unique_id=133005933 instance=ExtResource("5_egiix")]
+position = Vector2(960, 0)
+
+[node name="Level_06" parent="." unique_id=61915776 instance=ExtResource("6_tnrki")]
+position = Vector2(1280, 0)
+
+[node name="Level_07" parent="." unique_id=1581619132 instance=ExtResource("7_rlx0m")]
+position = Vector2(1600, 0)
+
+[node name="Level_09" parent="." unique_id=341649976 instance=ExtResource("8_kk8qj")]
+position = Vector2(1920, 0)
+
+[node name="Level_10" parent="." unique_id=913399560 instance=ExtResource("9_5yu0p")]
+position = Vector2(1920, 180)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1106733497]
+z_index = -1
+texture_filter = 1
+position = Vector2(135, -6)
+amount = 100
+texture = ExtResource("10_tmk5l")
+lifetime = 3.0
+process_material = SubResource("ParticleProcessMaterial_ufnu4")
+script = ExtResource("11_ufnu4")
+metadata/_custom_type_script = "uid://bf4c5rpbup6a1"
+
+[node name="Test" type="GPUParticles2D" parent="." unique_id=2111396610]
+z_index = -1
+texture_filter = 1
+position = Vector2(135, -6)
+amount = 2270
+texture = ExtResource("10_tmk5l")
+lifetime = 3.0
+process_material = SubResource("ParticleProcessMaterial_egiix")
+script = ExtResource("11_ufnu4")
+metadata/_custom_type_script = "uid://bf4c5rpbup6a1"

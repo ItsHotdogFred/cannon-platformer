@@ -1,6 +1,6 @@
 extends Area2D
 
-@export var push_force: float = 7.0
+@export var push_force: float = 14.0
 
 func _physics_process(_delta: float) -> void:
 	for body in get_overlapping_bodies():

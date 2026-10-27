@@ -21,7 +21,20 @@ func _ready() -> void:
 		shoot_timer = player.get_node_or_null("ShootTime") as Timer
 
 
+func _exit_tree() -> void:
+	# Don't leave the OS cursor hidden after a scene change.
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
+
 func _process(_delta: float) -> void:
+	# Hide the wheel while the player isn't allowed to shoot.
+	visible = player == null or player.get("can_shoot") != false
+	# The wheel stands in for the OS cursor; show the OS one when it's hidden.
+	var mode := Input.MOUSE_MODE_HIDDEN if visible else Input.MOUSE_MODE_VISIBLE
+	if Input.mouse_mode != mode:
+		Input.mouse_mode = mode
+	if not visible:
+		return
 	# CursorIndicator is a child of ScreenCamera, whose origin is the center
 	# of the gameplay viewport. Keep the wheel in camera-local screen space.
 	position = (get_viewport().get_mouse_position()

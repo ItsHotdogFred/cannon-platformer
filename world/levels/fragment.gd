@@ -9,7 +9,8 @@ var levels : Array[Level] = []
 
 
 func _ready():
-	camera.transiton_completed.connect(_on_transiton_completed)
+	if camera:
+		camera.transiton_completed.connect(_on_transiton_completed)
 	for node in find_children("*", "Level", true, false):
 		if node is Level:
 			levels.append(node as Level)
@@ -27,7 +28,7 @@ func _on_transiton_completed():
 func check():
 	var active_level: Level = null
 	for level in levels:
-		if camera.global_position.is_equal_approx(level.global_position + offset):
+		if camera and camera.global_position.is_equal_approx(level.global_position + offset):
 			active_level = level
 			break
 

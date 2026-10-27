@@ -6,12 +6,24 @@ const DeathScript = preload("res://world/player/death_sequence.gd")
 const CelesteMovementScript = preload("res://world/player/celeste_movement.gd")
 
 @export var noclip_speed: float = 200.0
+## When false the player can't fire the grapple; turning it off mid-grapple
+## releases the current hook.
+@export var can_grapple: bool = true:
+	set(value):
+		can_grapple = value
+		if not value and is_node_ready():
+			grapple.cancel()
+
+@export var can_jump: bool = true
+@export var can_shoot: bool = true
 @onready var sprite: AnimatedSprite2D = $Sprite
 
 @onready var movement = MovementScript.new()
 @onready var grapple = GrappleScript.new()
 @onready var death = DeathScript.new()
 @onready var celeste = CelesteMovementScript.new()
+
+var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var starting_pos: Vector2
 
@@ -53,11 +65,16 @@ func _physics_process(delta: float) -> void:
 
 	grapple.aim()
 	movement.aim_sprite()
-	if Input.is_action_just_pressed("shoot"):
-		movement.try_fire()
-	if Input.is_action_just_pressed("interaction"):
+	if Input.is_action_just_pressed("shoot") and can_shoot:
+		if movement.try_fire():
+			_breakable_hit()
+	if can_grapple and Input.is_action_just_pressed("interaction"):
 		if grapple.try_attach():
 			return
+	if can_jump and Input.is_action_just_pressed("jump") and is_on_floor():
+		movement.jump()
+			
+	
 	movement.step(delta, celeste_momentum)
 	
 	var pre_velocity := velocity
@@ -125,3 +142,13 @@ func _noclip_move(delta: float) -> void:
 		dir = dir.normalized()
 	global_position += dir * noclip_speed * delta
 	movement.aim_sprite()
+
+
+func _breakable_hit() -> void:
+	$RayCast2D.force_raycast_update()
+	if not $RayCast2D.is_colliding():
+		return
+	var collider: Node = $RayCast2D.get_collider() as Node
+	if collider != null and collider.is_in_group("breakable"):
+		if collider.has_method("destroy"):
+			collider.call("destroy")

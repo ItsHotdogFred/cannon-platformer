@@ -7,6 +7,10 @@ extends Node2D
 @export var swingImpulse := 3.0
 @export var climbSpeed := 90.0
 
+const ROPE_TEXTURE = preload("res://assets/jumpstart/Jumpstart Legacy/Tilesets/rope.png")
+## rope.png is drawn vertically, but Line2D tiles along the texture's X axis.
+static var _rope_line_texture: Texture2D
+
 @onready var anchor: StaticBody2D = %Anchor
 @onready var player_anchor: RigidBody2D = %PlayerAnchor
 @onready var line_2d: Line2D = %Line2D
@@ -24,6 +28,11 @@ var _screen_camera: Camera2D
 func _ready() -> void:
 	# Keep rope rendering alive while the camera pans with the tree paused.
 	process_mode = Node.PROCESS_MODE_ALWAYS
+	if _rope_line_texture == null:
+		var image := ROPE_TEXTURE.get_image()
+		image.rotate_90(CLOCKWISE)
+		_rope_line_texture = ImageTexture.create_from_image(image)
+	line_2d.texture = _rope_line_texture
 
 
 func start_hook(hook_position: Vector2, attached_body: Node2D = null) -> void:

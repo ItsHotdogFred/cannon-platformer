@@ -76,7 +76,15 @@ z_index = -2
 position = Vector2(0, -15)
 script = null
 
-[node name="Fragment" parent="SubViewportContainer/SubViewport" unique_id=585618502 node_paths=PackedStringArray("camera") instance=ExtResource("11_efxa6")]
+[node name="Fragment" parent="SubViewportContainer/SubViewport" unique_id=585618502 node_paths=PackedStringArray("fragment_particles", "camera") instance=ExtResource("11_efxa6")]
+fragment_particles = {
+NodePath("GPUParticles2D"): "Lush",
+NodePath("Test"): "Test"
+}
 camera = NodePath("../ScreenCamera")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="SubViewportContainer/SubViewport" unique_id=1938274651]
+visible = false
+color = Color(0.6, 0.62, 0.7, 1)
 
 [connection signal="pressed" from="SubViewportContainer/SubViewport/ScreenCamera/Sound" to="SubViewportContainer/SubViewport/ScreenCamera/Sound" method="_on_pressed"]

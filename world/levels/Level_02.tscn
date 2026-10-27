@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://c55fqx3iki2ga" path="res://world/levels/level.gd" id="3_n1oc0"]
 [ext_resource type="FontFile" uid="uid://cet8y2a7ru56n" path="res://fonts/silkscreen/Silkscreen-Bold.ttf" id="4_vn7fu"]
 [ext_resource type="PackedScene" uid="uid://bdir8fdmbtr0r" path="res://world/props/star.tscn" id="5_modof"]
+[ext_resource type="PackedScene" uid="uid://bdd21iboaab8h" path="res://breakable.tscn" id="7_f3dyj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n6sch"]
 texture = ExtResource("1_5ceop")
@@ -714,3 +715,6 @@ autowrap_mode = 2
 
 [node name="Star" parent="." unique_id=1610550291 instance=ExtResource("5_modof")]
 position = Vector2(168, 72)
+
+[node name="Breakable" parent="." unique_id=217170884 instance=ExtResource("7_f3dyj")]
+position = Vector2(80, 117)
