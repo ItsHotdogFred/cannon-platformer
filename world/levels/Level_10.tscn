@@ -1473,7 +1473,7 @@ _bundled = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_twto6"]
-size = Vector2(39, 40)
+size = Vector2(26, 40)
 
 [node name="Level_10" type="TileMapLayer" unique_id=1466047648]
 texture_filter = 1
@@ -1759,7 +1759,7 @@ script = ExtResource("11_etmcn")
 Transition = SubResource("PackedScene_tsf4o")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=801232341]
-position = Vector2(17.5, 16)
+position = Vector2(24, 16)
 shape = SubResource("RectangleShape2D_twto6")
 
 [connection signal="body_entered" from="Checkpoint" to="Checkpoint" method="_on_body_entered"]
