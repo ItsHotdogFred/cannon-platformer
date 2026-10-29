@@ -1,6 +1,6 @@
 # Cannon Platformer
 
-Cannon platformer is a game where you start off hiking a mountain still you fall all the way back down having to do it all over again except now your legs are breaking allowing you to still walk but no longer jump. Thankfully, a hand cannon has been magically placed in your pocket which you'll now use to get around for now on. This is a game I ended up quitting but because of the savepoint project on Hackclub. I have regained my motivation to continue working on it.
+Cannon platformer is a game where you start off hiking a mountain still you fall all the way back down having to do it all over again except now your legs are breaking allowing you to still walk but no longer jump. Thankfully, a hand cannon has been magically placed in your pocket which you'll now use to get around for now on. This is a game I ended up quitting but because of the savepoint project on Hackclub. I have regained my motivation to continue working on it. Play: [Cannon Platformer](https://cannon.itsfred.dev/)
 
 ## Controls
 
@@ -9,6 +9,7 @@ Spacebar - Jump
 Left click - Shoot
 Right click - Grapple
 W, D - Increase/Decrease the length of the grapple rope
+F - Noclip
 
 ## Screenshots
 
