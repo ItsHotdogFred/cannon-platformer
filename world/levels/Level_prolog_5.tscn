@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://cmxhsuirym7md" path="res://PointLightTexture.png" id="6_f3nkq"]
 [ext_resource type="Script" uid="uid://bbpvbv8826ou3" path="res://world/hazards/spike.gd" id="7_m6b5i"]
 [ext_resource type="PackedScene" uid="uid://dcaeoaw66cmoj" path="res://world/hazards/icy_block.tscn" id="8_p7bvh"]
-[ext_resource type="Script" uid="uid://bf4c5rpbup6a1" path="res://world/levels/background_particle.gd" id="11_ulsfr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n6sch"]
 texture = ExtResource("1_thxea")
@@ -767,30 +766,12 @@ sources/3 = SubResource("TileSetAtlasSource_avvws")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_afedu"]
 size = Vector2(416, 10)
 
-[sub_resource type="Gradient" id="Gradient_cw647"]
-offsets = PackedFloat32Array(0.6098081, 0.7654584, 1)
-colors = PackedColorArray(1, 1, 1, 1, 0.9019608, 0.8392157, 0.827451, 1, 0.9037051, 0.838402, 0.8274447, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_twto6"]
-gradient = SubResource("Gradient_cw647")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_l1gdm"]
-particle_flag_disable_z = true
-emission_shape = 3
-emission_box_extents = Vector3(160, 1, 1)
-angle_min = 209.00002
-angle_max = 209.00002
-initial_velocity_max = 29.49
-gravity = Vector3(0, 24.5, 0)
-scale_max = 2.0
-color_ramp = SubResource("GradientTexture1D_twto6")
-
 [node name="Level_09" type="TileMapLayer" unique_id=341649976 node_paths=PackedStringArray("LevelParticles")]
 texture_filter = 1
 tile_map_data = PackedByteArray("AAAAABAAAwAAAAAAAAAAABEAAwAAAAEAAAAAABIAAwAAAAEAAAAAABMAAwAAAAEAAAAAABQAAwAAAAEAAAAAABUAAwAAAAEAAAAAABYAAwAAAAEAAAABAAwAAQAHABcAAAABAA0AAQAHABgAAAABAA4AAQAJABcAAAABAA8AAQAJABgAAAABABAAAwABAAAAAAABABEAAwABAAEAAAABABIAAwABAAEAAAABABMAAwABAAEAAAABABQAAwABAAEAAAABABUAAwABAAEAAAABABYAAwABAAEAAAACAAwAAQAIABcAAAACAA0AAQAIABgAAAACAA4AAQAKABcAAAACAA8AAQAKABgAAAACABAAAwABAAAAAAACABEAAwABAAEAAAACABIAAwABAAEAAAACABMAAwABAAEAAAACABQAAwABAAEAAAACABUAAwABAAEAAAACABYAAwABAAEAAAADABAAAwABAAAAAAADABEAAwABAAEAAAADABIAAwABAAEAAAADABMAAwABAAEAAAADABQAAwABAAEAAAADABUAAwABAAEAAAADABYAAwABAAEAAAAEAA0AAQAhAAgAAAAEAA4AAQAhAAkAAAAEAA8AAQAhAAoAAAAEABAAAwABAAAAAAAEABEAAwABAAEAAAAEABIAAwABAAEAAAAEABMAAwABAAEAAAAEABQAAwABAAEAAAAEABUAAwABAAEAAAAEABYAAwABAAEAAAAFAA0AAQAiAAgAAAAFAA4AAQAiAAkAAAAFAA8AAQAiAAoAAAAFABAAAwACAAAAAAAFABEAAwACAAEAAAAFABIAAwACAAEAAAAFABMAAwACAAEAAAAFABQAAwACAAEAAAAFABUAAwACAAEAAAAFABYAAwACAAEAAAA6ABAAAwAAAAAAAAA6ABEAAwAAAAEAAAA6ABIAAwAAAAEAAAA6ABMAAwAAAAEAAAA6ABQAAwAAAAEAAAA6ABUAAwAAAAEAAAA6ABYAAwAAAAEAAAA7ABAAAwABAAAAAAA7ABEAAwABAAEAAAA7ABIAAwABAAEAAAA7ABMAAwABAAEAAAA7ABQAAwABAAEAAAA7ABUAAwABAAEAAAA7ABYAAwABAAEAAAA8ABAAAwABAAAAAAA8ABEAAwABAAEAAAA8ABIAAwABAAEAAAA8ABMAAwABAAEAAAA8ABQAAwABAAEAAAA8ABUAAwABAAEAAAA8ABYAAwABAAEAAAA9ABAAAwABAAAAAAA9ABEAAwABAAEAAAA9ABIAAwABAAEAAAA9ABMAAwABAAEAAAA9ABQAAwABAAEAAAA9ABUAAwABAAEAAAA9ABYAAwABAAEAAAA+ABAAAwABAAAAAAA+ABEAAwABAAEAAAA+ABIAAwABAAEAAAA+ABMAAwABAAEAAAA+ABQAAwABAAEAAAA+ABUAAwABAAEAAAA+ABYAAwABAAEAAAA/ABAAAwABAAAAAAA/ABEAAwABAAEAAAA/ABIAAwABAAEAAAA/ABMAAwABAAEAAAA/ABQAAwABAAEAAAA/ABUAAwABAAEAAAA/ABYAAwABAAEAAABAABAAAwABAAAAAABAABEAAwABAAEAAABAABIAAwABAAEAAABAABMAAwABAAEAAABAABQAAwABAAEAAABAABUAAwABAAEAAABAABYAAwABAAEAAABBABAAAwABAAAAAABBABEAAwABAAEAAABBABIAAwABAAEAAABBABMAAwABAAEAAABBABQAAwABAAEAAABBABUAAwABAAEAAABBABYAAwABAAEAAABCABAAAwACAAAAAABCABEAAwACAAEAAABCABIAAwACAAEAAABCABMAAwACAAEAAABCABQAAwACAAEAAABCABUAAwACAAEAAABCABYAAwACAAEAAAA=")
 tile_set = SubResource("TileSet_twto6")
 script = ExtResource("5_h1iqo")
-LevelParticles = [NodePath("SnowParticles2D")]
+LevelParticles = [NodePath("")]
 metadata/_custom_type_script = "uid://c55fqx3iki2ga"
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=612867742]
@@ -807,15 +788,6 @@ script = ExtResource("7_m6b5i")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="void" unique_id=852778293]
 position = Vector2(231, 22)
 shape = SubResource("RectangleShape2D_afedu")
-
-[node name="SnowParticles2D" type="GPUParticles2D" parent="." unique_id=1367819825]
-texture_filter = 1
-position = Vector2(135, -6)
-amount = 300
-lifetime = 4.5
-process_material = SubResource("ParticleProcessMaterial_l1gdm")
-script = ExtResource("11_ulsfr")
-metadata/_custom_type_script = "uid://bf4c5rpbup6a1"
 
 [node name="IceBlocks" type="Node" parent="." unique_id=297731184]
 

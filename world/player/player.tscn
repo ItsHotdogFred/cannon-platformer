@@ -138,8 +138,10 @@ script = ExtResource("1_onrkg")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1601340922]
 texture_filter = 1
+position = Vector2(0, 6)
 sprite_frames = SubResource("SpriteFrames_twto6")
 autoplay = "default"
+offset = Vector2(0, -5.99)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=455093127]
 position = Vector2(0, 9)

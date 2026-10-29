@@ -1,0 +1,17 @@
+[gd_resource type="NoiseTexture2D" format=3 uid="uid://coxgk4ixjsvu4"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_23t8p"]
+noise_type = 2
+seed = 5
+frequency = 0.0094
+fractal_octaves = 1
+cellular_jitter = 0.8
+domain_warp_amplitude = 40.0
+domain_warp_frequency = 0.01
+domain_warp_fractal_octaves = 1
+
+[resource]
+noise = SubResource("FastNoiseLite_23t8p")
+seamless = true
+invert = true
+seamless_blend_skirt = 1.0

@@ -4,6 +4,8 @@ const MovementScript = preload("res://world/player/movement.gd")
 const GrappleScript = preload("res://world/player/grapple_controller.gd")
 const DeathScript = preload("res://world/player/death_sequence.gd")
 const CelesteMovementScript = preload("res://world/player/celeste_movement.gd")
+const LandingSound = preload("res://happy-wheels-oh-my-leg.mp3")
+const MessageFont = preload("res://fonts/silkscreen/Silkscreen-Regular.ttf")
 
 @export var noclip_speed: float = 200.0
 ## When false the player can't fire the grapple; turning it off mid-grapple
@@ -14,6 +16,8 @@ const CelesteMovementScript = preload("res://world/player/celeste_movement.gd")
 		if not value and is_node_ready():
 			grapple.cancel()
 
+## When false walk/jump/shoot/grapple input is ignored; gravity still applies.
+@export var can_move: bool = true
 @export var can_jump: bool = true
 @export var can_shoot: bool = true
 @onready var sprite: AnimatedSprite2D = $Sprite
@@ -23,9 +27,10 @@ const CelesteMovementScript = preload("res://world/player/celeste_movement.gd")
 @onready var death = DeathScript.new()
 @onready var celeste = CelesteMovementScript.new()
 
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-
 var starting_pos: Vector2
+
+var falling : bool = false
+var _landing_sound_playing : bool = false
 
 signal just_died
 
@@ -53,7 +58,15 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	
-	var celeste_momentum = celeste.movement(delta)
+	var current_pos = global_position
+	
+
+	
+	var celeste_momentum := Vector2.ZERO
+	if can_move:
+		celeste_momentum = celeste.movement(delta)
+	else:
+		sprite.play("default")
 	
 	if death.is_dying:
 		return
@@ -65,13 +78,13 @@ func _physics_process(delta: float) -> void:
 
 	grapple.aim()
 	movement.aim_sprite()
-	if Input.is_action_just_pressed("shoot") and can_shoot:
+	if Input.is_action_just_pressed("shoot") and can_shoot and can_move:
 		if movement.try_fire():
 			_breakable_hit()
-	if can_grapple and Input.is_action_just_pressed("interaction"):
+	if can_move and can_grapple and Input.is_action_just_pressed("interaction"):
 		if grapple.try_attach():
 			return
-	if can_jump and Input.is_action_just_pressed("jump") and is_on_floor():
+	if can_move and can_jump and Input.is_action_just_pressed("jump") and is_on_floor():
 		movement.jump()
 			
 	
@@ -83,7 +96,14 @@ func _physics_process(delta: float) -> void:
 		movement.momentum.x *= velocity.x / pre_velocity.x
 	if pre_velocity.y != 0.0:
 		movement.momentum.y *= velocity.y / pre_velocity.y
-
+	if not can_move and not _landing_sound_playing and is_on_floor():
+		_play_landing_sound()
+		
+	if falling == true:
+		
+		sprite.rotate(5 * delta)
+		global_position = current_pos
+		$PointLight2D.hide()
 
 # --- Public surface other systems call -------------------------------
 
@@ -142,6 +162,43 @@ func _noclip_move(delta: float) -> void:
 		dir = dir.normalized()
 	global_position += dir * noclip_speed * delta
 	movement.aim_sprite()
+
+
+## Plays once on landing while frozen, then hands control back.
+func _play_landing_sound() -> void:
+	_landing_sound_playing = true
+	var sfx := AudioStreamPlayer.new()
+	sfx.stream = LandingSound
+	add_child(sfx)
+	sfx.play()
+	await sfx.finished
+	sfx.queue_free()
+	_landing_sound_playing = false
+	can_move = true
+	_show_message("Your legs have been crushed! You can still walk, but jumping is out of the question. Thankfully, a hand cannon has magically appeared in your pocket. Use it to get around from now on.")
+
+
+## Fades a centred message in, holds it, then fades it out. Same style as the
+## prolog transition text.
+func _show_message(text: String) -> void:
+	var layer := CanvasLayer.new()
+	layer.layer = 10
+	add_child(layer)
+	var label := Label.new()
+	label.text = text
+	label.add_theme_font_override("font", MessageFont)
+	label.add_theme_font_size_override("font_size", 8)
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	label.modulate.a = 0.0
+	layer.add_child(label)
+	label.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT, Control.PRESET_MODE_MINSIZE, 20)
+	var tween := create_tween()
+	tween.tween_property(label, "modulate:a", 1.0, 1.0)
+	tween.tween_interval(5.0)
+	tween.tween_property(label, "modulate:a", 0.0, 1.0)
+	tween.tween_callback(layer.queue_free)
 
 
 func _breakable_hit() -> void:

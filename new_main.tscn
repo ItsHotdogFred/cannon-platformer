@@ -6,12 +6,15 @@
 [ext_resource type="FontFile" uid="uid://cet8y2a7ru56n" path="res://fonts/silkscreen/Silkscreen-Bold.ttf" id="3_xyy1j"]
 [ext_resource type="Script" uid="uid://bngi4x21pnqef" path="res://ui/label.gd" id="4_ta2aw"]
 [ext_resource type="AudioStream" uid="uid://icoapxm7cb08" path="res://audio/music/iron_ascent.ogg" id="5_aeylb"]
-[ext_resource type="Texture2D" uid="uid://bibuw7f70ifba" path="res://icons/sound_on.svg" id="6_886ha"]
-[ext_resource type="Script" uid="uid://bto1f0lrjepde" path="res://ui/sound.gd" id="7_1fxgr"]
 [ext_resource type="PackedScene" path="res://world/player/cursor_indicator.tscn" id="8_rc6o0"]
 [ext_resource type="PackedScene" uid="uid://tqjr7bjruir1" path="res://background.tscn" id="9_1qswb"]
 [ext_resource type="Texture2D" uid="uid://cmxhsuirym7md" path="res://PointLightTexture.png" id="10_xyy1j"]
 [ext_resource type="PackedScene" uid="uid://dhde11ehatx83" path="res://world/levels/fragment_prolouge.tscn" id="11_g7d0j"]
+[ext_resource type="Script" uid="uid://cjsvofmh8h0x" path="res://world/levels/leg_breaker.gd" id="13_aeylb"]
+[ext_resource type="PackedScene" uid="uid://cj2mkfb2521re" path="res://assets/TransitionKit/transitions/t_bubbles_3.tscn" id="14_886ha"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1fxgr"]
+size = Vector2(417, 38)
 
 [node name="NewMain" type="Node2D" unique_id=1640156913]
 script = ExtResource("1_g7d0j")
@@ -60,20 +63,6 @@ position = Vector2(-160, -90)
 stream = ExtResource("5_aeylb")
 autoplay = true
 
-[node name="Sound" type="Button" parent="SubViewportContainer/SubViewport/Player/ScreenCamera" unique_id=456726441]
-z_index = 1
-texture_filter = 1
-offset_left = -138.0
-offset_top = -90.0
-offset_right = -106.0
-offset_bottom = -58.0
-focus_mode = 0
-icon = ExtResource("6_886ha")
-flat = true
-script = ExtResource("7_1fxgr")
-sound = false
-metadata/_edit_use_anchors_ = true
-
 [node name="CursorIndicator" parent="SubViewportContainer/SubViewport/Player/ScreenCamera" unique_id=652975328 node_paths=PackedStringArray("player") instance=ExtResource("8_rc6o0")]
 z_index = 999
 player = NodePath("../..")
@@ -85,12 +74,22 @@ color = Color(0.8627451, 0.65882355, 0, 1)
 texture = ExtResource("10_xyy1j")
 
 [node name="Background" parent="SubViewportContainer/SubViewport" unique_id=1680881938 instance=ExtResource("9_1qswb")]
-position = Vector2(0, -28)
+z_index = -5
+position = Vector2(0, -24)
 script = null
-
-[node name="Fragment" parent="SubViewportContainer/SubViewport" unique_id=967356842 instance=ExtResource("11_g7d0j")]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="SubViewportContainer/SubViewport" unique_id=855211179]
 color = Color(0.6, 0.62, 0.7, 1)
 
-[connection signal="pressed" from="SubViewportContainer/SubViewport/Player/ScreenCamera/Sound" to="SubViewportContainer/SubViewport/Player/ScreenCamera/Sound" method="_on_pressed"]
+[node name="LegBreaker" type="Area2D" parent="SubViewportContainer/SubViewport" unique_id=1031941162]
+position = Vector2(1474, 195)
+script = ExtResource("13_aeylb")
+Transition = ExtResource("14_886ha")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewportContainer/SubViewport/LegBreaker" unique_id=1470950636]
+position = Vector2(-106.5, -9)
+shape = SubResource("RectangleShape2D_1fxgr")
+
+[node name="Fragment" parent="SubViewportContainer/SubViewport" unique_id=967356842 instance=ExtResource("11_g7d0j")]
+
+[connection signal="body_entered" from="SubViewportContainer/SubViewport/LegBreaker" to="SubViewportContainer/SubViewport/LegBreaker" method="_on_body_entered"]

@@ -6,7 +6,7 @@ var max_height = -70
 
 var duration = 0.4
 
-@export var launch_speed: float = 300.0
+@export var launch_speed: float = 125.0
 
 func _ready() -> void:
 	starting_pos = global_position
@@ -52,6 +52,14 @@ func _physics_process(_delta: float) -> void:
 ## the jump or the launch, instead of the launch overwriting it.
 func _launch(body: CharacterBody2D) -> void:
 	body.movement.momentum.y = min(body.movement.momentum.y, -launch_speed)
+	# move_and_slide adds our own velocity to the rider when they leave us
+	# (+175 rising, -175 falling), so the launch strength depended on when
+	# they left. Turn that off until they're clear so it's always launch_speed.
+	var previous := body.platform_on_leave
+	body.platform_on_leave = CharacterBody2D.PLATFORM_ON_LEAVE_DO_NOTHING
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	body.platform_on_leave = previous
 
 
 func _is_standing_on_me(body: CharacterBody2D) -> bool:

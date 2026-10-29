@@ -1,0 +1,5 @@
+# Images matching these globs are pushed to GitHub as-is (not replaced).
+# Use this for art you made yourself or that is freely licensed.
+icon.svg
+# Godot-generated emission masks are level data, not art
+world/levels/*_mask.png

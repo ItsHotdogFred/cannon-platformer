@@ -1,0 +1,116 @@
+[gd_scene format=3 uid="uid://b7us7rqvmuxdc"]
+
+[ext_resource type="PackedScene" uid="uid://bgr1gr0wt8sjt" path="res://assets/TransitionKit/transitions/t_circle.tscn" id="1_iu21p"]
+[ext_resource type="PackedScene" uid="uid://dfhtofm6r1jpm" path="res://assets/TransitionKit/transitions/t_diamond.tscn" id="2_tnj6f"]
+[ext_resource type="PackedScene" uid="uid://dc813fj7jq33d" path="res://assets/TransitionKit/transitions/t_fragment.tscn" id="2_y6asa"]
+[ext_resource type="PackedScene" uid="uid://dsouc3wxev53l" path="res://assets/TransitionKit/transitions/t_fragment_2.tscn" id="3_6r5n1"]
+[ext_resource type="PackedScene" uid="uid://cyi7ncqnbp103" path="res://assets/TransitionKit/transitions/t_diagonal.tscn" id="3_xtsi8"]
+[ext_resource type="Texture2D" uid="uid://cjqycjnj05niv" path="res://assets/TransitionKit/src/texture/transition_shape/noise/fragment_02.tres" id="4_8cwq8"]
+[ext_resource type="PackedScene" uid="uid://bu25654pxn8cv" path="res://assets/TransitionKit/transitions/t_circle_radial_in.tscn" id="4_s2dcu"]
+[ext_resource type="PackedScene" uid="uid://bx3qocr5ym5j2" path="res://assets/TransitionKit/transitions/t_circle_radial_out.tscn" id="5_lj1om"]
+[ext_resource type="Texture2D" uid="uid://coxgk4ixjsvu4" path="res://assets/TransitionKit/src/texture/transition_shape/noise/cell_01.tres" id="5_tnj6f"]
+[ext_resource type="PackedScene" uid="uid://coevilrwr5w0n" path="res://assets/TransitionKit/transitions/t_natural_ridge.tscn" id="6_vg8cu"]
+[ext_resource type="PackedScene" uid="uid://diephe8hw1ej3" path="res://assets/TransitionKit/transitions/t_ordered_ridge.tscn" id="7_y6asa"]
+[ext_resource type="PackedScene" uid="uid://lc8y8at536ng" path="res://assets/TransitionKit/transitions/t_split.tscn" id="8_6r5n1"]
+[ext_resource type="PackedScene" uid="uid://dsb13yyt3u1qh" path="res://assets/TransitionKit/transitions/t_data.tscn" id="9_8cwq8"]
+[ext_resource type="PackedScene" uid="uid://udq3k5kt871x" path="res://assets/TransitionKit/transitions/t_cells.tscn" id="10_j77v0"]
+[ext_resource type="PackedScene" uid="uid://dgrx8nbk1ce8d" path="res://assets/TransitionKit/transitions/t_bubbles.tscn" id="11_8sqr0"]
+[ext_resource type="PackedScene" uid="uid://dvoblr68s5451" path="res://assets/TransitionKit/transitions/t_blades.tscn" id="12_fdnyx"]
+[ext_resource type="PackedScene" uid="uid://d01gd8f2fyd1d" path="res://assets/TransitionKit/transitions/t_cells_2.tscn" id="15_j77v0"]
+[ext_resource type="Texture2D" uid="uid://b0pmaf4w25ses" path="res://assets/TransitionKit/src/texture/transition_shape/noise/cell_03.tres" id="16_8sqr0"]
+[ext_resource type="PackedScene" uid="uid://b583k3vccp0oq" path="res://assets/TransitionKit/transitions/t_bubbles_2.tscn" id="18_8cwq8"]
+[ext_resource type="Texture2D" uid="uid://cqhh70tpqcap1" path="res://assets/TransitionKit/src/texture/transition_shape/noise/cell_04.tres" id="19_j77v0"]
+
+[sub_resource type="Gradient" id="Gradient_h2yge"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_iu21p"]
+gradient = SubResource("Gradient_h2yge")
+fill_from = Vector2(0, 1)
+
+[sub_resource type="Gradient" id="Gradient_tnj6f"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xtsi8"]
+gradient = SubResource("Gradient_tnj6f")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="Gradient" id="Gradient_xtsi8"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_s2dcu"]
+gradient = SubResource("Gradient_xtsi8")
+fill_from = Vector2(1, 1)
+fill_to = Vector2(0, 0)
+
+[node name="Node2D" type="Node2D" unique_id=1350310766]
+metadata/_edit_vertical_guides_ = [-121.0]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1071835469]
+
+[node name="TCircle" parent="CanvasLayer" unique_id=1312279347 instance=ExtResource("1_iu21p")]
+gradient_texture = SubResource("GradientTexture2D_iu21p")
+gradient_fixed = true
+shape_tiling = 8.0
+
+[node name="TFragment" parent="CanvasLayer" unique_id=1626647581 instance=ExtResource("2_y6asa")]
+visible = false
+
+[node name="TFragment2" parent="CanvasLayer" unique_id=1006679484 instance=ExtResource("3_6r5n1")]
+visible = false
+shape_texture = ExtResource("4_8cwq8")
+shape_treshold = 1.05
+
+[node name="TDiamond" parent="CanvasLayer" unique_id=1202404990 instance=ExtResource("2_tnj6f")]
+visible = false
+factor = 0.3
+shape_tiling = 16.0
+
+[node name="TDiagonal" parent="CanvasLayer" unique_id=399089452 instance=ExtResource("3_xtsi8")]
+visible = false
+factor = 0.3
+width = 0.2
+shape_tiling = 16.0
+
+[node name="TCircleRadialIn" parent="CanvasLayer" unique_id=1204616022 instance=ExtResource("4_s2dcu")]
+visible = false
+factor = 0.3
+shape_texture = ExtResource("5_tnj6f")
+shape_tiling = 4.0
+
+[node name="TCircleRadialOut" parent="CanvasLayer" unique_id=295038605 instance=ExtResource("5_lj1om")]
+visible = false
+
+[node name="TNaturalRidge" parent="CanvasLayer" unique_id=633732970 instance=ExtResource("6_vg8cu")]
+visible = false
+factor = 0.3
+gradient_texture = SubResource("GradientTexture2D_xtsi8")
+gradient_fixed = true
+shape_scroll = Vector2(0.02, 0.1)
+
+[node name="TOrderedRidge" parent="CanvasLayer" unique_id=187838029 instance=ExtResource("7_y6asa")]
+visible = false
+
+[node name="TSplit" parent="CanvasLayer" unique_id=1964230926 instance=ExtResource("8_6r5n1")]
+visible = false
+
+[node name="TData" parent="CanvasLayer" unique_id=182411039 instance=ExtResource("9_8cwq8")]
+visible = false
+factor = 0.3
+width = 0.6
+gradient_texture = SubResource("GradientTexture2D_s2dcu")
+shape_tiling = 4.0
+
+[node name="TCells" parent="CanvasLayer" unique_id=1851609813 instance=ExtResource("10_j77v0")]
+visible = false
+
+[node name="TCells2" parent="CanvasLayer" unique_id=1255611342 instance=ExtResource("15_j77v0")]
+visible = false
+shape_texture = ExtResource("16_8sqr0")
+
+[node name="TBubbles" parent="CanvasLayer" unique_id=372393343 instance=ExtResource("11_8sqr0")]
+visible = false
+
+[node name="TBubbles2" parent="CanvasLayer" unique_id=574521201 instance=ExtResource("18_8cwq8")]
+visible = false
+shape_texture = ExtResource("19_j77v0")
+
+[node name="TBlades" parent="CanvasLayer" unique_id=187501241 instance=ExtResource("12_fdnyx")]
+visible = false

@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://cj2mkfb2521re"]
+
+[ext_resource type="Shader" uid="uid://ovrd5ydp8p0q" path="res://assets/TransitionKit/src/shader/transition.gdshader" id="1_rectf"]
+[ext_resource type="Texture2D" uid="uid://coxgk4ixjsvu4" path="res://assets/TransitionKit/src/texture/transition_shape/noise/cell_01.tres" id="2_bvpw1"]
+[ext_resource type="Script" uid="uid://ckqprh3fr4y8e" path="res://assets/TransitionKit/transitions/transition_main.gd" id="3_rectf"]
+[ext_resource type="PackedScene" uid="uid://df1tjmqe6msdq" path="res://main.tscn" id="4_3q3de"]
+[ext_resource type="FontFile" uid="uid://dgx3at2cfj5ny" path="res://fonts/silkscreen/Silkscreen-Regular.ttf" id="4_bvpw1"]
+
+[sub_resource type="Gradient" id="Gradient_bvpw1"]
+offsets = PackedFloat32Array(0, 0.98767966)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_70fvc"]
+gradient = SubResource("Gradient_bvpw1")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kek77"]
+shader = ExtResource("1_rectf")
+shader_parameter/base_color = Color(0, 0, 0, 1)
+shader_parameter/node_resolution = Vector2(320, 180)
+shader_parameter/factor = 0.0
+shader_parameter/width = 0.4
+shader_parameter/gradient_texture = SubResource("GradientTexture2D_70fvc")
+shader_parameter/gradient_fixed = true
+shader_parameter/shape_texture = ExtResource("2_bvpw1")
+shader_parameter/shape_tiling = 6.0
+shader_parameter/shape_rotation = 0.0
+shader_parameter/shape_scroll = Vector2(-0.1, 0)
+shader_parameter/shape_feathering = 0.0
+shader_parameter/shape_treshold = 1.0
+
+[node name="TBubbles2" type="ColorRect" unique_id=574521201]
+material = SubResource("ShaderMaterial_kek77")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_rectf")
+next_scene = ExtResource("4_3q3de")
+gradient_texture = SubResource("GradientTexture2D_70fvc")
+gradient_fixed = true
+shape_texture = ExtResource("2_bvpw1")
+shape_tiling = 6.0
+shape_scroll = Vector2(-0.1, 0)
+metadata/_custom_type_script = "uid://bo1i5j2m427bs"
+
+[node name="Label" type="Label" parent="." unique_id=1638778260]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -7.0
+offset_right = 161.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_bvpw1")
+theme_override_font_sizes/font_size = 8
+text = "It's hard to beat a person who never gives up."
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="." unique_id=1292854259]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -159.5
+offset_top = 8.0
+offset_right = 161.5
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_bvpw1")
+theme_override_font_sizes/font_size = 8
+text = "- babe ruth"
+horizontal_alignment = 1
