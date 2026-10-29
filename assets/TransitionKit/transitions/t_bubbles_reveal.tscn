@@ -1,8 +1,8 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://gtakn3hry28t"]
 
 [ext_resource type="Shader" uid="uid://ovrd5ydp8p0q" path="res://assets/TransitionKit/src/shader/transition.gdshader" id="1_rectf"]
 [ext_resource type="Texture2D" uid="uid://coxgk4ixjsvu4" path="res://assets/TransitionKit/src/texture/transition_shape/noise/cell_01.tres" id="2_bvpw1"]
-[ext_resource type="Script" path="res://assets/TransitionKit/transitions/transition_reveal.gd" id="3_rectf"]
+[ext_resource type="Script" uid="uid://blylua0icrd13" path="res://assets/TransitionKit/transitions/transition_reveal.gd" id="3_rectf"]
 
 [sub_resource type="Gradient" id="Gradient_bvpw1"]
 offsets = PackedFloat32Array(0, 0.98767966)

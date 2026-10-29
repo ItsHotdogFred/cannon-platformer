@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" path="res://world/player/cursor_indicator.tscn" id="7_cursor"]
 [ext_resource type="PackedScene" uid="uid://0eqq6thotgan" path="res://world/levels/fragment_container.tscn" id="11_efxa6"]
 [ext_resource type="PackedScene" uid="uid://tqjr7bjruir1" path="res://background.tscn" id="17_074og"]
-[ext_resource type="PackedScene" path="res://assets/TransitionKit/transitions/t_bubbles_reveal.tscn" id="18_reveal"]
+[ext_resource type="PackedScene" uid="uid://gtakn3hry28t" path="res://assets/TransitionKit/transitions/t_bubbles_reveal.tscn" id="18_reveal"]
 
 [node name="Main" type="Node2D" unique_id=1227024573 node_paths=PackedStringArray("camera")]
 script = ExtResource("2_main")

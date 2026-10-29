@@ -3,7 +3,7 @@ extends Node
 ## `set_active` deferral rule. The player script drives this every physics
 ## frame; it does not read input on its own.
 
-@export var speed: float = 150.0
+@export var speed: float = 200.0
 @export var friction_air: float = 50.0
 @export var friction_ground: float = 500.0
 ## Multiplier on the project gravity. The cannon arc wants a floaty feel.
