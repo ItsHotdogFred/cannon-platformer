@@ -1,0 +1,84 @@
+[gd_scene format=3]
+
+[ext_resource type="Shader" path="res://assets/TransitionKit/src/shader/transition.gdshader" id="1_i2v1f"]
+[ext_resource type="Texture2D" path="res://assets/TransitionKit/src/texture/transition_shape/noise/cell_01.tres" id="2_wmuoj"]
+[ext_resource type="Script" path="res://assets/TransitionKit/transitions/transition_end.gd" id="3_hndtd"]
+[ext_resource type="FontFile" path="res://fonts/silkscreen/Silkscreen-Regular.ttf" id="4_eos7a"]
+
+[sub_resource type="Gradient" id="Gradient_dgjrj"]
+offsets = PackedFloat32Array(0, 0.98767966)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ptvr7"]
+gradient = SubResource("Gradient_dgjrj")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7g2u1"]
+shader = ExtResource("1_i2v1f")
+shader_parameter/base_color = Color(0, 0, 0, 1)
+shader_parameter/node_resolution = Vector2(320, 180)
+shader_parameter/factor = 0.0
+shader_parameter/width = 0.4
+shader_parameter/gradient_texture = SubResource("GradientTexture2D_ptvr7")
+shader_parameter/gradient_fixed = true
+shader_parameter/shape_texture = ExtResource("2_wmuoj")
+shader_parameter/shape_tiling = 6.0
+shader_parameter/shape_rotation = 0.0
+shader_parameter/shape_scroll = Vector2(-0.1, 0)
+shader_parameter/shape_feathering = 0.0
+shader_parameter/shape_treshold = 1.0
+
+[node name="TBubblesEnd" type="ColorRect" unique_id=574521201]
+material = SubResource("ShaderMaterial_7g2u1")
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_hndtd")
+gradient_texture = SubResource("GradientTexture2D_ptvr7")
+gradient_fixed = true
+shape_texture = ExtResource("2_wmuoj")
+shape_tiling = 6.0
+shape_scroll = Vector2(-0.1, 0)
+metadata/_custom_type_script = "uid://bo1i5j2m427bs"
+
+[node name="Label" type="Label" parent="." unique_id=1638778260]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -40.0
+offset_right = 150.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_eos7a")
+theme_override_font_sizes/font_size = 16
+text = "Thank you for playing my game! Hope you had fun"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Label2" type="Label" parent="." unique_id=1292854259]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -159.5
+offset_top = 8.0
+offset_right = 161.5
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_eos7a")
+theme_override_font_sizes/font_size = 8
+text = "This is it, you can leave now"
+horizontal_alignment = 1

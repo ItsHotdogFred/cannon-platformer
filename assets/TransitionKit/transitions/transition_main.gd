@@ -6,7 +6,9 @@ extends TransitionRect
 @export var text_fade_time: float = 1.0
 @export var text_hold_time: float = 2.0
 
-@export var next_scene : PackedScene
+# Stored as a path (not a PackedScene) so it's only loaded when the transition fires.
+# Preloading it caused a dependency cycle: level -> transition -> main scene -> level.
+@export_file("*.tscn") var next_scene : String
 
 var editable_falling_points : Array[Node2D]
 
@@ -33,7 +35,13 @@ func fade_in_text() -> void:
 	var player = get_tree().get_first_node_in_group("player")
 	var falling_down := get_tree().current_scene.find_child("Fallingdown", true, false) as Node2D
 	if player == null or falling_down == null:
-		push_error("transition_main: couldn't find Player or Fallingdown")
+		# No fall sequence in this scene (only the prologue has one): fade the
+		# text and go straight to the next scene while the screen's covered.
+		var fade = create_tween().set_parallel()
+		fade.tween_property(label, "modulate:a", 0, text_fade_time)
+		fade.tween_property(label_2, "modulate:a", 0, text_fade_time)
+		await fade.finished
+		get_tree().change_scene_to_file(next_scene)
 		return
 	player.global_position = falling_down.global_position
 	player.falling = true
@@ -66,7 +74,7 @@ func fade_in_text() -> void:
 	var cover = create_tween()
 	cover.tween_property(self.material, "shader_parameter/factor", 1.0, 1)
 	await cover.finished
-	get_tree().change_scene_to_packed(next_scene)
+	get_tree().change_scene_to_file(next_scene)
 
 	
 	

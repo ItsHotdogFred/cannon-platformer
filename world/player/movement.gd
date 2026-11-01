@@ -5,9 +5,15 @@ extends Node
 
 @export var speed: float = 200.0
 @export var friction_air: float = 50.0
+## Used instead of friction_air while steering left/right mid-air, and also
+## slows upward momentum, so steering bleeds off cannon/launch speed faster.
+@export var friction_air_steering: float = 500.0
 @export var friction_ground: float = 500.0
 ## Multiplier on the project gravity. The cannon arc wants a floaty feel.
 @export var gravity_scale: float = 0.50
+
+## After a cannon shot's impulse has been added to `momentum`.
+signal fired
 
 var body: CharacterBody2D
 var sprite: AnimatedSprite2D
@@ -21,6 +27,9 @@ var momentum: Vector2 = Vector2.ZERO
 var _can_shoot: bool = true
 var _gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 var _noclip: bool = false
+## True from a cannon shot or a dash platform launch until landing. Steering
+## only brakes a rise while this is set, so jumps and air vents keep their lift.
+var launched: bool = false
 
 
 func bind(body: CharacterBody2D, sprite: AnimatedSprite2D,
@@ -68,6 +77,8 @@ func try_fire() -> bool:
 	## never-decayed unit vector (the old bug that let vertical momentum bleed
 	## into later shots).
 	momentum += -direction * speed
+	launched = true
+	fired.emit()
 	_can_shoot = false
 	shoot_timer.start()
 	body.get_node("AudioStreamPlayer2D").play()
@@ -76,13 +87,20 @@ func try_fire() -> bool:
 
 ## Gravity only acts while airborne. Horizontal momentum bleeds off at
 ## different rates in the air vs on the ground. Vertical momentum is NOT
-## damped so cannon launches follow a natural gravity arc.
+## damped so cannon launches follow a natural gravity arc, unless the player
+## is steering (celeste_momentum.x is only non-zero while left/right is held).
 func step(delta: float, celeste_momentum : Vector2) -> void:
 	if not body.is_on_floor():
 		momentum.y += _gravity * gravity_scale * delta
-		momentum.x = move_toward(momentum.x, 0.0, friction_air * delta)
+		var steering := celeste_momentum.x != 0.0
+		momentum.x = move_toward(momentum.x, 0.0, (friction_air_steering if steering else friction_air) * delta)
+		if steering and momentum.y < 0.0 and launched:
+			momentum.y = move_toward(momentum.y, 0.0, friction_air_steering * delta)
 	else:
 		momentum.x = move_toward(momentum.x, 0.0, friction_ground * delta)
+		# Shots fire from the floor too, so only a landing (not rising) ends it.
+		if momentum.y >= 0.0:
+			launched = false
 
 	body.velocity = momentum + celeste_momentum
 

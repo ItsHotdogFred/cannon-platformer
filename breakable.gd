@@ -7,7 +7,8 @@ func destroy():
 	animated_sprite_2d.hide()
 	collision_shape_2d.disabled = true
 	await get_tree().create_timer(1).timeout
-	var tween = get_tree().create_tween()
+	# Bound to us (not the tree) so it can't outlive us after a scene change.
+	var tween = create_tween()
 	animated_sprite_2d.scale = Vector2(0,0)
 	animated_sprite_2d.show()
 	tween.tween_property(animated_sprite_2d, "scale", Vector2(1,1), 0.5)

@@ -1,23 +1,23 @@
 [gd_scene format=3 uid="uid://c5kgi281ndsxy"]
 
-[ext_resource type="PackedScene" uid="uid://cbgsp7kuo84q1" path="res://world/player/player.tscn" id="1_7cuaw"]
-[ext_resource type="Script" uid="uid://gryv2jnbe7a0" path="res://main.gd" id="1_g7d0j"]
-[ext_resource type="Script" uid="uid://6vwhdedv4rvy" path="res://smooth_camera.gd" id="2_7cuaw"]
-[ext_resource type="FontFile" uid="uid://cet8y2a7ru56n" path="res://fonts/silkscreen/Silkscreen-Bold.ttf" id="3_xyy1j"]
-[ext_resource type="Script" uid="uid://bngi4x21pnqef" path="res://ui/label.gd" id="4_ta2aw"]
-[ext_resource type="AudioStream" uid="uid://icoapxm7cb08" path="res://audio/music/iron_ascent.ogg" id="5_aeylb"]
-[ext_resource type="PackedScene" path="res://world/player/cursor_indicator.tscn" id="8_rc6o0"]
-[ext_resource type="PackedScene" uid="uid://tqjr7bjruir1" path="res://background.tscn" id="9_1qswb"]
-[ext_resource type="Texture2D" uid="uid://cmxhsuirym7md" path="res://PointLightTexture.png" id="10_xyy1j"]
-[ext_resource type="PackedScene" uid="uid://dhde11ehatx83" path="res://world/levels/fragment_prolouge.tscn" id="11_g7d0j"]
-[ext_resource type="Script" uid="uid://cjsvofmh8h0x" path="res://world/levels/leg_breaker.gd" id="13_aeylb"]
-[ext_resource type="PackedScene" uid="uid://cj2mkfb2521re" path="res://assets/TransitionKit/transitions/t_bubbles_3.tscn" id="14_886ha"]
+[ext_resource type="Script" uid="uid://gryv2jnbe7a0" path="res://main.gd" id="1_lo6rg"]
+[ext_resource type="PackedScene" uid="uid://cbgsp7kuo84q1" path="res://world/player/player.tscn" id="2_yfgox"]
+[ext_resource type="Script" uid="uid://6vwhdedv4rvy" path="res://smooth_camera.gd" id="3_m1ets"]
+[ext_resource type="FontFile" uid="uid://cet8y2a7ru56n" path="res://fonts/silkscreen/Silkscreen-Bold.ttf" id="4_ndy6y"]
+[ext_resource type="Script" uid="uid://bngi4x21pnqef" path="res://ui/label.gd" id="5_eva2o"]
+[ext_resource type="AudioStream" uid="uid://icoapxm7cb08" path="res://audio/music/iron_ascent.ogg" id="6_7xv76"]
+[ext_resource type="PackedScene" path="res://world/player/cursor_indicator.tscn" id="7_pkx2q"]
+[ext_resource type="Texture2D" uid="uid://cmxhsuirym7md" path="res://PointLightTexture.png" id="8_iq08e"]
+[ext_resource type="PackedScene" uid="uid://tqjr7bjruir1" path="res://background.tscn" id="9_3bmo1"]
+[ext_resource type="Script" uid="uid://cjsvofmh8h0x" path="res://world/levels/leg_breaker.gd" id="10_xpqc4"]
+[ext_resource type="PackedScene" uid="uid://cj2mkfb2521re" path="res://assets/TransitionKit/transitions/t_bubbles_cover.tscn" id="11_r1iv2"]
+[ext_resource type="PackedScene" uid="uid://dhde11ehatx83" path="res://world/levels/Prolouge_levels.tscn" id="12_q4w8x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1fxgr"]
 size = Vector2(417, 38)
 
 [node name="NewMain" type="Node2D" unique_id=1640156913]
-script = ExtResource("1_g7d0j")
+script = ExtResource("1_lo6rg")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1891945604]
 z_index = 100
@@ -32,7 +32,7 @@ handle_input_locally = false
 size = Vector2i(320, 180)
 render_target_update_mode = 4
 
-[node name="Player" parent="SubViewportContainer/SubViewport" unique_id=602816141 instance=ExtResource("1_7cuaw")]
+[node name="Player" parent="SubViewportContainer/SubViewport" unique_id=602816141 instance=ExtResource("2_yfgox")]
 unique_name_in_owner = true
 z_index = 5
 position = Vector2(22, 112)
@@ -42,7 +42,7 @@ can_shoot = false
 top_level = true
 position = Vector2(159, 94)
 limit_left = 0
-script = ExtResource("2_7cuaw")
+script = ExtResource("3_m1ets")
 viewport = NodePath("../../..")
 player = NodePath("..")
 
@@ -52,18 +52,18 @@ offset_left = -154.0
 offset_top = -90.0
 offset_right = -114.0
 offset_bottom = -67.0
-theme_override_fonts/font = ExtResource("3_xyy1j")
+theme_override_fonts/font = ExtResource("4_ndy6y")
 theme_override_font_sizes/font_size = 16
 text = "0"
-script = ExtResource("4_ta2aw")
+script = ExtResource("5_eva2o")
 metadata/_edit_use_anchors_ = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="SubViewportContainer/SubViewport/Player/ScreenCamera" unique_id=322395912]
 position = Vector2(-160, -90)
-stream = ExtResource("5_aeylb")
+stream = ExtResource("6_7xv76")
 autoplay = true
 
-[node name="CursorIndicator" parent="SubViewportContainer/SubViewport/Player/ScreenCamera" unique_id=652975328 node_paths=PackedStringArray("player") instance=ExtResource("8_rc6o0")]
+[node name="CursorIndicator" parent="SubViewportContainer/SubViewport/Player/ScreenCamera" unique_id=652975328 node_paths=PackedStringArray("player") instance=ExtResource("7_pkx2q")]
 z_index = 999
 player = NodePath("../..")
 
@@ -71,9 +71,9 @@ player = NodePath("../..")
 texture_filter = 1
 position = Vector2(0, 5.06)
 color = Color(0.8627451, 0.65882355, 0, 1)
-texture = ExtResource("10_xyy1j")
+texture = ExtResource("8_iq08e")
 
-[node name="Background" parent="SubViewportContainer/SubViewport" unique_id=1680881938 instance=ExtResource("9_1qswb")]
+[node name="Background" parent="SubViewportContainer/SubViewport" unique_id=1680881938 instance=ExtResource("9_3bmo1")]
 z_index = -5
 position = Vector2(0, -24)
 script = null
@@ -83,13 +83,13 @@ color = Color(0.6, 0.62, 0.7, 1)
 
 [node name="LegBreaker" type="Area2D" parent="SubViewportContainer/SubViewport" unique_id=1031941162]
 position = Vector2(1474, 195)
-script = ExtResource("13_aeylb")
-Transition = ExtResource("14_886ha")
+script = ExtResource("10_xpqc4")
+Transition = ExtResource("11_r1iv2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewportContainer/SubViewport/LegBreaker" unique_id=1470950636]
 position = Vector2(-106.5, -9)
 shape = SubResource("RectangleShape2D_1fxgr")
 
-[node name="Fragment" parent="SubViewportContainer/SubViewport" unique_id=967356842 instance=ExtResource("11_g7d0j")]
+[node name="Prolouge levels" parent="SubViewportContainer/SubViewport" unique_id=967356842 instance=ExtResource("12_q4w8x")]
 
 [connection signal="body_entered" from="SubViewportContainer/SubViewport/LegBreaker" to="SubViewportContainer/SubViewport/LegBreaker" method="_on_body_entered"]

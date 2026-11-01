@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://ckhlt3riikna4"]
+
+[ext_resource type="Script" uid="uid://gryv2jnbe7a0" path="res://main.gd" id="1_ugmfm"]
+[ext_resource type="PackedScene" uid="uid://cbgsp7kuo84q1" path="res://world/player/player.tscn" id="2_t4vm7"]
+[ext_resource type="PackedScene" uid="uid://ddjuyi6ifrm17" path="res://lush_fragment.tscn" id="2_ugmfm"]
+[ext_resource type="Script" uid="uid://bbk4casxeuub0" path="res://world/camera/screen_camera.gd" id="3_sti1s"]
+[ext_resource type="FontFile" uid="uid://cet8y2a7ru56n" path="res://fonts/silkscreen/Silkscreen-Bold.ttf" id="4_85g8o"]
+[ext_resource type="Script" uid="uid://bngi4x21pnqef" path="res://ui/label.gd" id="5_wfdsj"]
+[ext_resource type="AudioStream" uid="uid://icoapxm7cb08" path="res://audio/music/iron_ascent.ogg" id="6_67c1u"]
+[ext_resource type="PackedScene" path="res://world/player/cursor_indicator.tscn" id="7_lhci0"]
+[ext_resource type="PackedScene" uid="uid://tqjr7bjruir1" path="res://background.tscn" id="8_hd7pb"]
+[ext_resource type="PackedScene" uid="uid://gtakn3hry28t" path="res://assets/TransitionKit/transitions/t_bubbles_reveal.tscn" id="10_e8fyg"]
+
+[node name="Main" type="Node2D" unique_id=1227024573 node_paths=PackedStringArray("camera")]
+script = ExtResource("1_ugmfm")
+camera = NodePath("SubViewportContainer/SubViewport/ScreenCamera")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1612213823]
+z_index = 100
+texture_filter = 1
+offset_right = 320.0
+offset_bottom = 180.0
+mouse_filter = 2
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=527611784 groups=["grapple_rope_viewport"]]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(320, 180)
+render_target_update_mode = 4
+
+[node name="Fragment" parent="SubViewportContainer/SubViewport" unique_id=1428953238 instance=ExtResource("2_ugmfm")]
+
+[node name="Player" parent="SubViewportContainer/SubViewport" unique_id=602816141 instance=ExtResource("2_t4vm7")]
+z_index = 5
+position = Vector2(46, 104)
+can_jump = false
+
+[node name="ScreenCamera" type="Camera2D" parent="SubViewportContainer/SubViewport" unique_id=2020762220 groups=["grapple_screen_camera"]]
+position = Vector2(160, 90)
+script = ExtResource("3_sti1s")
+
+[node name="Label" type="Label" parent="SubViewportContainer/SubViewport/ScreenCamera" unique_id=1516192247]
+z_index = 1
+offset_left = -154.0
+offset_top = -90.0
+offset_right = -114.0
+offset_bottom = -67.0
+theme_override_fonts/font = ExtResource("4_85g8o")
+theme_override_font_sizes/font_size = 16
+text = "0"
+script = ExtResource("5_wfdsj")
+metadata/_edit_use_anchors_ = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="SubViewportContainer/SubViewport/ScreenCamera" unique_id=318832377]
+position = Vector2(-160, -90)
+stream = ExtResource("6_67c1u")
+autoplay = true
+
+[node name="CursorIndicator" parent="SubViewportContainer/SubViewport/ScreenCamera" unique_id=700347957 instance=ExtResource("7_lhci0")]
+z_index = 999
+
+[node name="Background" parent="SubViewportContainer/SubViewport" unique_id=1680881938 instance=ExtResource("8_hd7pb")]
+z_index = -2
+position = Vector2(0, -15)
+script = null
+
+[node name="CanvasModulate" type="CanvasModulate" parent="SubViewportContainer/SubViewport" unique_id=1938274651]
+visible = false
+color = Color(0.6, 0.62, 0.7, 1)
+
+[node name="TransitionLayer" type="CanvasLayer" parent="SubViewportContainer/SubViewport" unique_id=1840527713]
+layer = 10
+
+[node name="TBubblesReveal" parent="SubViewportContainer/SubViewport/TransitionLayer" unique_id=922081546 instance=ExtResource("10_e8fyg")]
+visible = false

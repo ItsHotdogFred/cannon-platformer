@@ -7,7 +7,7 @@
 [ext_resource type="FontFile" uid="uid://cet8y2a7ru56n" path="res://fonts/silkscreen/Silkscreen-Bold.ttf" id="3_efxa6"]
 [ext_resource type="AudioStream" uid="uid://icoapxm7cb08" path="res://audio/music/iron_ascent.ogg" id="5_dg77c"]
 [ext_resource type="PackedScene" path="res://world/player/cursor_indicator.tscn" id="7_cursor"]
-[ext_resource type="PackedScene" uid="uid://0eqq6thotgan" path="res://world/levels/fragment_container.tscn" id="11_efxa6"]
+[ext_resource type="PackedScene" uid="uid://0eqq6thotgan" path="res://world/levels/Most levels live here.tscn" id="11_efxa6"]
 [ext_resource type="PackedScene" uid="uid://tqjr7bjruir1" path="res://background.tscn" id="17_074og"]
 [ext_resource type="PackedScene" uid="uid://gtakn3hry28t" path="res://assets/TransitionKit/transitions/t_bubbles_reveal.tscn" id="18_reveal"]
 
@@ -63,10 +63,13 @@ z_index = -2
 position = Vector2(0, -15)
 script = null
 
-[node name="Fragment" parent="SubViewportContainer/SubViewport" unique_id=585618502 node_paths=PackedStringArray("fragment_particles", "camera") instance=ExtResource("11_efxa6")]
+[node name="Levels" parent="SubViewportContainer/SubViewport" unique_id=585618502 node_paths=PackedStringArray("fragment_particles", "fragment_canvas", "camera") instance=ExtResource("11_efxa6")]
 fragment_particles = {
 NodePath("GPUParticles2D"): "Lush",
 NodePath("Test"): "Test"
+}
+fragment_canvas = {
+NodePath("Level_12/CanvasModulate"): "Night"
 }
 camera = NodePath("../ScreenCamera")
 
@@ -78,3 +81,4 @@ color = Color(0.6, 0.62, 0.7, 1)
 layer = 10
 
 [node name="TBubblesReveal" parent="SubViewportContainer/SubViewport/TransitionLayer" unique_id=922081546 instance=ExtResource("18_reveal")]
+visible = false

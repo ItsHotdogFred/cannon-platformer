@@ -1,0 +1,31 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://world/hazards/dash_platform.gd" id="1_dash"]
+[ext_resource type="TileSet" path="res://world/hazards/dash_platform_tileset.tres" id="2_tiles"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
+size = Vector2(24, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_touch"]
+size = Vector2(26, 10)
+
+[node name="DashPlatform" type="Node2D"]
+script = ExtResource("1_dash")
+
+[node name="Body" type="AnimatableBody2D" parent="."]
+
+[node name="Tiles" type="TileMapLayer" parent="Body"]
+texture_filter = 1
+tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 1, 0, 0, 0)
+tile_set = ExtResource("2_tiles")
+collision_enabled = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
+position = Vector2(12, 4)
+shape = SubResource("RectangleShape2D_body")
+
+[node name="Touch" type="Area2D" parent="Body"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Touch"]
+position = Vector2(12, 4)
+shape = SubResource("RectangleShape2D_touch")

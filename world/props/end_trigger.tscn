@@ -1,0 +1,17 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://world/levels/leg_breaker.gd" id="1_trig"]
+[ext_resource type="PackedScene" path="res://assets/TransitionKit/transitions/t_end.tscn" id="2_end"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_end"]
+size = Vector2(26, 40)
+
+[node name="EndTrigger" type="Area2D"]
+script = ExtResource("1_trig")
+Transition = ExtResource("2_end")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(24, 16)
+shape = SubResource("RectangleShape2D_end")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

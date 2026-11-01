@@ -6,3 +6,5 @@ func _physics_process(_delta: float) -> void:
 	for body in get_overlapping_bodies():
 		if body is CharacterBody2D:
 			body.momentum.y -= push_force
+			# The vent's lift isn't a launch, so steering mustn't brake it.
+			body.movement.launched = false

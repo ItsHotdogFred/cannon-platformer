@@ -1,9 +1,8 @@
-[gd_scene format=3 uid="uid://cj2mkfb2521re"]
+[gd_scene format=3]
 
 [ext_resource type="Shader" uid="uid://ovrd5ydp8p0q" path="res://assets/TransitionKit/src/shader/transition.gdshader" id="1_rectf"]
 [ext_resource type="Texture2D" uid="uid://coxgk4ixjsvu4" path="res://assets/TransitionKit/src/texture/transition_shape/noise/cell_01.tres" id="2_bvpw1"]
 [ext_resource type="Script" uid="uid://ckqprh3fr4y8e" path="res://assets/TransitionKit/transitions/transition_main.gd" id="3_rectf"]
-[ext_resource type="PackedScene" uid="uid://df1tjmqe6msdq" path="res://main.tscn" id="4_3q3de"]
 [ext_resource type="FontFile" uid="uid://dgx3at2cfj5ny" path="res://fonts/silkscreen/Silkscreen-Regular.ttf" id="4_bvpw1"]
 
 [sub_resource type="Gradient" id="Gradient_bvpw1"]
@@ -38,7 +37,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_rectf")
-next_scene = ExtResource("4_3q3de")
+next_scene = "uid://ckhlt3riikna4"
 gradient_texture = SubResource("GradientTexture2D_70fvc")
 gradient_fixed = true
 shape_texture = ExtResource("2_bvpw1")
@@ -62,7 +61,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("4_bvpw1")
 theme_override_font_sizes/font_size = 8
-text = "It's hard to beat a person who never gives up."
+text = "Fail again. Fail better."
 horizontal_alignment = 1
 
 [node name="Label2" type="Label" parent="." unique_id=1292854259]
@@ -81,5 +80,5 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("4_bvpw1")
 theme_override_font_sizes/font_size = 8
-text = "- babe ruth"
+text = "- Samuel Beckett"
 horizontal_alignment = 1
