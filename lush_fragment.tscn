@@ -1542,7 +1542,7 @@ size = Vector2(24, 24)
 size = Vector2(24, 26)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ieals"]
-size = Vector2(26, 72)
+size = Vector2(35, 72)
 
 [node name="Fragment" type="Node2D" unique_id=1428953238]
 script = ExtResource("1_se11y")
@@ -2095,7 +2095,7 @@ script = ExtResource("20_ei6yd")
 Transition = ExtResource("21_khfh7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EndTrigger" unique_id=1084980023]
-position = Vector2(24, 0)
+position = Vector2(19.5, 0)
 shape = SubResource("RectangleShape2D_ieals")
 
 [connection signal="body_entered" from="Level/Checkpoint" to="Level/Checkpoint" method="_on_body_entered"]

@@ -1535,12 +1535,6 @@ shape = SubResource("RectangleShape2D_twto6")
 visible = false
 color = Color(0.6, 0.62, 0.7, 1)
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=747660228]
-z_index = -2
-offset_right = 320.0
-offset_bottom = 184.0
-color = Color(0.051735908, 0.057294272, 0.061174892, 1)
-
 [node name="Moving Platform Controller" parent="." unique_id=1445278168 instance=ExtResource("15_8iv5w")]
 position = Vector2(29, 178)
 speed = 64.0

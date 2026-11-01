@@ -2064,11 +2064,5 @@ texture = ExtResource("18_yntok")
 visible = false
 color = Color(0.6, 0.62, 0.7, 1)
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=747660228]
-z_index = -2
-offset_right = 320.0
-offset_bottom = 184.0
-color = Color(0.051735908, 0.057294272, 0.061174892, 1)
-
 [connection signal="body_entered" from="Checkpoint" to="Checkpoint" method="_on_body_entered"]
 [connection signal="body_entered" from="void" to="void" method="_on_body_entered"]
